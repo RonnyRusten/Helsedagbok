@@ -39,6 +39,8 @@
             this.Energy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bntAddFood = new System.Windows.Forms.Button();
             this.btnNutritionDetails = new System.Windows.Forms.Button();
+            this.lblUserName = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,11 +126,31 @@
             this.btnNutritionDetails.UseVisualStyleBackColor = true;
             this.btnNutritionDetails.Click += new System.EventHandler(this.btnNutritionDetails_Click);
             // 
+            // lblUserName
+            // 
+            this.lblUserName.AutoSize = true;
+            this.lblUserName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserName.Location = new System.Drawing.Point(12, 30);
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(50, 18);
+            this.lblUserName.TabIndex = 16;
+            this.lblUserName.Text = "label1";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(876, 25);
+            this.toolStrip1.TabIndex = 17;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(876, 648);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.lblUserName);
             this.Controls.Add(this.btnNutritionDetails);
             this.Controls.Add(this.bntAddFood);
             this.Controls.Add(this.dgvDiary);
@@ -139,6 +161,7 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -152,6 +175,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Energy;
         private System.Windows.Forms.Button bntAddFood;
         private System.Windows.Forms.Button btnNutritionDetails;
+        private System.Windows.Forms.Label lblUserName;
+        private System.Windows.Forms.ToolStrip toolStrip1;
     }
 }
 

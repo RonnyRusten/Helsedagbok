@@ -34,11 +34,30 @@ namespace Helsedagbok
         private void frmMain_Load(object sender, EventArgs e)
         {
             getMeals();
+            lblUserName.Text = getUser(clsGlobal.idUser);
         }
 
         private void dtpDate_ValueChanged(object sender, EventArgs e)
         {
             getMeals();
+        }
+
+        private string getUser(int idUser)
+        {
+            string UserName = "";
+            string sqlQuery = "SELECT FirstName + ' ' + LastName FROM tblUsers WHERE idUser = @idUser";
+            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
+            cmd.Parameters.AddWithValue("@idUser", idUser);
+            if (clsGlobal.conn1.State != ConnectionState.Open)
+                clsGlobal.conn1.Open();
+            SqlDataReader userReader = cmd.ExecuteReader();
+            if (userReader.HasRows)
+            {
+                userReader.Read();
+                UserName = userReader.GetString(0);
+            }
+            clsGlobal.conn1.Close();
+            return UserName;
         }
 
         private void getMeals()
@@ -57,7 +76,6 @@ namespace Helsedagbok
             decimal totalEnergy = 0;
 
             dgvDiary.Rows.Clear();
-            RemoveMealSummaries();
             string sqlString = "SELECT " +
                 "tblMeals.id, " +
                 "tblMeals.id_mealtype, " +
@@ -84,27 +102,25 @@ namespace Helsedagbok
                 dgvDiary.Rows[HeaderRowNo].Cells[1].Value = MealId;
                 dgvDiary.Rows[HeaderRowNo].Cells[2].Value = row["Name"].ToString();
                 dgvDiary.Rows[HeaderRowNo].Cells[3].Value = Meal.Energy.ToString("# ###.##") + " kCal";
-                int n = 0;
                 int RowNo;
                 foreach (clsGlobal.Food Food in Meal.Foods)
                 {
                     RowNo = dgvDiary.Rows.Add();
-                    dgvDiary.Rows[RowNo].Cells[0].Value = Meal.Foods[n].idDiary;
+                    dgvDiary.Rows[RowNo].Cells[0].Value = Food.idDiary;
                     dgvDiary.Rows[RowNo].Cells[1].Value = MealId;
-                    dgvDiary.Rows[RowNo].Cells[2].Value = Meal.Foods[n].DisplayName;
-                    dgvDiary.Rows[RowNo].Cells[3].Value = Meal.Foods[n].Energy.ToString("# ###.##") + " kCal";
-                    
-                    Carbs += Meal.Foods[n].Carbs;
-                    Sugar += Meal.Foods[n].Sugar;
-                    Fat += Meal.Foods[n].Fat;
-                    FatSat += Meal.Foods[n].FatSat;
-                    FatMono += Meal.Foods[n].FatMono;
-                    FatPoly += Meal.Foods[n].FatPoly;
-                    FatTrans += Meal.Foods[n].FatTrans;
-                    Protein += Meal.Foods[n].Protein;
-                    Alcohol += Meal.Foods[n].Alcohol;
-                    Weight += Meal.Foods[n].Count * Meal.Foods[n].unitWeight;
-                    n += 1;
+                    dgvDiary.Rows[RowNo].Cells[2].Value = Food.DisplayName;
+                    dgvDiary.Rows[RowNo].Cells[3].Value = Food.Energy.ToString("# ###.##") + " kCal";
+
+                    Carbs += Food.Carbs;
+                    Sugar += Food.Sugar;
+                    Fat += Food.Fat;
+                    FatSat += Food.FatSat;
+                    FatMono += Food.FatMono;
+                    FatPoly += Food.FatPoly;
+                    FatTrans += Food.FatTrans;
+                    Protein += Food.Protein;
+                    Alcohol += Food.Alcohol;
+                    Weight += Food.Count * Food.unitWeight;
                 }
                 dgvDiary.Rows[HeaderRowNo].Cells[2].Value = row["Name"].ToString() + " (F: " + Fat.ToString("0.0") + " g, K: " + Carbs.ToString("0.0") + " g, P: " + Protein.ToString("0.0") + " g, A: " + Alcohol.ToString("0.0") + ")";
                 mealNo += 1;
@@ -112,17 +128,6 @@ namespace Helsedagbok
             }
             setDiaryGrid();
             AddDaySummary(mealNo, Carbs, Sugar, Fat, FatSat, FatMono, FatPoly, FatTrans, Protein, Alcohol, Weight, totalEnergy);
-        }
-
-        private void RemoveMealSummaries()
-        {
-            foreach (Control cntrl in this.Controls)
-            {
-                if (cntrl.GetType().Name == "ucMealSummary")
-                {
-                    this.Controls.Remove(cntrl);
-                }
-            }
         }
 
         private void AddDaySummary(int mealNo, decimal Carbs, decimal Sugar, decimal Fat, decimal FatSat, decimal FatMono, decimal FatPoly, decimal FatTrans, decimal Protein, decimal Alcohol, decimal Weight, decimal Energy)
@@ -151,8 +156,8 @@ namespace Helsedagbok
 
         private void setDiaryGrid()
         {
-            dgvDiary.Columns[0].Visible = false;
-            dgvDiary.Columns[1].Visible = false;
+            //dgvDiary.Columns[0].Visible = false;
+            //dgvDiary.Columns[1].Visible = false;
             dgvDiary.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDiary.ClearSelection();
         }
@@ -181,7 +186,6 @@ namespace Helsedagbok
             frm.tblMeals = tblMeals;
             frm.ShowDialog();
         }
-
 
     }
 }
