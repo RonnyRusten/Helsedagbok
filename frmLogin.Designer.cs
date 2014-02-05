@@ -30,7 +30,6 @@
         {
             this.cmbUsers = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnNewUser = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -39,10 +38,12 @@
             // 
             this.cmbUsers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbUsers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbUsers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbUsers.FormattingEnabled = true;
             this.cmbUsers.Location = new System.Drawing.Point(12, 25);
             this.cmbUsers.Name = "cmbUsers";
-            this.cmbUsers.Size = new System.Drawing.Size(307, 21);
+            this.cmbUsers.Size = new System.Drawing.Size(345, 21);
             this.cmbUsers.TabIndex = 0;
             // 
             // label1
@@ -53,16 +54,6 @@
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Velg bruker";
-            // 
-            // btnNewUser
-            // 
-            this.btnNewUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNewUser.Location = new System.Drawing.Point(325, 23);
-            this.btnNewUser.Name = "btnNewUser";
-            this.btnNewUser.Size = new System.Drawing.Size(32, 23);
-            this.btnNewUser.TabIndex = 2;
-            this.btnNewUser.Text = "Ny";
-            this.btnNewUser.UseVisualStyleBackColor = true;
             // 
             // btnOK
             // 
@@ -94,7 +85,6 @@
             this.ClientSize = new System.Drawing.Size(369, 81);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.btnNewUser);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbUsers);
             this.Name = "frmLogin";
@@ -109,7 +99,6 @@
 
         private System.Windows.Forms.ComboBox cmbUsers;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnNewUser;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
     }

@@ -40,7 +40,43 @@ namespace Helsedagbok
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            clsGlobal.idUser = (int)cmbUsers.SelectedValue;
+            if (cmbUsers.SelectedValue == null)
+                AddUser();
+            else
+            {
+                clsGlobal.idUser = (int)cmbUsers.SelectedValue;
+                this.Close();
+            }
+        }
+
+        private void AddUser()
+        {
+            string fName;
+            string lName;
+            string sqlQuery;
+            int pos;
+            int idUser;
+
+            pos = cmbUsers.Text.LastIndexOf(" ");
+            fName = cmbUsers.Text.Substring(0, pos);
+            lName = cmbUsers.Text.Substring(pos + 1);
+            sqlQuery = "INSERT INTO tblUsers (FirstName, LastName) VALUES (@fName, @lName); SELECT CAST(idUser AS int) FROM tblUsers";
+            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
+            cmd.Parameters.AddWithValue("@fName", fName);
+            cmd.Parameters.AddWithValue("@lName", lName);
+            if (clsGlobal.conn1.State != ConnectionState.Open)
+            {
+                clsGlobal.conn1.Open();
+            }
+            cmd.ExecuteNonQuery();
+
+            sqlQuery = "SELECT idUser FROM tblUsers WHERE FirstName = @fname AND LastName = @lName";
+            cmd.CommandText = sqlQuery;
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            idUser = reader.GetInt32(0);
+            clsGlobal.conn1.Close();
+            clsGlobal.idUser = idUser;
             this.Close();
         }
     }
