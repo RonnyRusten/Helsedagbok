@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
@@ -37,11 +38,19 @@
             this.MealId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FoodName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Energy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bntAddFood = new System.Windows.Forms.Button();
-            this.btnNutritionDetails = new System.Windows.Forms.Button();
+            this.bntAddFoodOld = new System.Windows.Forms.Button();
+            this.btnNutritionDetailsOld = new System.Windows.Forms.Button();
             this.lblUserName = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnAddFood = new System.Windows.Forms.ToolStripButton();
+            this.btnNutritionDetails = new System.Windows.Forms.ToolStripButton();
+            this.btnSettings = new System.Windows.Forms.ToolStripButton();
+            this.cmMeals = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.redigerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.slettToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).BeginInit();
+            this.toolStrip1.SuspendLayout();
+            this.cmMeals.SuspendLayout();
             this.SuspendLayout();
             // 
             // dtpDate
@@ -70,6 +79,7 @@
             this.MealId,
             this.FoodName,
             this.Energy});
+            this.dgvDiary.ContextMenuStrip = this.cmMeals;
             this.dgvDiary.Location = new System.Drawing.Point(12, 81);
             this.dgvDiary.Name = "dgvDiary";
             this.dgvDiary.RowHeadersVisible = false;
@@ -104,27 +114,27 @@
             this.Energy.HeaderText = "Energy";
             this.Energy.Name = "Energy";
             // 
-            // bntAddFood
+            // bntAddFoodOld
             // 
-            this.bntAddFood.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bntAddFood.Location = new System.Drawing.Point(428, 52);
-            this.bntAddFood.Name = "bntAddFood";
-            this.bntAddFood.Size = new System.Drawing.Size(75, 23);
-            this.bntAddFood.TabIndex = 14;
-            this.bntAddFood.Text = "Legg til";
-            this.bntAddFood.UseVisualStyleBackColor = true;
-            this.bntAddFood.Click += new System.EventHandler(this.bntAddFood_Click);
+            this.bntAddFoodOld.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bntAddFoodOld.Location = new System.Drawing.Point(428, 52);
+            this.bntAddFoodOld.Name = "bntAddFoodOld";
+            this.bntAddFoodOld.Size = new System.Drawing.Size(75, 23);
+            this.bntAddFoodOld.TabIndex = 14;
+            this.bntAddFoodOld.Text = "Legg til";
+            this.bntAddFoodOld.UseVisualStyleBackColor = true;
+            this.bntAddFoodOld.Click += new System.EventHandler(this.bntAddFood_Click);
             // 
-            // btnNutritionDetails
+            // btnNutritionDetailsOld
             // 
-            this.btnNutritionDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNutritionDetails.Location = new System.Drawing.Point(347, 52);
-            this.btnNutritionDetails.Name = "btnNutritionDetails";
-            this.btnNutritionDetails.Size = new System.Drawing.Size(75, 23);
-            this.btnNutritionDetails.TabIndex = 15;
-            this.btnNutritionDetails.Text = "Detaljer";
-            this.btnNutritionDetails.UseVisualStyleBackColor = true;
-            this.btnNutritionDetails.Click += new System.EventHandler(this.btnNutritionDetails_Click);
+            this.btnNutritionDetailsOld.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNutritionDetailsOld.Location = new System.Drawing.Point(347, 52);
+            this.btnNutritionDetailsOld.Name = "btnNutritionDetailsOld";
+            this.btnNutritionDetailsOld.Size = new System.Drawing.Size(75, 23);
+            this.btnNutritionDetailsOld.TabIndex = 15;
+            this.btnNutritionDetailsOld.Text = "Detaljer";
+            this.btnNutritionDetailsOld.UseVisualStyleBackColor = true;
+            this.btnNutritionDetailsOld.Click += new System.EventHandler(this.btnNutritionDetails_Click);
             // 
             // lblUserName
             // 
@@ -138,11 +148,67 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAddFood,
+            this.btnNutritionDetails,
+            this.btnSettings});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(876, 25);
             this.toolStrip1.TabIndex = 17;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnAddFood
+            // 
+            this.btnAddFood.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAddFood.Image = global::Helsedagbok.Properties.Resources.Plus;
+            this.btnAddFood.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddFood.Name = "btnAddFood";
+            this.btnAddFood.Size = new System.Drawing.Size(23, 22);
+            this.btnAddFood.Text = "toolStripButton1";
+            this.btnAddFood.ToolTipText = "Registrer måltid";
+            this.btnAddFood.Click += new System.EventHandler(this.bntAddFood_Click);
+            // 
+            // btnNutritionDetails
+            // 
+            this.btnNutritionDetails.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnNutritionDetails.Image = global::Helsedagbok.Properties.Resources.Stats;
+            this.btnNutritionDetails.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNutritionDetails.Name = "btnNutritionDetails";
+            this.btnNutritionDetails.Size = new System.Drawing.Size(23, 22);
+            this.btnNutritionDetails.Text = "toolStripButton1";
+            this.btnNutritionDetails.ToolTipText = "Detaljer om dagens måltid";
+            this.btnNutritionDetails.Click += new System.EventHandler(this.btnNutritionDetails_Click);
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSettings.Image = global::Helsedagbok.Properties.Resources.Tool;
+            this.btnSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(23, 22);
+            this.btnSettings.Text = "toolStripButton1";
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
+            // cmMeals
+            // 
+            this.cmMeals.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.redigerToolStripMenuItem,
+            this.slettToolStripMenuItem});
+            this.cmMeals.Name = "cmMeals";
+            this.cmMeals.Size = new System.Drawing.Size(115, 48);
+            // 
+            // redigerToolStripMenuItem
+            // 
+            this.redigerToolStripMenuItem.Name = "redigerToolStripMenuItem";
+            this.redigerToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.redigerToolStripMenuItem.Text = "Rediger";
+            // 
+            // slettToolStripMenuItem
+            // 
+            this.slettToolStripMenuItem.Name = "slettToolStripMenuItem";
+            this.slettToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.slettToolStripMenuItem.Text = "Slett";
             // 
             // frmMain
             // 
@@ -151,8 +217,8 @@
             this.ClientSize = new System.Drawing.Size(876, 648);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.lblUserName);
-            this.Controls.Add(this.btnNutritionDetails);
-            this.Controls.Add(this.bntAddFood);
+            this.Controls.Add(this.btnNutritionDetailsOld);
+            this.Controls.Add(this.bntAddFoodOld);
             this.Controls.Add(this.dgvDiary);
             this.Controls.Add(this.dtpDate);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -160,6 +226,9 @@
             this.Text = "Matdagbok";
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.cmMeals.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,10 +242,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MealId;
         private System.Windows.Forms.DataGridViewTextBoxColumn FoodName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Energy;
-        private System.Windows.Forms.Button bntAddFood;
-        private System.Windows.Forms.Button btnNutritionDetails;
+        private System.Windows.Forms.Button bntAddFoodOld;
+        private System.Windows.Forms.Button btnNutritionDetailsOld;
         private System.Windows.Forms.Label lblUserName;
         private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btnAddFood;
+        private System.Windows.Forms.ToolStripButton btnNutritionDetails;
+        private System.Windows.Forms.ContextMenuStrip cmMeals;
+        private System.Windows.Forms.ToolStripMenuItem redigerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem slettToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton btnSettings;
     }
 }
 

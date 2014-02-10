@@ -85,7 +85,7 @@ namespace Helsedagbok
                 "tblMealTypes.Name " +
                 "FROM tblMeals " +
                 "LEFT OUTER JOIN tblMealTypes on tblMeals.id_mealType = tblMealTypes.id " +
-                "WHERE date = @date AND idUser = @idUser" +
+                "WHERE date = @date AND tblMeals.idUser = @idUser" +
                 " ORDER BY id_mealType, time";
             SqlDataAdapter a = new SqlDataAdapter(sqlString, clsGlobal.conn1);
             a.SelectCommand.Parameters.AddWithValue("@date", dtpDate.Value.Date);
@@ -184,6 +184,12 @@ namespace Helsedagbok
         {
             frmNutritionBreakdown frm = new frmNutritionBreakdown();
             frm.tblMeals = tblMeals;
+            frm.ShowDialog();
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            frmSetup frm = new frmSetup();
             frm.ShowDialog();
         }
 

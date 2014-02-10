@@ -63,6 +63,26 @@ namespace Helsedagbok.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Plus {
+            get {
+                object obj = ResourceManager.GetObject("Plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Podcast {
+            get {
+                object obj = ResourceManager.GetObject("Podcast", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Star_Favorite {
             get {
                 object obj = ResourceManager.GetObject("Star_Favorite", resourceCulture);
@@ -116,6 +136,26 @@ namespace Helsedagbok.Properties {
         internal static System.Drawing.Bitmap Star_Favorite_Grey_32x32 {
             get {
                 object obj = ResourceManager.GetObject("Star_Favorite_Grey_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Stats {
+            get {
+                object obj = ResourceManager.GetObject("Stats", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tool {
+            get {
+                object obj = ResourceManager.GetObject("Tool", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
