@@ -38,6 +38,7 @@
             this.lb_mealTypes = new System.Windows.Forms.ListBox();
             this.lblFoodName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnEditFood = new System.Windows.Forms.Button();
             this.lblAlcoholEnergy = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -70,8 +71,6 @@
             this.lblFat = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblProtein = new System.Windows.Forms.Label();
-            this.lblEnergy = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.lblTotEnergy = new System.Windows.Forms.Label();
             this.pcNutrition = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -82,7 +81,7 @@
             this.lblFoodCount = new System.Windows.Forms.Label();
             this.txtFoodFilter = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
-            this.btnEditFood = new System.Windows.Forms.Button();
+            this.lblTotWeight = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcNutrition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).BeginInit();
@@ -93,7 +92,7 @@
             this.cmbUnits.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbUnits.FormattingEnabled = true;
             this.cmbUnits.ItemHeight = 14;
-            this.cmbUnits.Location = new System.Drawing.Point(431, 141);
+            this.cmbUnits.Location = new System.Drawing.Point(428, 62);
             this.cmbUnits.Name = "cmbUnits";
             this.cmbUnits.Size = new System.Drawing.Size(46, 22);
             this.cmbUnits.TabIndex = 10;
@@ -102,7 +101,7 @@
             // txtAmount
             // 
             this.txtAmount.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAmount.Location = new System.Drawing.Point(338, 143);
+            this.txtAmount.Location = new System.Drawing.Point(335, 64);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(87, 20);
             this.txtAmount.TabIndex = 9;
@@ -113,7 +112,7 @@
             // lblFoodId
             // 
             this.lblFoodId.AutoSize = true;
-            this.lblFoodId.Location = new System.Drawing.Point(286, 146);
+            this.lblFoodId.Location = new System.Drawing.Point(283, 67);
             this.lblFoodId.Name = "lblFoodId";
             this.lblFoodId.Size = new System.Drawing.Size(46, 13);
             this.lblFoodId.TabIndex = 8;
@@ -122,9 +121,9 @@
             // lb_mealTypes
             // 
             this.lb_mealTypes.FormattingEnabled = true;
-            this.lb_mealTypes.Location = new System.Drawing.Point(286, 29);
+            this.lb_mealTypes.Location = new System.Drawing.Point(286, 90);
             this.lb_mealTypes.Name = "lb_mealTypes";
-            this.lb_mealTypes.Size = new System.Drawing.Size(139, 108);
+            this.lb_mealTypes.Size = new System.Drawing.Size(139, 121);
             this.lb_mealTypes.TabIndex = 7;
             this.lb_mealTypes.Click += new System.EventHandler(this.lb_mealTypes_Click);
             // 
@@ -136,7 +135,7 @@
             this.lblFoodName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFoodName.Location = new System.Drawing.Point(283, 9);
             this.lblFoodName.Name = "lblFoodName";
-            this.lblFoodName.Size = new System.Drawing.Size(361, 20);
+            this.lblFoodName.Size = new System.Drawing.Size(359, 20);
             this.lblFoodName.TabIndex = 11;
             this.lblFoodName.Text = "lblFoodName";
             this.lblFoodName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -178,12 +177,22 @@
             this.groupBox1.Controls.Add(this.lblFat);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lblProtein);
-            this.groupBox1.Location = new System.Drawing.Point(286, 170);
+            this.groupBox1.Location = new System.Drawing.Point(286, 217);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(358, 138);
+            this.groupBox1.Size = new System.Drawing.Size(356, 159);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Makroer";
+            // 
+            // btnEditFood
+            // 
+            this.btnEditFood.Location = new System.Drawing.Point(6, 131);
+            this.btnEditFood.Name = "btnEditFood";
+            this.btnEditFood.Size = new System.Drawing.Size(96, 23);
+            this.btnEditFood.TabIndex = 25;
+            this.btnEditFood.Text = "Rediger matvare";
+            this.btnEditFood.UseVisualStyleBackColor = true;
+            this.btnEditFood.Click += new System.EventHandler(this.btnEditFood_Click);
             // 
             // lblAlcoholEnergy
             // 
@@ -505,32 +514,11 @@
             this.lblProtein.Text = "lblProtein";
             this.lblProtein.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // lblEnergy
-            // 
-            this.lblEnergy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEnergy.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnergy.Location = new System.Drawing.Point(525, 30);
-            this.lblEnergy.Name = "lblEnergy";
-            this.lblEnergy.Size = new System.Drawing.Size(119, 14);
-            this.lblEnergy.TabIndex = 13;
-            this.lblEnergy.Text = "lblEnergy";
-            this.lblEnergy.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(431, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 14);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Energi";
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(483, 146);
+            this.label10.Location = new System.Drawing.Point(480, 67);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(13, 14);
             this.label10.TabIndex = 16;
@@ -539,9 +527,9 @@
             // lblTotEnergy
             // 
             this.lblTotEnergy.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotEnergy.Location = new System.Drawing.Point(502, 146);
+            this.lblTotEnergy.Location = new System.Drawing.Point(578, 67);
             this.lblTotEnergy.Name = "lblTotEnergy";
-            this.lblTotEnergy.Size = new System.Drawing.Size(91, 14);
+            this.lblTotEnergy.Size = new System.Drawing.Size(64, 14);
             this.lblTotEnergy.TabIndex = 15;
             this.lblTotEnergy.Text = "lblTotEnergy";
             this.lblTotEnergy.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -555,7 +543,7 @@
             this.pcNutrition.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.pcNutrition.Legends.Add(legend1);
-            this.pcNutrition.Location = new System.Drawing.Point(286, 314);
+            this.pcNutrition.Location = new System.Drawing.Point(286, 382);
             this.pcNutrition.Name = "pcNutrition";
             series1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
             series1.ChartArea = "Default";
@@ -565,7 +553,7 @@
             series1.Name = "Default";
             series1.ShadowOffset = 1;
             this.pcNutrition.Series.Add(series1);
-            this.pcNutrition.Size = new System.Drawing.Size(358, 151);
+            this.pcNutrition.Size = new System.Drawing.Size(356, 151);
             this.pcNutrition.TabIndex = 17;
             this.pcNutrition.Text = "chart1";
             // 
@@ -573,7 +561,7 @@
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.Enabled = false;
-            this.btnOK.Location = new System.Drawing.Point(569, 471);
+            this.btnOK.Location = new System.Drawing.Point(567, 539);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 18;
@@ -585,15 +573,15 @@
             // 
             this.dtpDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpDate.Location = new System.Drawing.Point(431, 47);
+            this.dtpDate.Location = new System.Drawing.Point(286, 38);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(213, 20);
+            this.dtpDate.Size = new System.Drawing.Size(211, 20);
             this.dtpDate.TabIndex = 19;
             // 
             // btnAddFood
             // 
             this.btnAddFood.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddFood.Location = new System.Drawing.Point(205, 471);
+            this.btnAddFood.Location = new System.Drawing.Point(205, 539);
             this.btnAddFood.Name = "btnAddFood";
             this.btnAddFood.Size = new System.Drawing.Size(75, 23);
             this.btnAddFood.TabIndex = 23;
@@ -614,7 +602,7 @@
             this.dgvFood.ReadOnly = true;
             this.dgvFood.RowHeadersVisible = false;
             this.dgvFood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFood.Size = new System.Drawing.Size(265, 427);
+            this.dgvFood.Size = new System.Drawing.Size(265, 495);
             this.dgvFood.TabIndex = 22;
             this.dgvFood.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFood_CellContentClick);
             this.dgvFood.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvFood_CellFormatting);
@@ -638,7 +626,8 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(488, 471);
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Location = new System.Drawing.Point(486, 539);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 24;
@@ -646,21 +635,22 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // btnEditFood
+            // lblTotWeight
             // 
-            this.btnEditFood.Location = new System.Drawing.Point(301, 109);
-            this.btnEditFood.Name = "btnEditFood";
-            this.btnEditFood.Size = new System.Drawing.Size(51, 23);
-            this.btnEditFood.TabIndex = 25;
-            this.btnEditFood.Text = "Endre";
-            this.btnEditFood.UseVisualStyleBackColor = true;
-            this.btnEditFood.Click += new System.EventHandler(this.btnEditFood_Click);
+            this.lblTotWeight.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotWeight.Location = new System.Drawing.Point(499, 67);
+            this.lblTotWeight.Name = "lblTotWeight";
+            this.lblTotWeight.Size = new System.Drawing.Size(72, 14);
+            this.lblTotWeight.TabIndex = 25;
+            this.lblTotWeight.Text = "(20000 g) =";
+            this.lblTotWeight.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // frmEditDiary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(656, 506);
+            this.ClientSize = new System.Drawing.Size(654, 574);
+            this.Controls.Add(this.lblTotWeight);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnAddFood);
             this.Controls.Add(this.dgvFood);
@@ -671,8 +661,6 @@
             this.Controls.Add(this.pcNutrition);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lblTotEnergy);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblEnergy);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblFoodName);
             this.Controls.Add(this.cmbUnits);
@@ -680,6 +668,7 @@
             this.Controls.Add(this.lblFoodId);
             this.Controls.Add(this.lb_mealTypes);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(670, 613);
             this.Name = "frmEditDiary";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Legg til matvare";
@@ -703,8 +692,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblProtein;
-        private System.Windows.Forms.Label lblEnergy;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblCarbs;
         private System.Windows.Forms.Label label4;
@@ -746,5 +733,6 @@
         private System.Windows.Forms.TextBox txtFoodFilter;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnEditFood;
+        private System.Windows.Forms.Label lblTotWeight;
     }
 }

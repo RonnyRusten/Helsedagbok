@@ -49,24 +49,26 @@ namespace Helsedagbok
 
                 int MealId = (int)row["id"];
                 Meal Meal = new Meal(MealId);
-                
-                int n = 0;
-                foreach (clsGlobal.Food Food in Meal.Foods)
+                if (Meal.Energy > 0)
                 {
-                    Carbs += Meal.Foods[n].Carbs;
-                    Sugar += Meal.Foods[n].Sugar;
-                    Fat += Meal.Foods[n].Fat;
-                    FatSat += Meal.Foods[n].FatSat;
-                    FatMono += Meal.Foods[n].FatMono;
-                    FatPoly += Meal.Foods[n].FatPoly;
-                    FatTrans += Meal.Foods[n].FatTrans;
-                    Protein += Meal.Foods[n].Protein;
-                    Alcohol += Meal.Foods[n].Alcohol;
-                    Weight += Meal.Foods[n].Count * Meal.Foods[n].unitWeight;
-                    n += 1;
+                    int n = 0;
+                    foreach (clsGlobal.Food Food in Meal.Foods)
+                    {
+                        Carbs += Meal.Foods[n].Carbs;
+                        Sugar += Meal.Foods[n].Sugar;
+                        Fat += Meal.Foods[n].Fat;
+                        FatSat += Meal.Foods[n].FatSat;
+                        FatMono += Meal.Foods[n].FatMono;
+                        FatPoly += Meal.Foods[n].FatPoly;
+                        FatTrans += Meal.Foods[n].FatTrans;
+                        Protein += Meal.Foods[n].Protein;
+                        Alcohol += Meal.Foods[n].Alcohol;
+                        Weight += Meal.Foods[n].Count * Meal.Foods[n].unitWeight;
+                        n += 1;
+                    }
+                    AddMealSummary(mealNo, row, Carbs, Sugar, Fat, FatSat, FatMono, FatPoly, FatTrans, Protein, Alcohol, Weight, Meal);
+                    mealNo += 1;
                 }
-                AddMealSummary(mealNo, row, Carbs, Sugar, Fat, FatSat, FatMono, FatPoly, FatTrans, Protein, Alcohol, Weight, Meal);
-                mealNo += 1;
             }
         }
 

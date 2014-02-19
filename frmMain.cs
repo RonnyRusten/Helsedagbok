@@ -95,36 +95,45 @@ namespace Helsedagbok
             
             foreach (DataRow row in tblMeals.Rows )
             {
+                decimal MealCarbs = 0;
+                decimal MealFat = 0;
+                decimal MealProtein = 0;
+                decimal MealAlcohol = 0;
                 int MealId = (int)row["id"];
                 Meal Meal = new Meal(MealId);
-                int HeaderRowNo = dgvDiary.Rows.Add();
-                dgvDiary.Rows[HeaderRowNo].DefaultCellStyle = HeadingStyle();
-                dgvDiary.Rows[HeaderRowNo].Cells[1].Value = MealId;
-                dgvDiary.Rows[HeaderRowNo].Cells[2].Value = row["Name"].ToString();
-                dgvDiary.Rows[HeaderRowNo].Cells[3].Value = Meal.Energy.ToString("# ###.##") + " kCal";
-                int RowNo;
-                foreach (clsGlobal.Food Food in Meal.Foods)
+                if (Meal.Foods.Length > 0)
                 {
-                    RowNo = dgvDiary.Rows.Add();
-                    dgvDiary.Rows[RowNo].Cells[0].Value = Food.idDiary;
-                    dgvDiary.Rows[RowNo].Cells[1].Value = MealId;
-                    dgvDiary.Rows[RowNo].Cells[2].Value = Food.DisplayName;
-                    dgvDiary.Rows[RowNo].Cells[3].Value = Food.Energy.ToString("# ###.##") + " kCal";
+                    int HeaderRowNo = dgvDiary.Rows.Add();
+                    dgvDiary.Rows[HeaderRowNo].DefaultCellStyle = HeadingStyle();
+                    dgvDiary.Rows[HeaderRowNo].Cells[1].Value = MealId;
+                    dgvDiary.Rows[HeaderRowNo].Cells[2].Value = row["Name"].ToString();
+                    dgvDiary.Rows[HeaderRowNo].Cells[3].Value = Meal.Energy.ToString("# ###.##") + " kCal";
+                    totalEnergy += Meal.Energy;
+                    int RowNo;
+                    foreach (clsGlobal.Food Food in Meal.Foods)
+                    {
+                        RowNo = dgvDiary.Rows.Add();
+                        dgvDiary.Rows[RowNo].Cells[0].Value = Food.idDiary;
+                        dgvDiary.Rows[RowNo].Cells[1].Value = MealId;
+                        dgvDiary.Rows[RowNo].Cells[2].Value = Food.DisplayName;
+                        dgvDiary.Rows[RowNo].Cells[3].Value = Food.Energy.ToString("# ###.##") + " kCal";
 
-                    Carbs += Food.Carbs;
-                    Sugar += Food.Sugar;
-                    Fat += Food.Fat;
-                    FatSat += Food.FatSat;
-                    FatMono += Food.FatMono;
-                    FatPoly += Food.FatPoly;
-                    FatTrans += Food.FatTrans;
-                    Protein += Food.Protein;
-                    Alcohol += Food.Alcohol;
-                    Weight += Food.Count * Food.unitWeight;
+                        Carbs += Food.Carbs;
+                        MealCarbs += Food.Carbs;
+                        Sugar += Food.Sugar;
+                        Fat += Food.Fat;
+                        MealFat += Food.Fat;
+                        FatSat += Food.FatSat;
+                        FatMono += Food.FatMono;
+                        FatPoly += Food.FatPoly;
+                        FatTrans += Food.FatTrans;
+                        Protein += Food.Protein;
+                        MealProtein += Food.Protein;
+                        Alcohol += Food.Alcohol;
+                        MealAlcohol += Food.Alcohol;
+                        Weight += Food.Count * Food.unitWeight;
+                    }
                 }
-                dgvDiary.Rows[HeaderRowNo].Cells[2].Value = row["Name"].ToString() + " (F: " + Fat.ToString("0.0") + " g, K: " + Carbs.ToString("0.0") + " g, P: " + Protein.ToString("0.0") + " g, A: " + Alcohol.ToString("0.0") + ")";
-                mealNo += 1;
-                totalEnergy += Meal.Energy;
             }
             setDiaryGrid();
             AddDaySummary(mealNo, Carbs, Sugar, Fat, FatSat, FatMono, FatPoly, FatTrans, Protein, Alcohol, Weight, totalEnergy);
@@ -138,7 +147,7 @@ namespace Helsedagbok
                 daySummary.Top = 81;
                 daySummary.Left = dgvDiary.Left + dgvDiary.Width + 2;
                 daySummary.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                this.Controls.Add(daySummary);
+                tpFoodDiary.Controls.Add(daySummary);
             }
             daySummary.Energy = Energy;
             daySummary.Carbs = Carbs;
@@ -156,8 +165,8 @@ namespace Helsedagbok
 
         private void setDiaryGrid()
         {
-            //dgvDiary.Columns[0].Visible = false;
-            //dgvDiary.Columns[1].Visible = false;
+            dgvDiary.Columns[0].Visible = false;
+            dgvDiary.Columns[1].Visible = false;
             dgvDiary.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDiary.ClearSelection();
         }
@@ -176,7 +185,7 @@ namespace Helsedagbok
         private void bntAddFood_Click(object sender, EventArgs e)
         {
             frmEditDiary frm = new frmEditDiary();
-            
+            frm.DiaryDate = dtpDate.Value;
             frm.ShowDialog();
         }
 
@@ -191,6 +200,38 @@ namespace Helsedagbok
         {
             frmSetup frm = new frmSetup();
             frm.ShowDialog();
+            getMeals();
+        }
+
+        private void slettToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvDiary.SelectedRows.Count > 0)
+            {
+                int idDiary = (int)dgvDiary.SelectedRows[0].Cells[0].Value;
+                string FoodName = dgvDiary.SelectedRows[0].Cells[2].Value.ToString();
+                if (MessageBox.Show("Vil du slette " + FoodName + "?", "Slette?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    SqlCommand cmd = new SqlCommand("DELETE FROM tblDiary WHERE id = @idDiary",clsGlobal.conn1);
+                    cmd.Parameters.AddWithValue("@idDiary", idDiary);
+                    if (clsGlobal.conn1.State != ConnectionState.Open)
+                        clsGlobal.conn1.Open();
+                    cmd.ExecuteNonQuery();
+                    clsGlobal.conn1.Close();
+                    getMeals();
+                }
+            }
+        }
+
+        private void dgvDiary_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                int rowSelected = e.RowIndex;
+                if (e.RowIndex != -1)
+                {
+                    this.dgvDiary.Rows[rowSelected].Selected = true;
+                }
+            }
         }
 
     }

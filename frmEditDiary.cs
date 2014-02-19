@@ -55,10 +55,15 @@ namespace Helsedagbok
 
         private void frmEditDiary_Load(object sender, EventArgs e)
         {
+            dtpDate.Value = DiaryDate;
             getMealTypes();
             getUnits();
             getFood();
-            lblFoodName.Text = "Velg matvare fra listen.";
+            IdFood = (int)dgvFood.Rows[0].Cells[3].Value;
+            getFoodInfo();
+            setChart();
+            getUnits();
+            setUnit();
         }
 
         private void getFood()
@@ -88,7 +93,7 @@ namespace Helsedagbok
 
         private void getMealTypes()
         {
-            SqlDataAdapter a = new SqlDataAdapter("SELECT id, Name FROM tblMealTypes", clsGlobal.conn1);
+            SqlDataAdapter a = new SqlDataAdapter("SELECT id, Name FROM tblMealTypes ORDER BY SortOrder", clsGlobal.conn1);
             DataTable tbl = new DataTable();
             a.Fill(tbl);
             lb_mealTypes.DataSource = tbl;
@@ -99,7 +104,8 @@ namespace Helsedagbok
 
         private void getUnits()
         {
-            SqlDataAdapter a = new SqlDataAdapter("SELECT id, Name, Weight FROM tblUnits", clsGlobal.conn1);
+            SqlDataAdapter a = new SqlDataAdapter("SELECT id, Name, Weight FROM tblUnits WHERE idFood = @idFood OR idFood is null", clsGlobal.conn1);
+            a.SelectCommand.Parameters.AddWithValue("@idFood", IdFood);
             tblUnits = new DataTable();
             a.Fill(tblUnits);
             cmbUnits.DataSource = tblUnits;
@@ -115,16 +121,15 @@ namespace Helsedagbok
             if (tblFoodInfo.Rows.Count > 0)
             {
                 lblFoodName.Text = tblFoodInfo.Rows[0]["Name"].ToString();
-                SetNutritionValues();
+                setNutritionValues();
             }
             
         }
 
-        private void SetNutritionValues()
+        private void setNutritionValues()
         {
             if (tblFoodInfo != null)
             {
-                lblEnergy.Text = totalEnergy() + " kCal/100 g";
                 lblTotEnergy.Text = macroCalk(totalEnergy().ToString()) + " kCal";
                 lblCarbs.Text = macroCalk(tblFoodInfo.Rows[0]["Karbohydrat"].ToString());
                 lblProtein.Text = macroCalk(tblFoodInfo.Rows[0]["Protein"].ToString());
@@ -143,6 +148,22 @@ namespace Helsedagbok
                 lblFatPolyEnergy.Text = macroEnergy(lblFatPolyUnsat.Text, 9).ToString() + " kCal";
                 lblFatTransEnergy.Text = macroEnergy(lblFatTrans.Text, 9).ToString() + " kCal";
                 lblAlcoholEnergy.Text = macroEnergy(lblAlcohol.Text, 7).ToString() + " kCal";
+            }
+        }
+
+        private void setTotalWeight()
+        {
+            decimal count = Convert.ToDecimal(txtAmount.Text);
+            decimal unitWeight = (decimal)tblUnits.Rows[cmbUnits.SelectedIndex]["Weight"];
+            decimal totWeight = count * unitWeight;
+            if (unitWeight != 1)
+            {
+                lblTotWeight.Visible = true;
+                lblTotWeight.Text = "(" + totWeight.ToString("0.0") + " g) =";
+            }
+            else 
+            { 
+                lblTotWeight.Visible = false; 
             }
         }
 
@@ -180,7 +201,10 @@ namespace Helsedagbok
             decimal total = 0;
             decimal count = Convert.ToDecimal(txtAmount.Text);
             if (count == 0)
+            {
                 count = 100;
+                txtAmount.Text = "100";
+            }
             decimal unitWeight = (decimal)tblUnits.Rows[cmbUnits.SelectedIndex]["Weight"];
             if (clsFunctions.IsNumeric(value)) total =  Convert.ToDecimal(value) / 100 * count * unitWeight;
             return total.ToString("0.00");
@@ -208,19 +232,38 @@ namespace Helsedagbok
             double d;
             if (double.TryParse(txtAmount.Text, out d))
             {
-                SetNutritionValues();
+                setNutritionValues();
+                setTotalWeight();
+                if (lb_mealTypes.SelectedItems.Count > 0)
+                {
+                    btnOK.Enabled = true;
+                }
             }
+            else
+                btnOK.Enabled = false;
         }
 
         private void cmbUnits_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetNutritionValues();
+            setNutritionValues();
+            setTotalWeight();
         }
 
         private void AddFood()
         {
+            SqlCommand cmd;
             int MealId = getMealId();
-            SqlCommand cmd = new SqlCommand("INSERT INTO tblDiary (id_Meal, id_Food, amnt, id_Unit) VALUES (@idMeal, @idFood, @amnt, @idUnit)", clsGlobal.conn1);
+            int DiaryId = getDiaryId(MealId);
+            if (DiaryId > 0)
+            {
+                cmd = new SqlCommand("Update tblDiary SET amnt = @amnt, id_unit = @idUnit WHERE id = @idDiary", clsGlobal.conn1);
+                cmd.Parameters.AddWithValue("@idDiary", DiaryId);
+            }
+            else
+            {
+                cmd = new SqlCommand("INSERT INTO tblDiary (id_Meal, id_Food, amnt, id_Unit) VALUES (@idMeal, @idFood, @amnt, @idUnit)", clsGlobal.conn1);
+            }
+            
             cmd.Parameters.AddWithValue("@idMeal", MealId);
             cmd.Parameters.AddWithValue("@idFood", IdFood);
             cmd.Parameters.AddWithValue("@amnt", txtAmount.Text);
@@ -263,6 +306,25 @@ namespace Helsedagbok
             return retVal;
         }
 
+        private int getDiaryId(int MealId)
+        {
+            int DiaryId = 0;
+            string sqlQuery = "SELECT id FROM tblDiary WHERE id_Meal = @idMeal AND id_Food = @idFood";
+            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
+            cmd.Parameters.AddWithValue("@idMeal", MealId);
+            cmd.Parameters.AddWithValue("@idFood", IdFood);
+            if (clsGlobal.conn1.State != ConnectionState.Open)
+                clsGlobal.conn1.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Read();
+                DiaryId = reader.GetInt32(0);
+            }
+            clsGlobal.conn1.Close();
+            return DiaryId;
+        }
+
         private void lb_mealTypes_Click(object sender, EventArgs e)
         {
             if (IdFood != 0)
@@ -300,13 +362,40 @@ namespace Helsedagbok
             {
                 setFavourite((int)dgvFood[2, e.RowIndex].Value, (int)dgvFood[3, e.RowIndex].Value);
                 getFood();
+                getUnits();
                 FilterFood();
             }
             IdFood = (int)dgvFood.SelectedRows[0].Cells[3].Value;
             getFoodInfo();
             setChart();
+            getUnits();
+            setUnit();
+            txtAmount.Focus();
+            txtAmount.SelectAll();
             if (lb_mealTypes.SelectedItems.Count > 0)
                 btnOK.Enabled = true;
+        }
+
+        private void setUnit()
+        {
+            string sqlSelect = "SELECT TOP 1 id FROM tblUnits WHERE idFood = @idFood ORDER BY id";
+            SqlCommand cmd = new SqlCommand(sqlSelect, clsGlobal.conn1);
+            cmd.Parameters.AddWithValue("@IdFood", IdFood);
+            if (clsGlobal.conn1.State != ConnectionState.Open)
+                clsGlobal.conn1.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Read();
+                txtAmount.Text = "1";
+                cmbUnits.SelectedValue = reader.GetInt32(0);
+            }
+            else
+            {
+                cmbUnits.SelectedValue = 1;
+            }
+            reader.Close();
+            setTotalWeight();
         }
 
         private void setFavourite(int status, int idFood)
@@ -362,6 +451,8 @@ namespace Helsedagbok
             }
             AddFood();
             FoodUpdated(EventArgs.Empty);
+            txtAmount.Focus();
+            txtAmount.SelectAll();
         }
 
         private void btnAddFood_Click(object sender, EventArgs e)
@@ -370,6 +461,7 @@ namespace Helsedagbok
             frm.ShowDialog();
             getFood();
             FilterFood();
+            getUnits();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -383,6 +475,7 @@ namespace Helsedagbok
             frm.EditMode = true;
             frm.FoodId = IdFood;
             frm.ShowDialog();
+            getUnits();
         }
 
     }

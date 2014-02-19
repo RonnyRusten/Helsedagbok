@@ -105,10 +105,6 @@ namespace Helsedagbok
         }
         #endregion
 
-        private void ucDaySummary_Load(object sender, EventArgs e)
-        {
-            
-        }
 
         public void setValues()
         {
@@ -126,7 +122,9 @@ namespace Helsedagbok
             setChart();
             setPerWeight();
             getGoals();
+            setColors();
         }
+        
         private void setChart()
         {
             decimal[] yValues = { 50, 35, 15, 0 };
@@ -184,7 +182,7 @@ namespace Helsedagbok
             decimal Protein = 0;
             decimal Fiber = 0;
 
-            string selectString = "SELECT TOP 1 * FROM tblNutrientGoal WHERE idUser = 1 ORDER BY idGoal DESC";
+            string selectString = "SELECT TOP 1 * FROM tblNutritionGoals WHERE idUser = 1 ORDER BY idGoal DESC";
             SqlCommand cmd = new SqlCommand(selectString, clsGlobal.conn1);
             if (clsGlobal.conn1.State != ConnectionState.Open)
             {
@@ -195,11 +193,11 @@ namespace Helsedagbok
             {
                 while (myReader.Read())
                 {
-                    Calories = myReader.GetDecimal(3);
-                    Carbs = myReader.GetDecimal(4);
-                    Fat = myReader.GetDecimal(5);
-                    Protein = myReader.GetDecimal(6);
-                    Fiber = myReader.GetDecimal(7);
+                    Calories = myReader.GetDecimal(2);
+                    Carbs = myReader.GetDecimal(3);
+                    Fat = myReader.GetDecimal(4);
+                    Protein = myReader.GetDecimal(5);
+                    Fiber = myReader.GetDecimal(6);
                 }
             }
             myReader.Close();
@@ -210,6 +208,18 @@ namespace Helsedagbok
             lblFatGoal.Text = Fat.ToString("0.0");
             lblProteinGoal.Text = Protein.ToString("0.0");
 
+        }
+
+        private void setColors()
+        {
+            if (Convert.ToDecimal(lblEnergy.Text) > Convert.ToDecimal(lblEnergyGoal.Text))
+                lblEnergy.ForeColor=Color.Red;
+            if (Convert.ToDecimal(lblCarbs.Text) > Convert.ToDecimal(lblCarbsGoal.Text))
+                lblCarbs.ForeColor=Color.Red;
+            if (Convert.ToDecimal(lblFat.Text) > Convert.ToDecimal(lblFatGoal.Text))
+                lblFat.ForeColor = Color.Red;
+            if (Convert.ToDecimal(lblProtein.Text) > Convert.ToDecimal(lblProteinGoal.Text))
+                lblProtein.ForeColor = Color.Red;
         }
     }
 }

@@ -65,7 +65,8 @@ namespace Helsedagbok
                 "LEFT OUTER JOIN tblUnits ON tblDiary.id_unit = tblUnits.id " +
 			    "LEFT OUTER JOIN tblMatvarer ON tblDiary.id_Food = tblMatvarer.id " +
                 "LEFT OUTER JOIN tblMealTypes ON tblMealTypes.id = tblMeals.id_mealType " +
-                "WHERE tblMeals.id = @mealId";
+                "WHERE tblMeals.id = @mealId " +
+                "ORDER BY DiaryId";
             SqlDataAdapter a = new SqlDataAdapter(sqlString, clsGlobal.conn1);
             a.SelectCommand.Parameters.AddWithValue("@mealId", m_MealId);
             DataTable tblFoods = new DataTable();
@@ -74,26 +75,32 @@ namespace Helsedagbok
             Foods = new clsGlobal.Food[tblFoods.Rows.Count];
             foreach (DataRow row in tblFoods.Rows)
 	        {
-                Foods[n].idDiary = (int)row["Diaryid"];
-                Foods[n].idFood = (int)row["Foodid"];
-                Foods[n].Name = (string)row["Name"];
-                Foods[n].Count = Convert.ToDecimal(row["amnt"]);
-                Foods[n].idUnit = (int)row["id_Unit"];
-                Foods[n].Unit = (string)row["Unit"];
-                Foods[n].unitWeight = Convert.ToDecimal(row["Unit_Weight"]);
-                decimal Mass = Foods[n].Count * Foods[n].unitWeight;
-                Foods[n].Carbs = Convert.ToDecimal(row["Karbohydrat"]) /100 * Mass;
-                Foods[n].Sugar = Convert.ToDecimal(row["Sukker"]) / 100 * Mass;
-                Foods[n].Fat = Convert.ToDecimal(row["Fett"]) / 100 * Mass;
-                Foods[n].FatSat = Convert.ToDecimal(row["Fett_mettet"]) / 100 * Mass;
-                Foods[n].FatMono = Convert.ToDecimal(row["Fett_enum"]) / 100 * Mass;
-                Foods[n].FatPoly = Convert.ToDecimal(row["Fett_flerum"]) / 100 * Mass;
-                Foods[n].FatTrans = Convert.ToDecimal(row["Fett_trans"]) / 100 * Mass;
-                Foods[n].Protein = Convert.ToDecimal(row["Protein"]) / 100 * Mass;
-                Foods[n].Alcohol = Convert.ToDecimal(row["Alkohol"]) / 100 * Mass;
-                Foods[n].Energy = calculateEnergy(n);
-                Foods[n].DisplayName = Displayname(n);
-                n++;
+                try
+                {
+                    Foods[n].idDiary = (int)row["Diaryid"];
+                    Foods[n].idFood = (int)row["Foodid"];
+                    Foods[n].Name = (string)row["Name"];
+                    Foods[n].Count = Convert.ToDecimal(row["amnt"]);
+                    Foods[n].idUnit = (int)row["id_Unit"];
+                    Foods[n].Unit = (string)row["Unit"];
+                    Foods[n].unitWeight = Convert.ToDecimal(row["Unit_Weight"]);
+                    decimal Mass = Foods[n].Count * Foods[n].unitWeight;
+                    Foods[n].Carbs = Convert.ToDecimal(row["Karbohydrat"]) /100 * Mass;
+                    Foods[n].Sugar = Convert.ToDecimal(row["Sukker"]) / 100 * Mass;
+                    Foods[n].Fat = Convert.ToDecimal(row["Fett"]) / 100 * Mass;
+                    Foods[n].FatSat = Convert.ToDecimal(row["Fett_mettet"]) / 100 * Mass;
+                    Foods[n].FatMono = Convert.ToDecimal(row["Fett_enum"]) / 100 * Mass;
+                    Foods[n].FatPoly = Convert.ToDecimal(row["Fett_flerum"]) / 100 * Mass;
+                    Foods[n].FatTrans = (row["Fett_trans"] is DBNull) ? 0 : Convert.ToDecimal(row["Fett_trans"]) / 100 * Mass;
+                    Foods[n].Protein = Convert.ToDecimal(row["Protein"]) / 100 * Mass;
+                    Foods[n].Alcohol = Convert.ToDecimal(row["Alkohol"]) / 100 * Mass;
+                    Foods[n].Energy = calculateEnergy(n);
+                    Foods[n].DisplayName = Displayname(n);
+                    n++;
+                }
+                catch (Exception)
+                {}
+                
 	        }
         }
 
@@ -126,11 +133,14 @@ namespace Helsedagbok
                 eTotal += (eFat + eCarbs + eProtein + eAlcohol);
             }
 
-            m_persAlcohol = eAlcoholTotal / eTotal * 100;
-            m_persCarbs = eCarbsTotal / eTotal * 100;
-            m_persFat = eFatTotal / eTotal * 100;
-            m_persProtein = eProteinTotal / eTotal * 100;
-            m_Energy = eTotal;
+            if (eTotal > 0)
+            {
+                m_persAlcohol = eAlcoholTotal / eTotal * 100;
+                m_persCarbs = eCarbsTotal / eTotal * 100;
+                m_persFat = eFatTotal / eTotal * 100;
+                m_persProtein = eProteinTotal / eTotal * 100;
+                m_Energy = eTotal;
+            }
         }
 
         private decimal calculateEnergy(int FoodId)

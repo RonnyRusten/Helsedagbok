@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -72,16 +73,26 @@
             this.label24 = new System.Windows.Forms.Label();
             this.txtFiber = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
+            this.txtUnit = new System.Windows.Forms.TextBox();
+            this.txtUnitWeight = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.btnSaveUnit = new System.Windows.Forms.Button();
+            this.lbUnits = new System.Windows.Forms.ListBox();
+            this.cmsUnits = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.label28 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pcNutrition)).BeginInit();
+            this.cmsUnits.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(209, 511);
+            this.btnOK.Location = new System.Drawing.Point(209, 646);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 13;
+            this.btnOK.TabIndex = 17;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -89,10 +100,10 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(128, 511);
+            this.btnCancel.Location = new System.Drawing.Point(128, 646);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 14;
+            this.btnCancel.TabIndex = 16;
             this.btnCancel.Text = "Avbryt";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -118,7 +129,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 67);
+            this.label3.Location = new System.Drawing.Point(12, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 4;
@@ -127,7 +138,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 119);
+            this.label4.Location = new System.Drawing.Point(12, 145);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(25, 13);
             this.label4.TabIndex = 5;
@@ -136,7 +147,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 249);
+            this.label5.Location = new System.Drawing.Point(12, 67);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 6;
@@ -176,10 +187,10 @@
             // 
             this.txtCarbohydrates.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCarbohydrates.Location = new System.Drawing.Point(107, 64);
+            this.txtCarbohydrates.Location = new System.Drawing.Point(107, 90);
             this.txtCarbohydrates.Name = "txtCarbohydrates";
             this.txtCarbohydrates.Size = new System.Drawing.Size(114, 20);
-            this.txtCarbohydrates.TabIndex = 2;
+            this.txtCarbohydrates.TabIndex = 3;
             this.txtCarbohydrates.Text = "0";
             this.txtCarbohydrates.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCarbohydrates.TextChanged += new System.EventHandler(this.txtCarbohydrates_TextChanged);
@@ -188,10 +199,10 @@
             // 
             this.txtFat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFat.Location = new System.Drawing.Point(107, 116);
+            this.txtFat.Location = new System.Drawing.Point(107, 142);
             this.txtFat.Name = "txtFat";
             this.txtFat.Size = new System.Drawing.Size(114, 20);
-            this.txtFat.TabIndex = 4;
+            this.txtFat.TabIndex = 5;
             this.txtFat.Text = "0";
             this.txtFat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtFat.TextChanged += new System.EventHandler(this.txtFat_TextChanged);
@@ -200,10 +211,10 @@
             // 
             this.txtProtein.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtProtein.Location = new System.Drawing.Point(107, 246);
+            this.txtProtein.Location = new System.Drawing.Point(107, 64);
             this.txtProtein.Name = "txtProtein";
             this.txtProtein.Size = new System.Drawing.Size(114, 20);
-            this.txtProtein.TabIndex = 9;
+            this.txtProtein.TabIndex = 2;
             this.txtProtein.Text = "0";
             this.txtProtein.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtProtein.TextChanged += new System.EventHandler(this.txtProtein_TextChanged);
@@ -224,7 +235,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(242, 67);
+            this.label7.Location = new System.Drawing.Point(242, 93);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 13);
             this.label7.TabIndex = 14;
@@ -234,7 +245,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(242, 119);
+            this.label8.Location = new System.Drawing.Point(242, 145);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(42, 13);
             this.label8.TabIndex = 15;
@@ -244,7 +255,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(242, 249);
+            this.label9.Location = new System.Drawing.Point(242, 67);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(42, 13);
             this.label9.TabIndex = 16;
@@ -304,7 +315,7 @@
             // 
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(242, 145);
+            this.label16.Location = new System.Drawing.Point(242, 171);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(42, 13);
             this.label16.TabIndex = 27;
@@ -314,17 +325,17 @@
             // 
             this.txtSatFat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSatFat.Location = new System.Drawing.Point(107, 142);
+            this.txtSatFat.Location = new System.Drawing.Point(107, 168);
             this.txtSatFat.Name = "txtSatFat";
             this.txtSatFat.Size = new System.Drawing.Size(114, 20);
-            this.txtSatFat.TabIndex = 5;
+            this.txtSatFat.TabIndex = 6;
             this.txtSatFat.Text = "0";
             this.txtSatFat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(24, 145);
+            this.label17.Location = new System.Drawing.Point(24, 171);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(55, 13);
             this.label17.TabIndex = 25;
@@ -334,7 +345,7 @@
             // 
             this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(242, 171);
+            this.label18.Location = new System.Drawing.Point(242, 197);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(42, 13);
             this.label18.TabIndex = 30;
@@ -344,17 +355,17 @@
             // 
             this.txtMonoFat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMonoFat.Location = new System.Drawing.Point(107, 168);
+            this.txtMonoFat.Location = new System.Drawing.Point(107, 194);
             this.txtMonoFat.Name = "txtMonoFat";
             this.txtMonoFat.Size = new System.Drawing.Size(114, 20);
-            this.txtMonoFat.TabIndex = 6;
+            this.txtMonoFat.TabIndex = 7;
             this.txtMonoFat.Text = "0";
             this.txtMonoFat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(24, 171);
+            this.label19.Location = new System.Drawing.Point(24, 197);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(73, 13);
             this.label19.TabIndex = 28;
@@ -364,7 +375,7 @@
             // 
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(242, 197);
+            this.label20.Location = new System.Drawing.Point(242, 223);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(42, 13);
             this.label20.TabIndex = 33;
@@ -374,17 +385,17 @@
             // 
             this.txtPolyFat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPolyFat.Location = new System.Drawing.Point(107, 194);
+            this.txtPolyFat.Location = new System.Drawing.Point(107, 220);
             this.txtPolyFat.Name = "txtPolyFat";
             this.txtPolyFat.Size = new System.Drawing.Size(114, 20);
-            this.txtPolyFat.TabIndex = 7;
+            this.txtPolyFat.TabIndex = 8;
             this.txtPolyFat.Text = "0";
             this.txtPolyFat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(24, 197);
+            this.label21.Location = new System.Drawing.Point(24, 223);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(77, 13);
             this.label21.TabIndex = 31;
@@ -394,7 +405,7 @@
             // 
             this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(242, 223);
+            this.label22.Location = new System.Drawing.Point(242, 249);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(42, 13);
             this.label22.TabIndex = 36;
@@ -404,17 +415,17 @@
             // 
             this.txtTransFat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTransFat.Location = new System.Drawing.Point(107, 220);
+            this.txtTransFat.Location = new System.Drawing.Point(107, 246);
             this.txtTransFat.Name = "txtTransFat";
             this.txtTransFat.Size = new System.Drawing.Size(114, 20);
-            this.txtTransFat.TabIndex = 8;
+            this.txtTransFat.TabIndex = 9;
             this.txtTransFat.Text = "0";
             this.txtTransFat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(24, 223);
+            this.label23.Location = new System.Drawing.Point(24, 249);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(49, 13);
             this.label23.TabIndex = 34;
@@ -424,7 +435,7 @@
             // 
             this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(242, 93);
+            this.label26.Location = new System.Drawing.Point(242, 119);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(42, 13);
             this.label26.TabIndex = 39;
@@ -434,17 +445,17 @@
             // 
             this.txtSugars.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSugars.Location = new System.Drawing.Point(107, 90);
+            this.txtSugars.Location = new System.Drawing.Point(107, 116);
             this.txtSugars.Name = "txtSugars";
             this.txtSugars.Size = new System.Drawing.Size(114, 20);
-            this.txtSugars.TabIndex = 3;
+            this.txtSugars.TabIndex = 4;
             this.txtSugars.Text = "0";
             this.txtSugars.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(24, 93);
+            this.label27.Location = new System.Drawing.Point(24, 119);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(41, 13);
             this.label27.TabIndex = 37;
@@ -459,7 +470,7 @@
             this.pcNutrition.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.pcNutrition.Legends.Add(legend1);
-            this.pcNutrition.Location = new System.Drawing.Point(12, 354);
+            this.pcNutrition.Location = new System.Drawing.Point(12, 489);
             this.pcNutrition.Name = "pcNutrition";
             series1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
             series1.ChartArea = "Default";
@@ -503,11 +514,96 @@
             this.label25.TabIndex = 45;
             this.label25.Text = "Kostfiber";
             // 
+            // txtUnit
+            // 
+            this.txtUnit.Location = new System.Drawing.Point(15, 363);
+            this.txtUnit.Name = "txtUnit";
+            this.txtUnit.Size = new System.Drawing.Size(112, 20);
+            this.txtUnit.TabIndex = 13;
+            // 
+            // txtUnitWeight
+            // 
+            this.txtUnitWeight.Location = new System.Drawing.Point(152, 363);
+            this.txtUnitWeight.Name = "txtUnitWeight";
+            this.txtUnitWeight.Size = new System.Drawing.Size(72, 20);
+            this.txtUnitWeight.TabIndex = 14;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(149, 347);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(75, 13);
+            this.label14.TabIndex = 49;
+            this.label14.Text = "gram pr. enhet";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(12, 347);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(35, 13);
+            this.label15.TabIndex = 50;
+            this.label15.Text = "Enhet";
+            // 
+            // btnSaveUnit
+            // 
+            this.btnSaveUnit.Location = new System.Drawing.Point(230, 361);
+            this.btnSaveUnit.Name = "btnSaveUnit";
+            this.btnSaveUnit.Size = new System.Drawing.Size(54, 23);
+            this.btnSaveUnit.TabIndex = 15;
+            this.btnSaveUnit.Text = "Lagre";
+            this.btnSaveUnit.UseVisualStyleBackColor = true;
+            this.btnSaveUnit.Click += new System.EventHandler(this.btnSaveUnit_Click);
+            // 
+            // lbUnits
+            // 
+            this.lbUnits.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbUnits.ContextMenuStrip = this.cmsUnits;
+            this.lbUnits.FormattingEnabled = true;
+            this.lbUnits.Location = new System.Drawing.Point(15, 389);
+            this.lbUnits.Name = "lbUnits";
+            this.lbUnits.Size = new System.Drawing.Size(269, 95);
+            this.lbUnits.TabIndex = 52;
+            this.lbUnits.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbUnits_MouseClick);
+            // 
+            // cmsUnits
+            // 
+            this.cmsUnits.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDelete});
+            this.cmsUnits.Name = "cmsUnits";
+            this.cmsUnits.Size = new System.Drawing.Size(98, 26);
+            // 
+            // tsmiDelete
+            // 
+            this.tsmiDelete.Name = "tsmiDelete";
+            this.tsmiDelete.Size = new System.Drawing.Size(97, 22);
+            this.tsmiDelete.Text = "Slett";
+            this.tsmiDelete.ToolTipText = "Slett enhet.";
+            this.tsmiDelete.Click += new System.EventHandler(this.tsmiDelete_Click);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(133, 366);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(13, 13);
+            this.label28.TabIndex = 53;
+            this.label28.Text = "=";
+            // 
             // frmAddFood
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(296, 546);
+            this.ClientSize = new System.Drawing.Size(296, 681);
+            this.Controls.Add(this.label28);
+            this.Controls.Add(this.lbUnits);
+            this.Controls.Add(this.btnSaveUnit);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.txtUnitWeight);
+            this.Controls.Add(this.txtUnit);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.txtFiber);
             this.Controls.Add(this.label25);
@@ -553,6 +649,7 @@
             this.Text = "Legg til matvare";
             this.Load += new System.EventHandler(this.frmAddFood_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pcNutrition)).EndInit();
+            this.cmsUnits.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -601,5 +698,14 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox txtFiber;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox txtUnit;
+        private System.Windows.Forms.TextBox txtUnitWeight;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button btnSaveUnit;
+        private System.Windows.Forms.ListBox lbUnits;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.ContextMenuStrip cmsUnits;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDelete;
     }
 }

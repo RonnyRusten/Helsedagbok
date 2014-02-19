@@ -102,7 +102,6 @@ namespace Helsedagbok
             if (EditMode == true)
             {
                 result = updateDB();
-                this.Close();
             }
             else
             {
@@ -123,6 +122,7 @@ namespace Helsedagbok
                 txtFiber.Text = "0";
                 txtAlcohol.Text = "0";
                 txtNatrium.Text = "0";
+                this.Close();
             }
             else
             {
@@ -193,6 +193,7 @@ namespace Helsedagbok
             clsGlobal.conn1.Close();
             return numRows;
         }
+
         private void getFood(int FoodID)
         {
             string sqlQuery = "SELECT * FROM tblMatvarer WHERE id = @FoodID";
@@ -238,13 +239,116 @@ namespace Helsedagbok
             clsGlobal.conn1.Close();
         }
 
+        private void getUnits()
+        {
+            string sqlSelect = "SELECT id, Name + ' = ' + FORMAT(Weight, '0.######') + ' g' AS Unit FROM tblUnits WHERE idFood = @idFood";
+            SqlDataAdapter a = new SqlDataAdapter(sqlSelect, clsGlobal.conn1);
+            a.SelectCommand.Parameters.AddWithValue("@idFood", FoodId);
+            DataTable tblUnits = new DataTable();
+            a.Fill(tblUnits);
+            lbUnits.DataSource = tblUnits;
+            lbUnits.DisplayMember = "Unit";
+            lbUnits.ValueMember = "id";
+            if(lbUnits.Items.Count > 0)
+                lbUnits.SetSelected(0, false);
+        }
+
         private void frmAddFood_Load(object sender, EventArgs e)
         {
             if (EditMode == true)
             {
                 this.Text = "Rediger matvare";
                 getFood(FoodId);
+                getUnits();
             }
+        }
+
+        private int getFoodId()
+        {
+            int FoodId = 0;
+            string sqlSelect = "SELECT id FROM tblMatvarer WHERE Name = @FoodName";
+            SqlCommand cmd = new SqlCommand(sqlSelect, clsGlobal.conn1);
+            cmd.Parameters.AddWithValue("@FoodName", txtName.Text);
+            if (clsGlobal.conn1.State == ConnectionState.Closed)
+                clsGlobal.conn1.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Read();
+                FoodId = reader.GetInt32(0);
+            }
+            clsGlobal.conn1.Close();
+            return FoodId;
+        }
+
+        private void btnSaveUnit_Click(object sender, EventArgs e)
+        {
+            int idUnit;
+            if (FoodId == 0)
+            {
+                addToDB();
+                FoodId = getFoodId();
+                EditMode = true;
+            }
+            string sqlSelect = "SELECT id FROM tblUnits WHERE idFood = @idFood AND Name = @UnitName";
+            string sqlInsert = "INSERT INTO tblUnits (Name, Weight, idFood) VALUES (@Name, @Weight, @idFood)";
+            string sqlUpdate = "UPDATE tblUnits SET Name = @Name, Weight = @Weight, idFood = @idFood WHERE id = @idUnit";
+            if (clsGlobal.conn1.State != ConnectionState.Open)
+                clsGlobal.conn1.Open();
+            SqlCommand cmd = new SqlCommand(sqlSelect, clsGlobal.conn1);
+            cmd.Parameters.AddWithValue("@idFood",FoodId);
+            cmd.Parameters.AddWithValue("@UnitName", txtUnit.Text);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Read();
+                idUnit = reader.GetInt32(0);
+                reader.Close();
+                SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, clsGlobal.conn1);
+                cmdUpdate.Parameters.AddWithValue("@Name", txtUnit.Text);
+                cmdUpdate.Parameters.AddWithValue("@Weight", Convert.ToDecimal(txtUnitWeight.Text.Replace(".",",")));
+                cmdUpdate.Parameters.AddWithValue("@idFood", FoodId);
+                cmdUpdate.Parameters.AddWithValue("@idUnit", idUnit);
+                cmdUpdate.ExecuteNonQuery();
+            }
+            else
+            {
+                reader.Close();
+                SqlCommand cmdInsert = new SqlCommand(sqlInsert, clsGlobal.conn1);
+                cmdInsert.Parameters.AddWithValue("@Name", txtUnit.Text);
+                cmdInsert.Parameters.AddWithValue("@Weight", Convert.ToDecimal(txtUnitWeight.Text));
+                cmdInsert.Parameters.AddWithValue("@idFood", FoodId);
+                cmdInsert.ExecuteNonQuery();
+            }
+            getUnits();
+            txtUnit.Text = "";
+            txtUnitWeight.Text = "";
+        }
+
+        private void lbUnits_MouseClick(object sender, MouseEventArgs e)
+        {
+            int eqPos;
+            string SelectedValue;
+            string UnitName;
+            string UnitWeight;
+            SelectedValue=lbUnits.Text;
+            eqPos = SelectedValue.IndexOf("=");
+            UnitName = SelectedValue.Substring(0, eqPos - 1);
+            UnitWeight = SelectedValue.Substring(eqPos + 2, SelectedValue.Length - eqPos - 4);
+            txtUnit.Text = UnitName;
+            txtUnitWeight.Text = UnitWeight;
+        }
+
+        private void tsmiDelete_Click(object sender, EventArgs e)
+        {
+            string sqlString = "DELETE FROM tblUnits WHERE id = @UnitId";
+            SqlCommand cmdDelete = new SqlCommand(sqlString, clsGlobal.conn1);
+            cmdDelete.Parameters.AddWithValue("@UnitId", lbUnits.SelectedValue);
+            if (clsGlobal.conn1.State != ConnectionState.Open)
+                clsGlobal.conn1.Open();
+            cmdDelete.ExecuteNonQuery();
+            clsGlobal.conn1.Close();
+            getUnits();
         }
     }
 }

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.lblWeight = new System.Windows.Forms.Label();
@@ -84,9 +84,6 @@
             this.label26 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             ((System.ComponentModel.ISupportInitialize)(this.pcNutrition)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -127,21 +124,21 @@
             this.pcNutrition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pcNutrition.BackColor = System.Drawing.Color.Transparent;
-            chartArea1.Name = "Default";
-            this.pcNutrition.ChartAreas.Add(chartArea1);
-            legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
-            legend1.Name = "Legend1";
-            this.pcNutrition.Legends.Add(legend1);
+            chartArea2.Name = "Default";
+            this.pcNutrition.ChartAreas.Add(chartArea2);
+            legend2.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
+            legend2.Name = "Legend1";
+            this.pcNutrition.Legends.Add(legend2);
             this.pcNutrition.Location = new System.Drawing.Point(0, 192);
             this.pcNutrition.Name = "pcNutrition";
-            series1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
-            series1.ChartArea = "Default";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            series1.Legend = "Legend1";
-            series1.Name = "Default";
-            series1.ShadowOffset = 1;
-            this.pcNutrition.Series.Add(series1);
+            series2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
+            series2.ChartArea = "Default";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            series2.Legend = "Legend1";
+            series2.Name = "Default";
+            series2.ShadowOffset = 1;
+            this.pcNutrition.Series.Add(series2);
             this.pcNutrition.Size = new System.Drawing.Size(373, 152);
             this.pcNutrition.TabIndex = 65;
             this.pcNutrition.Text = "chart1";
@@ -149,7 +146,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(149, 135);
+            this.label19.Location = new System.Drawing.Point(149, 150);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(13, 13);
             this.label19.TabIndex = 63;
@@ -160,7 +157,7 @@
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(3, 135);
+            this.label20.Location = new System.Drawing.Point(3, 150);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(80, 13);
             this.label20.TabIndex = 62;
@@ -170,7 +167,7 @@
             // 
             this.lblFatTrans.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFatTrans.Location = new System.Drawing.Point(89, 135);
+            this.lblFatTrans.Location = new System.Drawing.Point(89, 150);
             this.lblFatTrans.Name = "lblFatTrans";
             this.lblFatTrans.Size = new System.Drawing.Size(54, 13);
             this.lblFatTrans.TabIndex = 64;
@@ -189,7 +186,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(149, 150);
+            this.label17.Location = new System.Drawing.Point(149, 120);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(13, 13);
             this.label17.TabIndex = 51;
@@ -198,7 +195,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(149, 120);
+            this.label16.Location = new System.Drawing.Point(149, 135);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(13, 13);
             this.label16.TabIndex = 50;
@@ -263,7 +260,7 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 60);
+            this.label9.Location = new System.Drawing.Point(3, 75);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(80, 13);
             this.label9.TabIndex = 43;
@@ -285,7 +282,7 @@
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 150);
+            this.label7.Location = new System.Drawing.Point(3, 45);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(80, 13);
             this.label7.TabIndex = 41;
@@ -296,7 +293,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 120);
+            this.label6.Location = new System.Drawing.Point(3, 135);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(80, 13);
             this.label6.TabIndex = 40;
@@ -307,7 +304,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 105);
+            this.label5.Location = new System.Drawing.Point(3, 120);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(80, 13);
             this.label5.TabIndex = 39;
@@ -318,7 +315,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 90);
+            this.label4.Location = new System.Drawing.Point(3, 105);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 13);
             this.label4.TabIndex = 38;
@@ -329,7 +326,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 75);
+            this.label3.Location = new System.Drawing.Point(3, 90);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 13);
             this.label3.TabIndex = 37;
@@ -340,7 +337,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 45);
+            this.label2.Location = new System.Drawing.Point(3, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 13);
             this.label2.TabIndex = 36;
@@ -372,7 +369,7 @@
             // 
             this.lblProtein.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblProtein.Location = new System.Drawing.Point(89, 150);
+            this.lblProtein.Location = new System.Drawing.Point(89, 45);
             this.lblProtein.Name = "lblProtein";
             this.lblProtein.Size = new System.Drawing.Size(54, 13);
             this.lblProtein.TabIndex = 60;
@@ -383,7 +380,7 @@
             // 
             this.lblFatMono.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFatMono.Location = new System.Drawing.Point(89, 105);
+            this.lblFatMono.Location = new System.Drawing.Point(89, 120);
             this.lblFatMono.Name = "lblFatMono";
             this.lblFatMono.Size = new System.Drawing.Size(54, 13);
             this.lblFatMono.TabIndex = 59;
@@ -394,7 +391,7 @@
             // 
             this.lblFatSat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFatSat.Location = new System.Drawing.Point(89, 90);
+            this.lblFatSat.Location = new System.Drawing.Point(89, 105);
             this.lblFatSat.Name = "lblFatSat";
             this.lblFatSat.Size = new System.Drawing.Size(54, 13);
             this.lblFatSat.TabIndex = 58;
@@ -405,7 +402,7 @@
             // 
             this.lblFat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFat.Location = new System.Drawing.Point(89, 75);
+            this.lblFat.Location = new System.Drawing.Point(89, 90);
             this.lblFat.Name = "lblFat";
             this.lblFat.Size = new System.Drawing.Size(54, 13);
             this.lblFat.TabIndex = 57;
@@ -416,7 +413,7 @@
             // 
             this.lblSugar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSugar.Location = new System.Drawing.Point(89, 60);
+            this.lblSugar.Location = new System.Drawing.Point(89, 75);
             this.lblSugar.Name = "lblSugar";
             this.lblSugar.Size = new System.Drawing.Size(54, 13);
             this.lblSugar.TabIndex = 56;
@@ -427,7 +424,7 @@
             // 
             this.lblCarbs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCarbs.Location = new System.Drawing.Point(89, 45);
+            this.lblCarbs.Location = new System.Drawing.Point(89, 60);
             this.lblCarbs.Name = "lblCarbs";
             this.lblCarbs.Size = new System.Drawing.Size(54, 13);
             this.lblCarbs.TabIndex = 55;
@@ -449,7 +446,7 @@
             // 
             this.lblFatPoly.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFatPoly.Location = new System.Drawing.Point(89, 120);
+            this.lblFatPoly.Location = new System.Drawing.Point(89, 135);
             this.lblFatPoly.Name = "lblFatPoly";
             this.lblFatPoly.Size = new System.Drawing.Size(54, 13);
             this.lblFatPoly.TabIndex = 53;
@@ -468,7 +465,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(339, 150);
+            this.label28.Location = new System.Drawing.Point(339, 45);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(13, 13);
             this.label28.TabIndex = 77;
@@ -477,7 +474,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(339, 75);
+            this.label32.Location = new System.Drawing.Point(339, 90);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(13, 13);
             this.label32.TabIndex = 73;
@@ -486,7 +483,7 @@
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(339, 45);
+            this.label34.Location = new System.Drawing.Point(339, 60);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(13, 13);
             this.label34.TabIndex = 71;
@@ -507,7 +504,7 @@
             // 
             this.lblProteinWeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblProteinWeight.Location = new System.Drawing.Point(279, 150);
+            this.lblProteinWeight.Location = new System.Drawing.Point(279, 45);
             this.lblProteinWeight.Name = "lblProteinWeight";
             this.lblProteinWeight.Size = new System.Drawing.Size(54, 13);
             this.lblProteinWeight.TabIndex = 86;
@@ -518,7 +515,7 @@
             // 
             this.lblFatWeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFatWeight.Location = new System.Drawing.Point(279, 75);
+            this.lblFatWeight.Location = new System.Drawing.Point(279, 90);
             this.lblFatWeight.Name = "lblFatWeight";
             this.lblFatWeight.Size = new System.Drawing.Size(54, 13);
             this.lblFatWeight.TabIndex = 83;
@@ -529,7 +526,7 @@
             // 
             this.lblCarbsWeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCarbsWeight.Location = new System.Drawing.Point(279, 45);
+            this.lblCarbsWeight.Location = new System.Drawing.Point(279, 60);
             this.lblCarbsWeight.Name = "lblCarbsWeight";
             this.lblCarbsWeight.Size = new System.Drawing.Size(54, 13);
             this.lblCarbsWeight.TabIndex = 81;
@@ -539,7 +536,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(244, 150);
+            this.label23.Location = new System.Drawing.Point(244, 45);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(13, 13);
             this.label23.TabIndex = 90;
@@ -548,7 +545,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(244, 75);
+            this.label24.Location = new System.Drawing.Point(244, 90);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(13, 13);
             this.label24.TabIndex = 89;
@@ -557,7 +554,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(244, 45);
+            this.label25.Location = new System.Drawing.Point(244, 60);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(13, 13);
             this.label25.TabIndex = 88;
@@ -567,7 +564,7 @@
             // 
             this.lblProteinGoal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblProteinGoal.Location = new System.Drawing.Point(184, 150);
+            this.lblProteinGoal.Location = new System.Drawing.Point(184, 45);
             this.lblProteinGoal.Name = "lblProteinGoal";
             this.lblProteinGoal.Size = new System.Drawing.Size(54, 13);
             this.lblProteinGoal.TabIndex = 93;
@@ -578,7 +575,7 @@
             // 
             this.lblFatGoal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFatGoal.Location = new System.Drawing.Point(184, 75);
+            this.lblFatGoal.Location = new System.Drawing.Point(184, 90);
             this.lblFatGoal.Name = "lblFatGoal";
             this.lblFatGoal.Size = new System.Drawing.Size(54, 13);
             this.lblFatGoal.TabIndex = 92;
@@ -589,7 +586,7 @@
             // 
             this.lblCarbsGoal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCarbsGoal.Location = new System.Drawing.Point(184, 45);
+            this.lblCarbsGoal.Location = new System.Drawing.Point(184, 60);
             this.lblCarbsGoal.Name = "lblCarbsGoal";
             this.lblCarbsGoal.Size = new System.Drawing.Size(54, 13);
             this.lblCarbsGoal.TabIndex = 91;
@@ -651,50 +648,32 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.Controls.Add(this.label22, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label32, 6, 5);
-            this.tableLayoutPanel1.Controls.Add(this.label28, 6, 10);
             this.tableLayoutPanel1.Controls.Add(this.label27, 6, 11);
+            this.tableLayoutPanel1.Controls.Add(this.label28, 6, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblProteinWeight, 5, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label23, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblProteinGoal, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label17, 2, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblProtein, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label26, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblAlcoholWeight, 5, 11);
-            this.tableLayoutPanel1.Controls.Add(this.label34, 6, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblProteinWeight, 5, 10);
-            this.tableLayoutPanel1.Controls.Add(this.label23, 4, 10);
-            this.tableLayoutPanel1.Controls.Add(this.lblFatWeight, 5, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label16, 2, 9);
+            this.tableLayoutPanel1.Controls.Add(this.label20, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.lblFatPoly, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.label19, 2, 10);
+            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.lblFatTrans, 1, 10);
             this.tableLayoutPanel1.Controls.Add(this.label30, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label24, 4, 5);
-            this.tableLayoutPanel1.Controls.Add(this.label9, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblCarbsWeight, 5, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label25, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.lblProteinGoal, 3, 10);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.lblFatGoal, 3, 5);
-            this.tableLayoutPanel1.Controls.Add(this.lblCarbsGoal, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label20, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 10);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 11);
             this.tableLayoutPanel1.Controls.Add(this.lblWeight, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblEnergy, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblCarbs, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblSugar, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblFat, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.lblFatSat, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.lblFatMono, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.lblFatPoly, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.label21, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label18, 2, 11);
-            this.tableLayoutPanel1.Controls.Add(this.label19, 2, 9);
-            this.tableLayoutPanel1.Controls.Add(this.label17, 2, 10);
-            this.tableLayoutPanel1.Controls.Add(this.lblFatTrans, 1, 9);
-            this.tableLayoutPanel1.Controls.Add(this.lblProtein, 1, 10);
             this.tableLayoutPanel1.Controls.Add(this.lblAlcohol, 1, 11);
-            this.tableLayoutPanel1.Controls.Add(this.label16, 2, 8);
             this.tableLayoutPanel1.Controls.Add(this.label10, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label15, 2, 7);
             this.tableLayoutPanel1.Controls.Add(this.label11, 2, 3);
@@ -703,6 +682,24 @@
             this.tableLayoutPanel1.Controls.Add(this.label13, 2, 5);
             this.tableLayoutPanel1.Controls.Add(this.lblEnergyGoal, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.label29, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblFatMono, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblFatSat, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lblFat, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label9, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lblSugar, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lblFatGoal, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label24, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lblFatWeight, 5, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label32, 6, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblCarbs, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblCarbsGoal, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label25, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblCarbsWeight, 5, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label34, 6, 4);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 12;
@@ -721,44 +718,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(362, 183);
             this.tableLayoutPanel1.TabIndex = 98;
             // 
-            // shapeContainer1
-            // 
-            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
-            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeContainer1.Name = "shapeContainer1";
-            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.lineShape2,
-            this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(374, 349);
-            this.shapeContainer1.TabIndex = 99;
-            this.shapeContainer1.TabStop = false;
-            // 
-            // lineShape1
-            // 
-            this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = 183;
-            this.lineShape1.X2 = 184;
-            this.lineShape1.Y1 = 4;
-            this.lineShape1.Y2 = 186;
-            // 
-            // lineShape2
-            // 
-            this.lineShape2.Name = "lineShape2";
-            this.lineShape2.X1 = 279;
-            this.lineShape2.X2 = 280;
-            this.lineShape2.Y1 = 4;
-            this.lineShape2.Y2 = 186;
-            // 
             // ucDaySummary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pcNutrition);
-            this.Controls.Add(this.shapeContainer1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ucDaySummary";
             this.Size = new System.Drawing.Size(374, 349);
-            this.Load += new System.EventHandler(this.ucDaySummary_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pcNutrition)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -821,8 +788,5 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape2;
     }
 }
