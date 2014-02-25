@@ -40,8 +40,10 @@ namespace Helsedagbok
             DataTable tblWeight = new DataTable();
             a.Fill(tblWeight);
             WeightChart.DataSource = tblWeight;
-            WeightChart.Series["Series1"].XValueMember = "Date";
-            WeightChart.Series["Series1"].YValueMembers = "Weight";
+            WeightChart.Series["Weight"].XValueMember = "Date";
+            WeightChart.Series["Weight"].YValueMembers = "Weight";
+            WeightChart.Series["Weight2"].XValueMember = "Date";
+            WeightChart.Series["Weight2"].YValueMembers = "Weight2";
             WeightChart.DataBind();
         }
 
@@ -56,29 +58,33 @@ namespace Helsedagbok
             if (reader.HasRows)
             {
                 reader.Read();
-                txtHeight.Text = reader.GetDecimal(3).ToString("0");
-                txtWeight.Text = reader.GetDecimal(2).ToString("0.0");
+                if (!reader.IsDBNull(2))
+                    txtHeight.Text = reader.GetDecimal(2).ToString("0");
+                if (!reader.IsDBNull(3))
+                    txtWeight.Text = reader.GetDecimal(3).ToString("0.0");
                 if (!reader.IsDBNull(4))
-                    txtNeck.Text = reader.GetDecimal(4).ToString("0.0");
+                    txtWeight2.Text = reader.GetDecimal(4).ToString("0.0");
                 if (!reader.IsDBNull(5))
-                    txtShoulders.Text = reader.GetDecimal(5).ToString("0.0");
+                    txtNeck.Text = reader.GetDecimal(5).ToString("0.0");
                 if (!reader.IsDBNull(6))
-                    txtChest.Text = reader.GetDecimal(6).ToString("0.0");
+                    txtShoulders.Text = reader.GetDecimal(6).ToString("0.0");
                 if (!reader.IsDBNull(7))
-                    txtWaist.Text = reader.GetDecimal(7).ToString("0.0");
+                    txtChest.Text = reader.GetDecimal(7).ToString("0.0");
                 if (!reader.IsDBNull(8))
-                    txtHips.Text = reader.GetDecimal(8).ToString("0.0");
+                    txtWaist.Text = reader.GetDecimal(8).ToString("0.0");
                 if (!reader.IsDBNull(9))
-                    txtThigh.Text = reader.GetDecimal(9).ToString("0.0");
+                    txtHips.Text = reader.GetDecimal(9).ToString("0.0");
                 if (!reader.IsDBNull(10))
-                    txtCalf.Text = reader.GetDecimal(10).ToString("0.0");
+                    txtThigh.Text = reader.GetDecimal(10).ToString("0.0");
                 if (!reader.IsDBNull(11))
-                    txtArm.Text = reader.GetDecimal(11).ToString("0.0");
+                    txtCalf.Text = reader.GetDecimal(11).ToString("0.0");
                 if (!reader.IsDBNull(12))
-                    txtForeArm.Text = reader.GetDecimal(12).ToString("0.0");
+                    txtArm.Text = reader.GetDecimal(12).ToString("0.0");
                 if (!reader.IsDBNull(13))
+                    txtForeArm.Text = reader.GetDecimal(13).ToString("0.0");
+                if (!reader.IsDBNull(14))
                 {
-                    lastMeasurementDate = reader.GetDateTime(13);
+                    lastMeasurementDate = reader.GetDateTime(14);
                     lblMeasureDate.Text = lastMeasurementDate.ToString("dd.MM.yyyy");
                 }
             }
@@ -149,11 +155,12 @@ namespace Helsedagbok
         private void saveMeasurements()
         {
             string sqlQuery;
-            string sqlInsert = "INSERT INTO tblMeasurement (idUser, Height, Weight, Neck, Shoulders, Chest, Waist, Hips, Thighs, Calves, Arms, ForeArms, Date) " +
+            string sqlInsert = "INSERT INTO tblMeasurement (idUser, Height, Weight, Weight2, Neck, Shoulders, Chest, Waist, Hips, Thighs, Calves, Arms, ForeArms, Date) " +
                                                    "VALUES (@idUser, @Height, @Weight, @Neck, @Shoulders, @Chest, @Waist, @Hips, @Thighs, @Calves, @Arms, @ForeArms, @Date)";
             string sqlUpdate = "UPDATE tblMeasurement SET idUser = @idUser, " +
                                                          "Height = @Height, " +
                                                          "Weight = @Weight, " +
+                                                         "Weight2 = @Weight2, " +
                                                          "Neck = @Neck, " +
                                                          "Shoulders = @Shoulders, " +
                                                          "Chest = @Chest, " +
@@ -170,6 +177,7 @@ namespace Helsedagbok
             cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
             cmd.Parameters.AddWithValue("@Height", Convert.ToDecimal(txtHeight.Text));
             cmd.Parameters.AddWithValue("@Weight", Convert.ToDecimal(txtWeight.Text));
+            cmd.Parameters.AddWithValue("@Weight2", (txtWeight2.Text.Length>0) ? Convert.ToDecimal(txtWeight2.Text) : Convert.DBNull);
             cmd.Parameters.AddWithValue("@Neck", Convert.ToDecimal(txtNeck.Text));
             cmd.Parameters.AddWithValue("@Shoulders", Convert.ToDecimal(txtShoulders.Text));
             cmd.Parameters.AddWithValue("@Chest", Convert.ToDecimal(txtChest.Text));

@@ -31,10 +31,12 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSetup));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.WeightChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnSavePhysics = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
             this.lblMeasureDate = new System.Windows.Forms.Label();
@@ -112,12 +114,13 @@
             this.btnSaveMealTypes = new System.Windows.Forms.Button();
             this.label34 = new System.Windows.Forms.Label();
             this.dgvMealNames = new System.Windows.Forms.DataGridView();
-            this.WeightChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label44 = new System.Windows.Forms.Label();
+            this.txtWeight2 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WeightChart)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMealNames)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WeightChart)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -130,11 +133,13 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(673, 408);
+            this.tabControl1.Size = new System.Drawing.Size(799, 408);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label44);
+            this.tabPage1.Controls.Add(this.txtWeight2);
             this.tabPage1.Controls.Add(this.WeightChart);
             this.tabPage1.Controls.Add(this.btnSavePhysics);
             this.tabPage1.Controls.Add(this.label35);
@@ -196,14 +201,47 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(665, 382);
+            this.tabPage1.Size = new System.Drawing.Size(791, 382);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Fysikk";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // WeightChart
+            // 
+            this.WeightChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.AxisY.IsStartedFromZero = false;
+            chartArea1.Name = "ChartArea1";
+            this.WeightChart.ChartAreas.Add(chartArea1);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.WeightChart.Legends.Add(legend1);
+            this.WeightChart.Location = new System.Drawing.Point(336, 8);
+            this.WeightChart.Name = "WeightChart";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.IsValueShownAsLabel = true;
+            series1.Legend = "Legend1";
+            series1.Name = "Weight";
+            series1.YValuesPerPoint = 4;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Legend = "Legend1";
+            series2.Name = "Weight2";
+            this.WeightChart.Series.Add(series1);
+            this.WeightChart.Series.Add(series2);
+            this.WeightChart.Size = new System.Drawing.Size(449, 308);
+            this.WeightChart.TabIndex = 55;
+            this.WeightChart.Text = "Vekt";
+            title1.Name = "Title1";
+            title1.Text = "Vekt";
+            this.WeightChart.Titles.Add(title1);
+            // 
             // btnSavePhysics
             // 
-            this.btnSavePhysics.Location = new System.Drawing.Point(584, 353);
+            this.btnSavePhysics.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSavePhysics.Location = new System.Drawing.Point(710, 353);
             this.btnSavePhysics.Name = "btnSavePhysics";
             this.btnSavePhysics.Size = new System.Drawing.Size(75, 23);
             this.btnSavePhysics.TabIndex = 1;
@@ -232,7 +270,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(200, 36);
+            this.label33.Location = new System.Drawing.Point(262, 36);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(24, 13);
             this.label33.TabIndex = 54;
@@ -241,7 +279,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(247, 295);
+            this.label21.Location = new System.Drawing.Point(309, 295);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(21, 13);
             this.label21.TabIndex = 53;
@@ -250,7 +288,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(247, 269);
+            this.label22.Location = new System.Drawing.Point(309, 269);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(21, 13);
             this.label22.TabIndex = 52;
@@ -259,7 +297,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(247, 243);
+            this.label25.Location = new System.Drawing.Point(309, 243);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(21, 13);
             this.label25.TabIndex = 51;
@@ -268,7 +306,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(247, 217);
+            this.label26.Location = new System.Drawing.Point(309, 217);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(21, 13);
             this.label26.TabIndex = 50;
@@ -277,7 +315,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(247, 191);
+            this.label27.Location = new System.Drawing.Point(309, 191);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(21, 13);
             this.label27.TabIndex = 49;
@@ -286,7 +324,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(247, 165);
+            this.label28.Location = new System.Drawing.Point(309, 165);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(21, 13);
             this.label28.TabIndex = 48;
@@ -295,7 +333,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(247, 139);
+            this.label29.Location = new System.Drawing.Point(309, 139);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(21, 13);
             this.label29.TabIndex = 47;
@@ -304,7 +342,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(247, 113);
+            this.label30.Location = new System.Drawing.Point(309, 113);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(21, 13);
             this.label30.TabIndex = 46;
@@ -313,7 +351,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(247, 87);
+            this.label31.Location = new System.Drawing.Point(309, 87);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(21, 13);
             this.label31.TabIndex = 45;
@@ -322,7 +360,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(247, 61);
+            this.label32.Location = new System.Drawing.Point(309, 61);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(19, 13);
             this.label32.TabIndex = 44;
@@ -330,7 +368,7 @@
             // 
             // txtForeArmGoal
             // 
-            this.txtForeArmGoal.Location = new System.Drawing.Point(187, 188);
+            this.txtForeArmGoal.Location = new System.Drawing.Point(249, 188);
             this.txtForeArmGoal.Name = "txtForeArmGoal";
             this.txtForeArmGoal.Size = new System.Drawing.Size(54, 20);
             this.txtForeArmGoal.TabIndex = 43;
@@ -338,7 +376,7 @@
             // 
             // txtArmGoal
             // 
-            this.txtArmGoal.Location = new System.Drawing.Point(187, 162);
+            this.txtArmGoal.Location = new System.Drawing.Point(249, 162);
             this.txtArmGoal.Name = "txtArmGoal";
             this.txtArmGoal.Size = new System.Drawing.Size(54, 20);
             this.txtArmGoal.TabIndex = 42;
@@ -346,7 +384,7 @@
             // 
             // txtCalfGoal
             // 
-            this.txtCalfGoal.Location = new System.Drawing.Point(187, 292);
+            this.txtCalfGoal.Location = new System.Drawing.Point(249, 292);
             this.txtCalfGoal.Name = "txtCalfGoal";
             this.txtCalfGoal.Size = new System.Drawing.Size(54, 20);
             this.txtCalfGoal.TabIndex = 41;
@@ -354,7 +392,7 @@
             // 
             // txtThighGoal
             // 
-            this.txtThighGoal.Location = new System.Drawing.Point(187, 266);
+            this.txtThighGoal.Location = new System.Drawing.Point(249, 266);
             this.txtThighGoal.Name = "txtThighGoal";
             this.txtThighGoal.Size = new System.Drawing.Size(54, 20);
             this.txtThighGoal.TabIndex = 40;
@@ -362,7 +400,7 @@
             // 
             // txtHipsGoal
             // 
-            this.txtHipsGoal.Location = new System.Drawing.Point(187, 240);
+            this.txtHipsGoal.Location = new System.Drawing.Point(249, 240);
             this.txtHipsGoal.Name = "txtHipsGoal";
             this.txtHipsGoal.Size = new System.Drawing.Size(54, 20);
             this.txtHipsGoal.TabIndex = 39;
@@ -370,7 +408,7 @@
             // 
             // txtWaistGoal
             // 
-            this.txtWaistGoal.Location = new System.Drawing.Point(187, 214);
+            this.txtWaistGoal.Location = new System.Drawing.Point(249, 214);
             this.txtWaistGoal.Name = "txtWaistGoal";
             this.txtWaistGoal.Size = new System.Drawing.Size(54, 20);
             this.txtWaistGoal.TabIndex = 38;
@@ -378,7 +416,7 @@
             // 
             // txtChestGoal
             // 
-            this.txtChestGoal.Location = new System.Drawing.Point(187, 136);
+            this.txtChestGoal.Location = new System.Drawing.Point(249, 136);
             this.txtChestGoal.Name = "txtChestGoal";
             this.txtChestGoal.Size = new System.Drawing.Size(54, 20);
             this.txtChestGoal.TabIndex = 37;
@@ -386,7 +424,7 @@
             // 
             // txtShouldersGoal
             // 
-            this.txtShouldersGoal.Location = new System.Drawing.Point(187, 110);
+            this.txtShouldersGoal.Location = new System.Drawing.Point(249, 110);
             this.txtShouldersGoal.Name = "txtShouldersGoal";
             this.txtShouldersGoal.Size = new System.Drawing.Size(54, 20);
             this.txtShouldersGoal.TabIndex = 36;
@@ -394,7 +432,7 @@
             // 
             // txtNeckGoal
             // 
-            this.txtNeckGoal.Location = new System.Drawing.Point(187, 84);
+            this.txtNeckGoal.Location = new System.Drawing.Point(249, 84);
             this.txtNeckGoal.Name = "txtNeckGoal";
             this.txtNeckGoal.Size = new System.Drawing.Size(54, 20);
             this.txtNeckGoal.TabIndex = 35;
@@ -402,7 +440,7 @@
             // 
             // txtWeightGoal
             // 
-            this.txtWeightGoal.Location = new System.Drawing.Point(187, 58);
+            this.txtWeightGoal.Location = new System.Drawing.Point(249, 58);
             this.txtWeightGoal.Name = "txtWeightGoal";
             this.txtWeightGoal.Size = new System.Drawing.Size(54, 20);
             this.txtWeightGoal.TabIndex = 34;
@@ -892,35 +930,27 @@
             this.dgvMealNames.Size = new System.Drawing.Size(179, 328);
             this.dgvMealNames.TabIndex = 1;
             // 
-            // WeightChart
+            // label44
             // 
-            chartArea1.AxisY.IsStartedFromZero = false;
-            chartArea1.Name = "ChartArea1";
-            this.WeightChart.ChartAreas.Add(chartArea1);
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.WeightChart.Legends.Add(legend1);
-            this.WeightChart.Location = new System.Drawing.Point(274, 8);
-            this.WeightChart.Name = "WeightChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.IsValueShownAsLabel = true;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.YValuesPerPoint = 4;
-            this.WeightChart.Series.Add(series1);
-            this.WeightChart.Size = new System.Drawing.Size(385, 308);
-            this.WeightChart.TabIndex = 55;
-            this.WeightChart.Text = "Vekt";
-            title1.Name = "Title1";
-            title1.Text = "Vekt";
-            this.WeightChart.Titles.Add(title1);
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(224, 65);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(19, 13);
+            this.label44.TabIndex = 58;
+            this.label44.Text = "kg";
+            // 
+            // txtWeight2
+            // 
+            this.txtWeight2.Location = new System.Drawing.Point(164, 62);
+            this.txtWeight2.Name = "txtWeight2";
+            this.txtWeight2.Size = new System.Drawing.Size(54, 20);
+            this.txtWeight2.TabIndex = 57;
             // 
             // frmSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(697, 432);
+            this.ClientSize = new System.Drawing.Size(823, 432);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSetup";
@@ -929,10 +959,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WeightChart)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMealNames)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WeightChart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1019,6 +1049,8 @@
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.DataVisualization.Charting.Chart WeightChart;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.TextBox txtWeight2;
 
     }
 }
