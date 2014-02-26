@@ -156,7 +156,7 @@ namespace Helsedagbok
         {
             string sqlQuery;
             string sqlInsert = "INSERT INTO tblMeasurement (idUser, Height, Weight, Weight2, Neck, Shoulders, Chest, Waist, Hips, Thighs, Calves, Arms, ForeArms, Date) " +
-                                                   "VALUES (@idUser, @Height, @Weight, @Neck, @Shoulders, @Chest, @Waist, @Hips, @Thighs, @Calves, @Arms, @ForeArms, @Date)";
+                                                   "VALUES (@idUser, @Height, @Weight, @Weight2, @Neck, @Shoulders, @Chest, @Waist, @Hips, @Thighs, @Calves, @Arms, @ForeArms, @Date)";
             string sqlUpdate = "UPDATE tblMeasurement SET idUser = @idUser, " +
                                                          "Height = @Height, " +
                                                          "Weight = @Weight, " +

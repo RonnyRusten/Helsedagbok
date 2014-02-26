@@ -36,6 +36,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSetup));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label44 = new System.Windows.Forms.Label();
+            this.txtWeight2 = new System.Windows.Forms.TextBox();
             this.WeightChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnSavePhysics = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
@@ -114,8 +116,6 @@
             this.btnSaveMealTypes = new System.Windows.Forms.Button();
             this.label34 = new System.Windows.Forms.Label();
             this.dgvMealNames = new System.Windows.Forms.DataGridView();
-            this.label44 = new System.Windows.Forms.Label();
-            this.txtWeight2 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WeightChart)).BeginInit();
@@ -206,6 +206,22 @@
             this.tabPage1.Text = "Fysikk";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(224, 65);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(19, 13);
+            this.label44.TabIndex = 58;
+            this.label44.Text = "kg";
+            // 
+            // txtWeight2
+            // 
+            this.txtWeight2.Location = new System.Drawing.Point(164, 62);
+            this.txtWeight2.Name = "txtWeight2";
+            this.txtWeight2.Size = new System.Drawing.Size(54, 20);
+            this.txtWeight2.TabIndex = 57;
+            // 
             // WeightChart
             // 
             this.WeightChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -219,14 +235,15 @@
             this.WeightChart.Legends.Add(legend1);
             this.WeightChart.Location = new System.Drawing.Point(336, 8);
             this.WeightChart.Name = "WeightChart";
+            this.WeightChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.IsValueShownAsLabel = true;
             series1.Legend = "Legend1";
             series1.Name = "Weight";
             series1.YValuesPerPoint = 4;
             series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series2.Legend = "Legend1";
             series2.Name = "Weight2";
             this.WeightChart.Series.Add(series1);
@@ -756,7 +773,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(665, 382);
+            this.tabPage2.Size = new System.Drawing.Size(791, 382);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Næring";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -929,22 +946,6 @@
             this.dgvMealNames.RowHeadersVisible = false;
             this.dgvMealNames.Size = new System.Drawing.Size(179, 328);
             this.dgvMealNames.TabIndex = 1;
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(224, 65);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(19, 13);
-            this.label44.TabIndex = 58;
-            this.label44.Text = "kg";
-            // 
-            // txtWeight2
-            // 
-            this.txtWeight2.Location = new System.Drawing.Point(164, 62);
-            this.txtWeight2.Name = "txtWeight2";
-            this.txtWeight2.Size = new System.Drawing.Size(54, 20);
-            this.txtWeight2.TabIndex = 57;
             // 
             // frmSetup
             // 

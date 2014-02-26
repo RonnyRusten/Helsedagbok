@@ -212,14 +212,15 @@ namespace Helsedagbok
 
         private void setColors()
         {
-            if (Convert.ToDecimal(lblEnergy.Text) > Convert.ToDecimal(lblEnergyGoal.Text))
-                lblEnergy.ForeColor=Color.Red;
-            if (Convert.ToDecimal(lblCarbs.Text) > Convert.ToDecimal(lblCarbsGoal.Text))
-                lblCarbs.ForeColor=Color.Red;
-            if (Convert.ToDecimal(lblFat.Text) > Convert.ToDecimal(lblFatGoal.Text))
-                lblFat.ForeColor = Color.Red;
-            if (Convert.ToDecimal(lblProtein.Text) > Convert.ToDecimal(lblProteinGoal.Text))
-                lblProtein.ForeColor = Color.Red;
+            lblEnergy.ForeColor = (Convert.ToDecimal(lblEnergy.Text) > Convert.ToDecimal(lblEnergyGoal.Text)) ? Color.Red : Color.Black;
+            lblCarbs.ForeColor = (Convert.ToDecimal(lblCarbs.Text) > Convert.ToDecimal(lblCarbsGoal.Text)) ? Color.Red : Color.Black;
+            lblFat.ForeColor = (Convert.ToDecimal(lblFat.Text) > Convert.ToDecimal(lblFatGoal.Text)) ? Color.Red : Color.Black;
+            lblProtein.ForeColor = (Convert.ToDecimal(lblProtein.Text) > Convert.ToDecimal(lblProteinGoal.Text)) ? Color.Red : Color.Black;
+        }
+
+        private void ucDaySummary_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

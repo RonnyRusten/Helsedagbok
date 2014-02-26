@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.lblWeight = new System.Windows.Forms.Label();
@@ -124,21 +124,21 @@
             this.pcNutrition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pcNutrition.BackColor = System.Drawing.Color.Transparent;
-            chartArea2.Name = "Default";
-            this.pcNutrition.ChartAreas.Add(chartArea2);
-            legend2.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
-            legend2.Name = "Legend1";
-            this.pcNutrition.Legends.Add(legend2);
+            chartArea1.Name = "Default";
+            this.pcNutrition.ChartAreas.Add(chartArea1);
+            legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
+            legend1.Name = "Legend1";
+            this.pcNutrition.Legends.Add(legend1);
             this.pcNutrition.Location = new System.Drawing.Point(0, 192);
             this.pcNutrition.Name = "pcNutrition";
-            series2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
-            series2.ChartArea = "Default";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            series2.Legend = "Legend1";
-            series2.Name = "Default";
-            series2.ShadowOffset = 1;
-            this.pcNutrition.Series.Add(series2);
+            series1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
+            series1.ChartArea = "Default";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            series1.Legend = "Legend1";
+            series1.Name = "Default";
+            series1.ShadowOffset = 1;
+            this.pcNutrition.Series.Add(series1);
             this.pcNutrition.Size = new System.Drawing.Size(373, 152);
             this.pcNutrition.TabIndex = 65;
             this.pcNutrition.Text = "chart1";
@@ -726,6 +726,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ucDaySummary";
             this.Size = new System.Drawing.Size(374, 349);
+            this.Load += new System.EventHandler(this.ucDaySummary_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pcNutrition)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
