@@ -94,7 +94,7 @@
             this.cmbUnits.ItemHeight = 14;
             this.cmbUnits.Location = new System.Drawing.Point(428, 62);
             this.cmbUnits.Name = "cmbUnits";
-            this.cmbUnits.Size = new System.Drawing.Size(46, 22);
+            this.cmbUnits.Size = new System.Drawing.Size(69, 22);
             this.cmbUnits.TabIndex = 10;
             this.cmbUnits.SelectedIndexChanged += new System.EventHandler(this.cmbUnits_SelectedIndexChanged);
             // 
@@ -126,6 +126,7 @@
             this.lb_mealTypes.Size = new System.Drawing.Size(139, 121);
             this.lb_mealTypes.TabIndex = 7;
             this.lb_mealTypes.Click += new System.EventHandler(this.lb_mealTypes_Click);
+            this.lb_mealTypes.SelectedIndexChanged += new System.EventHandler(this.lb_mealTypes_SelectedIndexChanged);
             // 
             // lblFoodName
             // 
@@ -518,7 +519,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(480, 67);
+            this.label10.Location = new System.Drawing.Point(503, 67);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(13, 14);
             this.label10.TabIndex = 16;
@@ -527,9 +528,9 @@
             // lblTotEnergy
             // 
             this.lblTotEnergy.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotEnergy.Location = new System.Drawing.Point(578, 67);
+            this.lblTotEnergy.Location = new System.Drawing.Point(598, 67);
             this.lblTotEnergy.Name = "lblTotEnergy";
-            this.lblTotEnergy.Size = new System.Drawing.Size(64, 14);
+            this.lblTotEnergy.Size = new System.Drawing.Size(44, 14);
             this.lblTotEnergy.TabIndex = 15;
             this.lblTotEnergy.Text = "lblTotEnergy";
             this.lblTotEnergy.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -638,9 +639,9 @@
             // lblTotWeight
             // 
             this.lblTotWeight.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotWeight.Location = new System.Drawing.Point(499, 67);
+            this.lblTotWeight.Location = new System.Drawing.Point(522, 67);
             this.lblTotWeight.Name = "lblTotWeight";
-            this.lblTotWeight.Size = new System.Drawing.Size(72, 14);
+            this.lblTotWeight.Size = new System.Drawing.Size(70, 14);
             this.lblTotWeight.TabIndex = 25;
             this.lblTotWeight.Text = "(20000 g) =";
             this.lblTotWeight.TextAlign = System.Drawing.ContentAlignment.TopRight;

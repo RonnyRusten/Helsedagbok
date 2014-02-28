@@ -34,10 +34,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.dgvDiary = new System.Windows.Forms.DataGridView();
-            this.DiaryId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MealId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FoodName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Energy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmMeals = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.redigerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.slettToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,10 +42,15 @@
             this.btnAddFood = new System.Windows.Forms.ToolStripButton();
             this.btnNutritionDetails = new System.Windows.Forms.ToolStripButton();
             this.btnSettings = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tpFoodDiary = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.DiaryId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MealId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FoodId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FoodName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Energy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).BeginInit();
             this.cmMeals.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -81,43 +82,18 @@
             this.dgvDiary.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DiaryId,
             this.MealId,
+            this.FoodId,
             this.FoodName,
             this.Energy});
             this.dgvDiary.ContextMenuStrip = this.cmMeals;
             this.dgvDiary.Location = new System.Drawing.Point(6, 54);
+            this.dgvDiary.MultiSelect = false;
             this.dgvDiary.Name = "dgvDiary";
             this.dgvDiary.RowHeadersVisible = false;
+            this.dgvDiary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDiary.Size = new System.Drawing.Size(492, 522);
             this.dgvDiary.TabIndex = 13;
             this.dgvDiary.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvDiary_CellMouseDown);
-            // 
-            // DiaryId
-            // 
-            this.DiaryId.HeaderText = "DiaryId";
-            this.DiaryId.Name = "DiaryId";
-            // 
-            // MealId
-            // 
-            this.MealId.HeaderText = "MealId";
-            this.MealId.Name = "MealId";
-            // 
-            // FoodName
-            // 
-            this.FoodName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FoodName.DefaultCellStyle = dataGridViewCellStyle1;
-            this.FoodName.HeaderText = "Name";
-            this.FoodName.Name = "FoodName";
-            this.FoodName.ReadOnly = true;
-            // 
-            // Energy
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Energy.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Energy.HeaderText = "Energy";
-            this.Energy.Name = "Energy";
             // 
             // cmMeals
             // 
@@ -125,18 +101,20 @@
             this.redigerToolStripMenuItem,
             this.slettToolStripMenuItem});
             this.cmMeals.Name = "cmMeals";
-            this.cmMeals.Size = new System.Drawing.Size(115, 48);
+            this.cmMeals.Size = new System.Drawing.Size(153, 70);
+            this.cmMeals.Opening += new System.ComponentModel.CancelEventHandler(this.cmMeals_Opening);
             // 
             // redigerToolStripMenuItem
             // 
             this.redigerToolStripMenuItem.Name = "redigerToolStripMenuItem";
-            this.redigerToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.redigerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.redigerToolStripMenuItem.Text = "Rediger";
+            this.redigerToolStripMenuItem.Click += new System.EventHandler(this.redigerToolStripMenuItem_Click);
             // 
             // slettToolStripMenuItem
             // 
             this.slettToolStripMenuItem.Name = "slettToolStripMenuItem";
-            this.slettToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.slettToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.slettToolStripMenuItem.Text = "Slett";
             this.slettToolStripMenuItem.Click += new System.EventHandler(this.slettToolStripMenuItem_Click);
             // 
@@ -197,6 +175,11 @@
             this.btnSettings.ToolTipText = "Innstillinger";
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // tabMain
             // 
             this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -233,10 +216,38 @@
             this.tabPage2.Text = "Oppskrifter";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // toolStripSeparator1
+            // DiaryId
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.DiaryId.HeaderText = "DiaryId";
+            this.DiaryId.Name = "DiaryId";
+            // 
+            // MealId
+            // 
+            this.MealId.HeaderText = "MealId";
+            this.MealId.Name = "MealId";
+            // 
+            // FoodId
+            // 
+            this.FoodId.HeaderText = "FoodId";
+            this.FoodId.Name = "FoodId";
+            // 
+            // FoodName
+            // 
+            this.FoodName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FoodName.DefaultCellStyle = dataGridViewCellStyle1;
+            this.FoodName.HeaderText = "Name";
+            this.FoodName.Name = "FoodName";
+            this.FoodName.ReadOnly = true;
+            // 
+            // Energy
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Energy.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Energy.HeaderText = "Energy";
+            this.Energy.Name = "Energy";
             // 
             // frmMain
             // 
@@ -265,10 +276,6 @@
 
         private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.DataGridView dgvDiary;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DiaryId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MealId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FoodName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Energy;
         private System.Windows.Forms.Label lblUserName;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnAddFood;
@@ -281,6 +288,11 @@
         private System.Windows.Forms.TabPage tpFoodDiary;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiaryId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MealId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FoodId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FoodName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Energy;
     }
 }
 

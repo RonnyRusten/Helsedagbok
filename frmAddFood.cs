@@ -331,12 +331,20 @@ namespace Helsedagbok
             string SelectedValue;
             string UnitName;
             string UnitWeight;
-            SelectedValue=lbUnits.Text;
-            eqPos = SelectedValue.IndexOf("=");
-            UnitName = SelectedValue.Substring(0, eqPos - 1);
-            UnitWeight = SelectedValue.Substring(eqPos + 2, SelectedValue.Length - eqPos - 4);
-            txtUnit.Text = UnitName;
-            txtUnitWeight.Text = UnitWeight;
+            if (lbUnits.SelectedIndex >= 0)
+            {
+                SelectedValue = lbUnits.Text;
+                eqPos = SelectedValue.IndexOf("=");
+                UnitName = SelectedValue.Substring(0, eqPos - 1);
+                UnitWeight = SelectedValue.Substring(eqPos + 2, SelectedValue.Length - eqPos - 4);
+                txtUnit.Text = UnitName;
+                txtUnitWeight.Text = UnitWeight;
+            }
+            else
+            {
+                txtUnit.Text = "";
+                txtUnitWeight.Text = "";
+            }
         }
 
         private void tsmiDelete_Click(object sender, EventArgs e)

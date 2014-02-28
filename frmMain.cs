@@ -81,12 +81,12 @@ namespace Helsedagbok
                 "tblMeals.id_mealtype, " +
                 "tblMeals.date, " +
                 "tblMeals.time, " +
-                "tblMeals.SortOrder, " +
+                "tblMealTypes.SortOrder, " +
                 "tblMealTypes.Name " +
                 "FROM tblMeals " +
                 "LEFT OUTER JOIN tblMealTypes on tblMeals.id_mealType = tblMealTypes.id " +
                 "WHERE date = @date AND tblMeals.idUser = @idUser" +
-                " ORDER BY id_mealType, time";
+                " ORDER BY tblMealTypes.SortOrder, time";
             SqlDataAdapter a = new SqlDataAdapter(sqlString, clsGlobal.conn1);
             a.SelectCommand.Parameters.AddWithValue("@date", dtpDate.Value.Date);
             a.SelectCommand.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
@@ -106,8 +106,8 @@ namespace Helsedagbok
                     int HeaderRowNo = dgvDiary.Rows.Add();
                     dgvDiary.Rows[HeaderRowNo].DefaultCellStyle = HeadingStyle();
                     dgvDiary.Rows[HeaderRowNo].Cells[1].Value = MealId;
-                    dgvDiary.Rows[HeaderRowNo].Cells[2].Value = row["Name"].ToString();
-                    dgvDiary.Rows[HeaderRowNo].Cells[3].Value = Meal.Energy.ToString("# ###.##") + " kCal";
+                    dgvDiary.Rows[HeaderRowNo].Cells[3].Value = row["Name"].ToString();
+                    dgvDiary.Rows[HeaderRowNo].Cells[4].Value = Meal.Energy.ToString("# ###.##") + " kCal";
                     totalEnergy += Meal.Energy;
                     int RowNo;
                     foreach (clsGlobal.Food Food in Meal.Foods)
@@ -115,8 +115,9 @@ namespace Helsedagbok
                         RowNo = dgvDiary.Rows.Add();
                         dgvDiary.Rows[RowNo].Cells[0].Value = Food.idDiary;
                         dgvDiary.Rows[RowNo].Cells[1].Value = MealId;
-                        dgvDiary.Rows[RowNo].Cells[2].Value = Food.DisplayName;
-                        dgvDiary.Rows[RowNo].Cells[3].Value = Food.Energy.ToString("# ###.##") + " kCal";
+                        dgvDiary.Rows[RowNo].Cells[2].Value = Food.idFood;
+                        dgvDiary.Rows[RowNo].Cells[3].Value = Food.DisplayName;
+                        dgvDiary.Rows[RowNo].Cells[4].Value = Food.Energy.ToString("# ###.##") + " kCal";
 
                         Carbs += Food.Carbs;
                         MealCarbs += Food.Carbs;
@@ -167,6 +168,7 @@ namespace Helsedagbok
         {
             dgvDiary.Columns[0].Visible = false;
             dgvDiary.Columns[1].Visible = false;
+            dgvDiary.Columns[2].Visible = false;
             dgvDiary.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDiary.ClearSelection();
         }
@@ -222,6 +224,48 @@ namespace Helsedagbok
             }
         }
 
+        private void redigerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int idFood;
+            int idUnit;
+            int idMealType;
+            decimal amnt;
+            if (dgvDiary.SelectedRows[0].Cells[0].Value == null)
+                return;
+            string sqlQuery = "SELECT " +
+                              "tblDiary.id, " +
+                              "tblDiary.id_Meal, " +
+                              "tblDiary.id_Food, " +
+                              "tblDiary.amnt, " +
+                              "tblDiary.id_unit, " +
+                              "tblMeals.id_mealType " +
+                              "FROM tblDiary " +
+                              "left join tblMeals on tblmeals.id = tblDiary.id_Meal " +
+                              "WHERE tblDiary.id = @idDiary";
+            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
+            cmd.Parameters.AddWithValue("@idDiary", (int)dgvDiary.SelectedRows[0].Cells[0].Value);
+            if (clsGlobal.conn1.State != ConnectionState.Open)
+                clsGlobal.conn1.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Read();
+                idFood = reader.GetInt32(2);
+                idUnit = reader.GetInt32(4);
+                idMealType = reader.GetInt32(5);
+                amnt = reader.GetDecimal(3);
+                reader.Close();
+                clsGlobal.conn1.Close();
+                frmEditDiary frm = new frmEditDiary();
+                frm.DiaryDate = dtpDate.Value.Date;
+                frm.IdFood = idFood;
+                frm.IdUnit = idUnit;
+                frm.IdMealType = idMealType;
+                frm.amnt = amnt;
+                frm.ShowDialog();
+            }
+        }
+
         private void dgvDiary_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -234,6 +278,10 @@ namespace Helsedagbok
             }
         }
 
+        private void cmMeals_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
     }
 }
 

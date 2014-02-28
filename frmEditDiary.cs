@@ -14,12 +14,15 @@ namespace Helsedagbok
     public partial class frmEditDiary : Form
     {
         int m_idFood;
+        int m_idMealType;
         DateTime m_DiaryDate;
         DataTable tblFoodInfo;
         DataTable tblUnits;
         DataTable tblFood;
         DataTable tblFoodFiltered;
         SqlDataAdapter FoodAdapter;
+
+        int test;
 
         public static event EventHandler eFoodUpdated;
 
@@ -39,6 +42,35 @@ namespace Helsedagbok
             get { return m_idFood; }
             set { m_idFood = value; }
         }
+
+        public int IdUnit
+        {
+            get { return (int)cmbUnits.SelectedValue; }
+            set 
+            {
+                setUnit();
+                cmbUnits.SelectedValue = value; 
+            }
+        }
+
+        public int IdMealType
+        {
+            get { return lb_mealTypes.SelectedIndex; }
+            set 
+            {
+                m_idMealType = value;
+                getMealTypes();
+                lb_mealTypes.SelectedValue = value;
+                lb_mealTypes.SetSelected(lb_mealTypes.SelectedIndex, true);
+            }
+        }
+
+        public decimal amnt
+        {
+            get { return Convert.ToDecimal(txtAmount.Text); }
+            set { txtAmount.Text = value.ToString(); }
+            
+        }
         #endregion
 
         public frmEditDiary()
@@ -56,14 +88,18 @@ namespace Helsedagbok
         private void frmEditDiary_Load(object sender, EventArgs e)
         {
             dtpDate.Value = DiaryDate;
-            getMealTypes();
-            getUnits();
+            if (IdMealType <= 0)
+                getMealTypes();
+            if(tblUnits == null)
+                getUnits();
             getFood();
-            IdFood = (int)dgvFood.Rows[0].Cells[3].Value;
+            if (IdFood == 0)
+                IdFood = (int)dgvFood.Rows[0].Cells[3].Value;
             getFoodInfo();
             setChart();
-            getUnits();
-            setUnit();
+            //getUnits();
+            if (Convert.ToDecimal(txtAmount.Text) <= 1)
+                setUnit();
         }
 
         private void getFood()
@@ -99,7 +135,10 @@ namespace Helsedagbok
             lb_mealTypes.DataSource = tbl;
             lb_mealTypes.DisplayMember = "Name";
             lb_mealTypes.ValueMember = "id";
-            lb_mealTypes.SetSelected(0, false);
+            if (m_idMealType != 0)
+                lb_mealTypes.SetSelected(IdMealType, true);
+            else
+                lb_mealTypes.SetSelected(0, false);
         }
 
         private void getUnits()
@@ -378,6 +417,8 @@ namespace Helsedagbok
 
         private void setUnit()
         {
+            if (tblUnits == null)
+                getUnits();
             string sqlSelect = "SELECT TOP 1 id FROM tblUnits WHERE idFood = @idFood ORDER BY id";
             SqlCommand cmd = new SqlCommand(sqlSelect, clsGlobal.conn1);
             cmd.Parameters.AddWithValue("@IdFood", IdFood);
@@ -476,6 +517,11 @@ namespace Helsedagbok
             frm.FoodId = IdFood;
             frm.ShowDialog();
             getUnits();
+        }
+
+        private void lb_mealTypes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int test = lb_mealTypes.SelectedIndex;
         }
 
     }
