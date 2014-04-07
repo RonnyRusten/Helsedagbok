@@ -22,8 +22,6 @@ namespace Helsedagbok
         DataTable tblFoodFiltered;
         SqlDataAdapter FoodAdapter;
 
-        int test;
-
         public static event EventHandler eFoodUpdated;
 
         #region "Properties"
@@ -522,6 +520,16 @@ namespace Helsedagbok
         private void lb_mealTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
             int test = lb_mealTypes.SelectedIndex;
+        }
+
+        private void dgvFood_MouseEnter(object sender, EventArgs e)
+        {
+            dgvFood.Focus();
+        }
+
+        private void dgvFood_MouseLeave(object sender, EventArgs e)
+        {
+            txtAmount.Focus();
         }
 
     }

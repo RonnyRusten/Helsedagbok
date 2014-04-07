@@ -25,21 +25,13 @@ namespace Helsedagbok
             frmEditDiary.eFoodUpdated += MealUpdated;
             
         }
-
-        private void MealUpdated(object sender, EventArgs e)
-        {
-            getMeals();
-        }
-
+        
         private void frmMain_Load(object sender, EventArgs e)
         {
             getMeals();
             lblUserName.Text = getUser(clsGlobal.idUser);
-        }
-
-        private void dtpDate_ValueChanged(object sender, EventArgs e)
-        {
-            getMeals();
+            getRecepieCategories();
+            getRecepies();
         }
 
         private string getUser(int idUser)
@@ -58,6 +50,15 @@ namespace Helsedagbok
             }
             clsGlobal.conn1.Close();
             return UserName;
+        }
+
+
+
+#region Næringsinnhold
+
+        private void MealUpdated(object sender, EventArgs e)
+        {
+            getMeals();
         }
 
         private void getMeals()
@@ -166,9 +167,9 @@ namespace Helsedagbok
 
         private void setDiaryGrid()
         {
-            dgvDiary.Columns[0].Visible = false;
-            dgvDiary.Columns[1].Visible = false;
-            dgvDiary.Columns[2].Visible = false;
+            //dgvDiary.Columns[0].Visible = false;
+            //dgvDiary.Columns[1].Visible = false;
+            //dgvDiary.Columns[2].Visible = false;
             dgvDiary.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDiary.ClearSelection();
         }
@@ -182,6 +183,11 @@ namespace Helsedagbok
             HeadingStyle.ForeColor = Color.White;
             HeadingStyle.Alignment = DataGridViewContentAlignment.TopRight;
             return HeadingStyle;
+        }
+
+        private void dtpDate_ValueChanged(object sender, EventArgs e)
+        {
+            getMeals();
         }
 
         private void bntAddFood_Click(object sender, EventArgs e)
@@ -204,13 +210,31 @@ namespace Helsedagbok
             frm.ShowDialog();
             getMeals();
         }
+        
+        private void cmFood_Opening(object sender, CancelEventArgs e)
+        {
+            if (dgvDiary.SelectedRows[0].Cells[0].Value == null)
+            {
+                miCopyMeal.Visible = true;
+                miMoveMeal.Visible = true;
+                miEditFood.Visible = false;
+                miDeleteFood.Visible = false;
+            }
+            else
+            {
+                miCopyMeal.Visible = false;
+                miMoveMeal.Visible = false;
+                miEditFood.Visible = true;
+                miDeleteFood.Visible = true;
+            }
+        }
 
-        private void slettToolStripMenuItem_Click(object sender, EventArgs e)
+        private void miDeleteFood_Click(object sender, EventArgs e)
         {
             if (dgvDiary.SelectedRows.Count > 0)
             {
                 int idDiary = (int)dgvDiary.SelectedRows[0].Cells[0].Value;
-                string FoodName = dgvDiary.SelectedRows[0].Cells[2].Value.ToString();
+                string FoodName = dgvDiary.SelectedRows[0].Cells[3].Value.ToString();
                 if (MessageBox.Show("Vil du slette " + FoodName + "?", "Slette?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     SqlCommand cmd = new SqlCommand("DELETE FROM tblDiary WHERE id = @idDiary",clsGlobal.conn1);
@@ -224,7 +248,7 @@ namespace Helsedagbok
             }
         }
 
-        private void redigerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void miEditFood_Click(object sender, EventArgs e)
         {
             int idFood;
             int idUnit;
@@ -266,6 +290,19 @@ namespace Helsedagbok
             }
         }
 
+        private void miCopyMeal_Click(object sender, EventArgs e)
+        {
+            int idMeal = (int)dgvDiary.SelectedRows[0].Cells[0].Value;
+            //tblMeals, id + id_mealType
+            //tblDiary, id_Meal
+        }
+
+        private void miMoveMeal_Click(object sender, EventArgs e)
+        {
+            int idMeal = (int)dgvDiary.SelectedRows[0].Cells[0].Value;
+            //tblMeals, id + date
+        }
+
         private void dgvDiary_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -278,10 +315,51 @@ namespace Helsedagbok
             }
         }
 
-        private void cmMeals_Opening(object sender, CancelEventArgs e)
+#endregion
+
+#region Oppskrifter
+        private void getRecepieCategories()
         {
+            DataTable tblCategories = new DataTable();
+            string sqlSelect;
+
+            sqlSelect = "SELECT idCategory,CategoryName AS Kategori FROM tblCategories ORDER BY CategoryName";
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlSelect, clsGlobal.conn1);
+            adapter.Fill(tblCategories);
+            dgvCategories.DataSource = tblCategories;
+            dgvCategories.Columns[0].Visible = false;
+            dgvCategories.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvCategories.se
+        }
+
+        private void getRecepies()
+        {
+            DataTable tblRecepies = new DataTable();
+            string sqlSelect;
+
+            sqlSelect = "SELECT idRecepie, Name AS Oppskrift FROM tblRecepies";
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlSelect, clsGlobal.conn1);
+            adapter.Fill(tblRecepies);
+            dgvRecepies.DataSource = tblRecepies;
+            dgvRecepies.Columns[0].Visible = false;
+            dgvRecepies.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        private void getReceiptProperties()
+        {
+            string sqlSelect = "SELECT tblCategories.CategoryName " +
+                                ", tblRecepies.Time " +
+                                ", tblRecepies.Porsjoner " +
+                                ", tblDifficulties.Difficulty " +
+                                "FROM tblRecepies " +
+                                "JOIN tblRecepie_categories ON tblRecepie_categories.id_recepie = tblRecepies.idRecepie " +
+                                "JOIN tblCategories ON tblCategories.idCategory = tblRecepie_categories.id_Category " +
+                                "WHERE tblRecepies.idRecepie = @idRecepie";
+            
 
         }
+#endregion
+
     }
 }
 

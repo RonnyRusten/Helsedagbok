@@ -283,46 +283,49 @@ namespace Helsedagbok
 
         private void btnSaveUnit_Click(object sender, EventArgs e)
         {
-            int idUnit;
-            if (FoodId == 0)
+            if (clsFunctions.IsNumeric(txtUnitWeight.Text) & txtUnit.Text.Length > 0)
             {
-                addToDB();
-                FoodId = getFoodId();
-                EditMode = true;
+                int idUnit;
+                if (FoodId == 0)
+                {
+                    addToDB();
+                    FoodId = getFoodId();
+                    EditMode = true;
+                }
+                string sqlSelect = "SELECT id FROM tblUnits WHERE idFood = @idFood AND Name = @UnitName";
+                string sqlInsert = "INSERT INTO tblUnits (Name, Weight, idFood) VALUES (@Name, @Weight, @idFood)";
+                string sqlUpdate = "UPDATE tblUnits SET Name = @Name, Weight = @Weight, idFood = @idFood WHERE id = @idUnit";
+                if (clsGlobal.conn1.State != ConnectionState.Open)
+                    clsGlobal.conn1.Open();
+                SqlCommand cmd = new SqlCommand(sqlSelect, clsGlobal.conn1);
+                cmd.Parameters.AddWithValue("@idFood", FoodId);
+                cmd.Parameters.AddWithValue("@UnitName", txtUnit.Text);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    idUnit = reader.GetInt32(0);
+                    reader.Close();
+                    SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, clsGlobal.conn1);
+                    cmdUpdate.Parameters.AddWithValue("@Name", txtUnit.Text);
+                    cmdUpdate.Parameters.AddWithValue("@Weight", Convert.ToDecimal(txtUnitWeight.Text.Replace(".", ",")));
+                    cmdUpdate.Parameters.AddWithValue("@idFood", FoodId);
+                    cmdUpdate.Parameters.AddWithValue("@idUnit", idUnit);
+                    cmdUpdate.ExecuteNonQuery();
+                }
+                else
+                {
+                    reader.Close();
+                    SqlCommand cmdInsert = new SqlCommand(sqlInsert, clsGlobal.conn1);
+                    cmdInsert.Parameters.AddWithValue("@Name", txtUnit.Text);
+                    cmdInsert.Parameters.AddWithValue("@Weight", Convert.ToDecimal(txtUnitWeight.Text));
+                    cmdInsert.Parameters.AddWithValue("@idFood", FoodId);
+                    cmdInsert.ExecuteNonQuery();
+                }
+                getUnits();
+                txtUnit.Text = "";
+                txtUnitWeight.Text = "";
             }
-            string sqlSelect = "SELECT id FROM tblUnits WHERE idFood = @idFood AND Name = @UnitName";
-            string sqlInsert = "INSERT INTO tblUnits (Name, Weight, idFood) VALUES (@Name, @Weight, @idFood)";
-            string sqlUpdate = "UPDATE tblUnits SET Name = @Name, Weight = @Weight, idFood = @idFood WHERE id = @idUnit";
-            if (clsGlobal.conn1.State != ConnectionState.Open)
-                clsGlobal.conn1.Open();
-            SqlCommand cmd = new SqlCommand(sqlSelect, clsGlobal.conn1);
-            cmd.Parameters.AddWithValue("@idFood",FoodId);
-            cmd.Parameters.AddWithValue("@UnitName", txtUnit.Text);
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                reader.Read();
-                idUnit = reader.GetInt32(0);
-                reader.Close();
-                SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, clsGlobal.conn1);
-                cmdUpdate.Parameters.AddWithValue("@Name", txtUnit.Text);
-                cmdUpdate.Parameters.AddWithValue("@Weight", Convert.ToDecimal(txtUnitWeight.Text.Replace(".",",")));
-                cmdUpdate.Parameters.AddWithValue("@idFood", FoodId);
-                cmdUpdate.Parameters.AddWithValue("@idUnit", idUnit);
-                cmdUpdate.ExecuteNonQuery();
-            }
-            else
-            {
-                reader.Close();
-                SqlCommand cmdInsert = new SqlCommand(sqlInsert, clsGlobal.conn1);
-                cmdInsert.Parameters.AddWithValue("@Name", txtUnit.Text);
-                cmdInsert.Parameters.AddWithValue("@Weight", Convert.ToDecimal(txtUnitWeight.Text));
-                cmdInsert.Parameters.AddWithValue("@idFood", FoodId);
-                cmdInsert.ExecuteNonQuery();
-            }
-            getUnits();
-            txtUnit.Text = "";
-            txtUnitWeight.Text = "";
         }
 
         private void lbUnits_MouseClick(object sender, MouseEventArgs e)

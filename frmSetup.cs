@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,7 @@ namespace Helsedagbok
         private void frmSetup_Load(object sender, EventArgs e)
         {
             getMeasurements();
+            getLastMeasure();
             getGoals();
             getWeightList();
             getMealTypes();
@@ -47,47 +49,69 @@ namespace Helsedagbok
             WeightChart.DataBind();
         }
 
-        private void getMeasurements()
+        private void getLastMeasure()
         {
-            string sqlQuery = "SELECT TOP 1 * FROM tblMeasurement WHERE idUser = @idUser ORDER BY Date DESC";
+            string sqlQuery = "SELECT TOP 1 Height, Date FROM tblMeasurement WHERE idUser = @idUser ORDER BY Date DESC";
             SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
             cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
+            cmd.Parameters.AddWithValue("@Date", dtpDate.Value.Date);
             if (clsGlobal.conn1.State != ConnectionState.Open)
                 clsGlobal.conn1.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
                 reader.Read();
-                if (!reader.IsDBNull(2))
-                    txtHeight.Text = reader.GetDecimal(2).ToString("0");
-                if (!reader.IsDBNull(3))
-                    txtWeight.Text = reader.GetDecimal(3).ToString("0.0");
-                if (!reader.IsDBNull(4))
-                    txtWeight2.Text = reader.GetDecimal(4).ToString("0.0");
-                if (!reader.IsDBNull(5))
-                    txtNeck.Text = reader.GetDecimal(5).ToString("0.0");
-                if (!reader.IsDBNull(6))
-                    txtShoulders.Text = reader.GetDecimal(6).ToString("0.0");
-                if (!reader.IsDBNull(7))
-                    txtChest.Text = reader.GetDecimal(7).ToString("0.0");
-                if (!reader.IsDBNull(8))
-                    txtWaist.Text = reader.GetDecimal(8).ToString("0.0");
-                if (!reader.IsDBNull(9))
-                    txtHips.Text = reader.GetDecimal(9).ToString("0.0");
-                if (!reader.IsDBNull(10))
-                    txtThigh.Text = reader.GetDecimal(10).ToString("0.0");
-                if (!reader.IsDBNull(11))
-                    txtCalf.Text = reader.GetDecimal(11).ToString("0.0");
-                if (!reader.IsDBNull(12))
-                    txtArm.Text = reader.GetDecimal(12).ToString("0.0");
-                if (!reader.IsDBNull(13))
-                    txtForeArm.Text = reader.GetDecimal(13).ToString("0.0");
-                if (!reader.IsDBNull(14))
+                if (!reader.IsDBNull(0))
+                    txtHeight.Text = reader.GetDecimal(0).ToString("0");
+                if (!reader.IsDBNull(1))
                 {
-                    lastMeasurementDate = reader.GetDateTime(14);
+                    lastMeasurementDate = reader.GetDateTime(1);
                     lblMeasureDate.Text = lastMeasurementDate.ToString("dd.MM.yyyy");
                 }
             }
+            reader.Close();
+            clsGlobal.conn1.Close();
+        }
+
+        private void getMeasurements()
+        {
+            string sqlQuery = "SELECT TOP 1 * FROM tblMeasurement WHERE idUser = @idUser AND Date = @Date ORDER BY Date DESC";
+            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
+            cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
+            cmd.Parameters.AddWithValue("@Date", dtpDate.Value.Date);
+            if (clsGlobal.conn1.State != ConnectionState.Open)
+                clsGlobal.conn1.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Read();
+                txtWeight.Text = (reader.IsDBNull(3)) ? "" : reader.GetDecimal(3).ToString("0.0");
+                txtWeight2.Text = (reader.IsDBNull(4)) ? "" : reader.GetDecimal(4).ToString("0.0");
+                txtNeck.Text = (reader.IsDBNull(5)) ? "" : reader.GetDecimal(5).ToString("0.0");
+                txtShoulders.Text = (reader.IsDBNull(6)) ? "" : reader.GetDecimal(6).ToString("0.0");
+                txtChest.Text = (reader.IsDBNull(7)) ? "" : reader.GetDecimal(7).ToString("0.0");
+                txtWaist.Text = (reader.IsDBNull(8)) ? "" : reader.GetDecimal(8).ToString("0.0");
+                txtHips.Text = (reader.IsDBNull(9)) ? "" : reader.GetDecimal(9).ToString("0.0");
+                txtThigh.Text = (reader.IsDBNull(10)) ? "" : reader.GetDecimal(10).ToString("0.0");
+                txtCalf.Text = (reader.IsDBNull(11)) ? "" : reader.GetDecimal(11).ToString("0.0");
+                txtArm.Text = (reader.IsDBNull(12)) ? "" : reader.GetDecimal(12).ToString("0.0");
+                txtForeArm.Text = (reader.IsDBNull(13)) ? "" : reader.GetDecimal(13).ToString("0.0");
+            }
+            else
+            {
+                txtWeight.Text = "";
+                txtWeight2.Text = "";
+                txtNeck.Text = "";
+                txtShoulders.Text = "";
+                txtChest.Text = "";
+                txtWaist.Text = "";
+                txtHips.Text = "";
+                txtThigh.Text = "";
+                txtCalf.Text = "";
+                txtArm.Text = "";
+                txtForeArm.Text = "";
+            }
+            reader.Close();
             clsGlobal.conn1.Close();
         }
 
@@ -155,6 +179,7 @@ namespace Helsedagbok
         private void saveMeasurements()
         {
             string sqlQuery;
+            string sqlSelect = "Select idUser FROM tblMeasurement WHERE idUser = @idUser AND Date = @Date";
             string sqlInsert = "INSERT INTO tblMeasurement (idUser, Height, Weight, Weight2, Neck, Shoulders, Chest, Waist, Hips, Thighs, Calves, Arms, ForeArms, Date) " +
                                                    "VALUES (@idUser, @Height, @Weight, @Weight2, @Neck, @Shoulders, @Chest, @Waist, @Hips, @Thighs, @Calves, @Arms, @ForeArms, @Date)";
             string sqlUpdate = "UPDATE tblMeasurement SET idUser = @idUser, " +
@@ -171,23 +196,32 @@ namespace Helsedagbok
                                                          "Arms = @Arms, " +
                                                          "ForeArms = @ForeArms " +
                                                          "WHERE idUser = @idUser AND Date = @Date";
-            if (lastMeasurementDate.Date == DateTime.Now.Date) { sqlQuery = sqlUpdate; }
-            else { sqlQuery = sqlInsert; }
-            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
+            SqlCommand cmd = new SqlCommand(sqlSelect, clsGlobal.conn1);
             cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
-            cmd.Parameters.AddWithValue("@Height", Convert.ToDecimal(txtHeight.Text));
-            cmd.Parameters.AddWithValue("@Weight", Convert.ToDecimal(txtWeight.Text));
+            cmd.Parameters.AddWithValue("@Date", dtpDate.Value.Date);
+            if (clsGlobal.conn1.State != ConnectionState.Open)
+                clsGlobal.conn1.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows) 
+                { sqlQuery = sqlUpdate; }
+            else 
+                { sqlQuery = sqlInsert; }
+            reader.Close();
+            cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
+            cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
+            cmd.Parameters.AddWithValue("@Height", (txtHeight.Text.Length > 0) ? Convert.ToDecimal(txtHeight.Text) : Convert.DBNull);
+            cmd.Parameters.AddWithValue("@Weight", (txtWeight.Text.Length > 0) ? Convert.ToDecimal(txtWeight.Text) : Convert.DBNull);
             cmd.Parameters.AddWithValue("@Weight2", (txtWeight2.Text.Length>0) ? Convert.ToDecimal(txtWeight2.Text) : Convert.DBNull);
-            cmd.Parameters.AddWithValue("@Neck", Convert.ToDecimal(txtNeck.Text));
-            cmd.Parameters.AddWithValue("@Shoulders", Convert.ToDecimal(txtShoulders.Text));
-            cmd.Parameters.AddWithValue("@Chest", Convert.ToDecimal(txtChest.Text));
-            cmd.Parameters.AddWithValue("@Waist", Convert.ToDecimal(txtWaist.Text));
-            cmd.Parameters.AddWithValue("@Hips", Convert.ToDecimal(txtHips.Text));
-            cmd.Parameters.AddWithValue("@Thighs", Convert.ToDecimal(txtThigh.Text));
-            cmd.Parameters.AddWithValue("@Calves", Convert.ToDecimal(txtCalf.Text));
-            cmd.Parameters.AddWithValue("@Arms", Convert.ToDecimal(txtArm.Text));
-            cmd.Parameters.AddWithValue("@ForeArms", Convert.ToDecimal(txtForeArm.Text));
-            cmd.Parameters.AddWithValue("@Date", DateTime.Now.Date);
+            cmd.Parameters.AddWithValue("@Neck", (txtNeck.Text.Length > 0) ? Convert.ToDecimal(txtNeck.Text) : Convert.DBNull);
+            cmd.Parameters.AddWithValue("@Shoulders", (txtShoulders.Text.Length > 0) ? Convert.ToDecimal(txtShoulders.Text) : Convert.DBNull);
+            cmd.Parameters.AddWithValue("@Chest", (txtChest.Text.Length > 0) ? Convert.ToDecimal(txtChest.Text) : Convert.DBNull);
+            cmd.Parameters.AddWithValue("@Waist", (txtWaist.Text.Length > 0) ? Convert.ToDecimal(txtWaist.Text) : Convert.DBNull);
+            cmd.Parameters.AddWithValue("@Hips", (txtHips.Text.Length > 0) ? Convert.ToDecimal(txtHips.Text) : Convert.DBNull);
+            cmd.Parameters.AddWithValue("@Thighs", (txtThigh.Text.Length > 0) ? Convert.ToDecimal(txtThigh.Text) : Convert.DBNull);
+            cmd.Parameters.AddWithValue("@Calves", (txtCalf.Text.Length > 0) ? Convert.ToDecimal(txtCalf.Text) : Convert.DBNull);
+            cmd.Parameters.AddWithValue("@Arms", (txtArm.Text.Length > 0) ? Convert.ToDecimal(txtArm.Text) : Convert.DBNull);
+            cmd.Parameters.AddWithValue("@ForeArms", (txtForeArm.Text.Length > 0) ? Convert.ToDecimal(txtForeArm.Text) : Convert.DBNull);
+            cmd.Parameters.AddWithValue("@Date", dtpDate.Value.Date);
             if (clsGlobal.conn1.State != ConnectionState.Open)
                 clsGlobal.conn1.Open();
             cmd.ExecuteNonQuery();
@@ -309,8 +343,14 @@ namespace Helsedagbok
             saveMeasurements();
             saveGoals();
             getMeasurements();
+            getLastMeasure();
             getWeightList();
             getGoals();
+        }
+
+        private void dtpDate_ValueChanged(object sender, EventArgs e)
+        {
+            getMeasurements();
         }
     }
 }

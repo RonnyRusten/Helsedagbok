@@ -36,6 +36,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSetup));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.label44 = new System.Windows.Forms.Label();
             this.txtWeight2 = new System.Windows.Forms.TextBox();
             this.WeightChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -116,7 +117,6 @@
             this.btnSaveMealTypes = new System.Windows.Forms.Button();
             this.label34 = new System.Windows.Forms.Label();
             this.dgvMealNames = new System.Windows.Forms.DataGridView();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WeightChart)).BeginInit();
@@ -139,7 +139,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.dateTimePicker1);
+            this.tabPage1.Controls.Add(this.dtpDate);
             this.tabPage1.Controls.Add(this.label44);
             this.tabPage1.Controls.Add(this.txtWeight2);
             this.tabPage1.Controls.Add(this.WeightChart);
@@ -207,6 +207,14 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Fysikk";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dtpDate
+            // 
+            this.dtpDate.Location = new System.Drawing.Point(6, 6);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpDate.TabIndex = 59;
+            this.dtpDate.ValueChanged += new System.EventHandler(this.dtpDate_ValueChanged);
             // 
             // label44
             // 
@@ -949,13 +957,6 @@
             this.dgvMealNames.Size = new System.Drawing.Size(179, 328);
             this.dgvMealNames.TabIndex = 1;
             // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(6, 6);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 59;
-            // 
             // frmSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1061,7 +1062,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart WeightChart;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.TextBox txtWeight2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpDate;
 
     }
 }

@@ -599,6 +599,7 @@
             this.dgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFood.ColumnHeadersVisible = false;
             this.dgvFood.Location = new System.Drawing.Point(15, 38);
+            this.dgvFood.MultiSelect = false;
             this.dgvFood.Name = "dgvFood";
             this.dgvFood.ReadOnly = true;
             this.dgvFood.RowHeadersVisible = false;
@@ -607,6 +608,8 @@
             this.dgvFood.TabIndex = 22;
             this.dgvFood.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFood_CellContentClick);
             this.dgvFood.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvFood_CellFormatting);
+            this.dgvFood.MouseEnter += new System.EventHandler(this.dgvFood_MouseEnter);
+            this.dgvFood.MouseLeave += new System.EventHandler(this.dgvFood_MouseLeave);
             // 
             // lblFoodCount
             // 
