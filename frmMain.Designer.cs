@@ -45,15 +45,16 @@
             this.cmFood = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miEditFood = new System.Windows.Forms.ToolStripMenuItem();
             this.miDeleteFood = new System.Windows.Forms.ToolStripMenuItem();
+            this.miCopyMeal = new System.Windows.Forms.ToolStripMenuItem();
+            this.miMoveMeal = new System.Windows.Forms.ToolStripMenuItem();
             this.lblUserName = new System.Windows.Forms.Label();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnAddFood = new System.Windows.Forms.ToolStripButton();
-            this.btnNutritionDetails = new System.Windows.Forms.ToolStripButton();
-            this.btnSettings = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tpFoodDiary = new System.Windows.Forms.TabPage();
+            this.btnNutritionDetails = new System.Windows.Forms.Button();
+            this.btnAddFood = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnAddRecepieIngredient = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -77,11 +78,8 @@
             this.dgvRecepies = new System.Windows.Forms.DataGridView();
             this.dgvCategories = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.miCopyMeal = new System.Windows.Forms.ToolStripMenuItem();
-            this.miMoveMeal = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).BeginInit();
             this.cmFood.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tpFoodDiary.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -125,7 +123,7 @@
             this.dgvDiary.Name = "dgvDiary";
             this.dgvDiary.RowHeadersVisible = false;
             this.dgvDiary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDiary.Size = new System.Drawing.Size(492, 522);
+            this.dgvDiary.Size = new System.Drawing.Size(492, 538);
             this.dgvDiary.TabIndex = 13;
             this.dgvDiary.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvDiary_CellMouseDown);
             // 
@@ -187,6 +185,20 @@
             this.miDeleteFood.Text = "Slett";
             this.miDeleteFood.Click += new System.EventHandler(this.miDeleteFood_Click);
             // 
+            // miCopyMeal
+            // 
+            this.miCopyMeal.Name = "miCopyMeal";
+            this.miCopyMeal.Size = new System.Drawing.Size(152, 22);
+            this.miCopyMeal.Text = "Kopier måltid";
+            this.miCopyMeal.Click += new System.EventHandler(this.miCopyMeal_Click);
+            // 
+            // miMoveMeal
+            // 
+            this.miMoveMeal.Name = "miMoveMeal";
+            this.miMoveMeal.Size = new System.Drawing.Size(152, 22);
+            this.miMoveMeal.Text = "Flytt måltid";
+            this.miMoveMeal.Click += new System.EventHandler(this.miMoveMeal_Click);
+            // 
             // lblUserName
             // 
             this.lblUserName.AutoSize = true;
@@ -197,58 +209,6 @@
             this.lblUserName.TabIndex = 16;
             this.lblUserName.Text = "label1";
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnAddFood,
-            this.btnNutritionDetails,
-            this.btnSettings,
-            this.toolStripSeparator1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(896, 25);
-            this.toolStrip1.TabIndex = 17;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // btnAddFood
-            // 
-            this.btnAddFood.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnAddFood.Image = global::Helsedagbok.Properties.Resources.Plus;
-            this.btnAddFood.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAddFood.Name = "btnAddFood";
-            this.btnAddFood.Size = new System.Drawing.Size(23, 22);
-            this.btnAddFood.Text = "toolStripButton1";
-            this.btnAddFood.ToolTipText = "Registrer måltid";
-            this.btnAddFood.Click += new System.EventHandler(this.bntAddFood_Click);
-            // 
-            // btnNutritionDetails
-            // 
-            this.btnNutritionDetails.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNutritionDetails.Image = global::Helsedagbok.Properties.Resources.Stats;
-            this.btnNutritionDetails.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNutritionDetails.Name = "btnNutritionDetails";
-            this.btnNutritionDetails.Size = new System.Drawing.Size(23, 22);
-            this.btnNutritionDetails.Text = "toolStripButton1";
-            this.btnNutritionDetails.ToolTipText = "Detaljer om dagens måltid";
-            this.btnNutritionDetails.Click += new System.EventHandler(this.btnNutritionDetails_Click);
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSettings.Image = global::Helsedagbok.Properties.Resources.Tool;
-            this.btnSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(23, 22);
-            this.btnSettings.Text = "toolStripButton1";
-            this.btnSettings.ToolTipText = "Innstillinger";
-            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
             // tabMain
             // 
             this.tabMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -256,27 +216,64 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tpFoodDiary);
             this.tabMain.Controls.Add(this.tabPage2);
-            this.tabMain.Location = new System.Drawing.Point(12, 28);
+            this.tabMain.Location = new System.Drawing.Point(12, 12);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(872, 608);
+            this.tabMain.Size = new System.Drawing.Size(872, 624);
             this.tabMain.TabIndex = 18;
             // 
             // tpFoodDiary
             // 
+            this.tpFoodDiary.BackColor = System.Drawing.SystemColors.Control;
+            this.tpFoodDiary.Controls.Add(this.btnNutritionDetails);
+            this.tpFoodDiary.Controls.Add(this.btnAddFood);
+            this.tpFoodDiary.Controls.Add(this.btnSettings);
             this.tpFoodDiary.Controls.Add(this.lblUserName);
             this.tpFoodDiary.Controls.Add(this.dtpDate);
             this.tpFoodDiary.Controls.Add(this.dgvDiary);
             this.tpFoodDiary.Location = new System.Drawing.Point(4, 22);
             this.tpFoodDiary.Name = "tpFoodDiary";
             this.tpFoodDiary.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFoodDiary.Size = new System.Drawing.Size(864, 582);
+            this.tpFoodDiary.Size = new System.Drawing.Size(864, 598);
             this.tpFoodDiary.TabIndex = 0;
             this.tpFoodDiary.Text = "Matdagbok";
-            this.tpFoodDiary.UseVisualStyleBackColor = true;
+            // 
+            // btnNutritionDetails
+            // 
+            this.btnNutritionDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNutritionDetails.Image = global::Helsedagbok.Properties.Resources.Stats;
+            this.btnNutritionDetails.Location = new System.Drawing.Point(773, 6);
+            this.btnNutritionDetails.Name = "btnNutritionDetails";
+            this.btnNutritionDetails.Size = new System.Drawing.Size(38, 38);
+            this.btnNutritionDetails.TabIndex = 19;
+            this.btnNutritionDetails.UseVisualStyleBackColor = true;
+            this.btnNutritionDetails.Click += new System.EventHandler(this.btnNutritionDetails_Click);
+            // 
+            // btnAddFood
+            // 
+            this.btnAddFood.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddFood.Image = global::Helsedagbok.Properties.Resources.Plus;
+            this.btnAddFood.Location = new System.Drawing.Point(729, 6);
+            this.btnAddFood.Name = "btnAddFood";
+            this.btnAddFood.Size = new System.Drawing.Size(38, 38);
+            this.btnAddFood.TabIndex = 18;
+            this.btnAddFood.UseVisualStyleBackColor = true;
+            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSettings.Image = global::Helsedagbok.Properties.Resources.Tool;
+            this.btnSettings.Location = new System.Drawing.Point(817, 6);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(38, 38);
+            this.btnSettings.TabIndex = 17;
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnAddRecepieIngredient);
             this.tabPage2.Controls.Add(this.richTextBox1);
             this.tabPage2.Controls.Add(this.pictureBox1);
             this.tabPage2.Controls.Add(this.dataGridView1);
@@ -291,6 +288,17 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Oppskrifter";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnAddRecepieIngredient
+            // 
+            this.btnAddRecepieIngredient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddRecepieIngredient.Location = new System.Drawing.Point(383, 553);
+            this.btnAddRecepieIngredient.Name = "btnAddRecepieIngredient";
+            this.btnAddRecepieIngredient.Size = new System.Drawing.Size(75, 23);
+            this.btnAddRecepieIngredient.TabIndex = 7;
+            this.btnAddRecepieIngredient.Text = "Legg til";
+            this.btnAddRecepieIngredient.UseVisualStyleBackColor = true;
+            this.btnAddRecepieIngredient.Click += new System.EventHandler(this.btnAddRecepieIngredient_Click);
             // 
             // richTextBox1
             // 
@@ -328,7 +336,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(230, 393);
+            this.dataGridView1.Size = new System.Drawing.Size(230, 364);
             this.dataGridView1.TabIndex = 4;
             // 
             // gbProperties
@@ -551,35 +559,20 @@
             this.textBox1.Size = new System.Drawing.Size(216, 20);
             this.textBox1.TabIndex = 0;
             // 
-            // miCopyMeal
-            // 
-            this.miCopyMeal.Name = "miCopyMeal";
-            this.miCopyMeal.Size = new System.Drawing.Size(152, 22);
-            this.miCopyMeal.Text = "Kopier måltid";
-            this.miCopyMeal.Click += new System.EventHandler(this.miCopyMeal_Click);
-            // 
-            // miMoveMeal
-            // 
-            this.miMoveMeal.Name = "miMoveMeal";
-            this.miMoveMeal.Size = new System.Drawing.Size(152, 22);
-            this.miMoveMeal.Text = "Flytt måltid";
-            this.miMoveMeal.Click += new System.EventHandler(this.miMoveMeal_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(896, 648);
             this.Controls.Add(this.tabMain);
-            this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(912, 687);
             this.Name = "frmMain";
             this.Text = "Matdagbok";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).EndInit();
             this.cmFood.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.tabMain.ResumeLayout(false);
             this.tpFoodDiary.ResumeLayout(false);
             this.tpFoodDiary.PerformLayout();
@@ -592,7 +585,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecepies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -601,17 +593,12 @@
         private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.DataGridView dgvDiary;
         private System.Windows.Forms.Label lblUserName;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btnAddFood;
-        private System.Windows.Forms.ToolStripButton btnNutritionDetails;
         private System.Windows.Forms.ContextMenuStrip cmFood;
         private System.Windows.Forms.ToolStripMenuItem miEditFood;
         private System.Windows.Forms.ToolStripMenuItem miDeleteFood;
-        private System.Windows.Forms.ToolStripButton btnSettings;
         private System.Windows.Forms.TabControl tabMain;
         private System.Windows.Forms.TabPage tpFoodDiary;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.DataGridViewTextBoxColumn DiaryId;
         private System.Windows.Forms.DataGridViewTextBoxColumn MealId;
         private System.Windows.Forms.DataGridViewTextBoxColumn FoodId;
@@ -642,6 +629,10 @@
         private System.Windows.Forms.Label lblDifficulty;
         private System.Windows.Forms.ToolStripMenuItem miCopyMeal;
         private System.Windows.Forms.ToolStripMenuItem miMoveMeal;
+        private System.Windows.Forms.Button btnAddRecepieIngredient;
+        private System.Windows.Forms.Button btnNutritionDetails;
+        private System.Windows.Forms.Button btnAddFood;
+        private System.Windows.Forms.Button btnSettings;
     }
 }
 

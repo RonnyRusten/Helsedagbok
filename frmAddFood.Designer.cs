@@ -645,8 +645,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
+            this.MinimumSize = new System.Drawing.Size(310, 720);
             this.Name = "frmAddFood";
             this.Text = "Legg til matvare";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAddFood_FormClosing);
             this.Load += new System.EventHandler(this.frmAddFood_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pcNutrition)).EndInit();
             this.cmsUnits.ResumeLayout(false);

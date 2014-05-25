@@ -676,6 +676,7 @@
             this.Name = "frmEditDiary";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Legg til matvare";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmEditDiary_FormClosing);
             this.Load += new System.EventHandler(this.frmEditDiary_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

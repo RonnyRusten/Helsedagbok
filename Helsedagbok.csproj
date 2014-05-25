@@ -50,13 +50,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="clsFunctions.cs" />
-    <Compile Include="clsGlobal.cs" />
+    <Compile Include="Functions.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="frmAddFood.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmAddFood.Designer.cs">
       <DependentUpon>frmAddFood.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditRecepieIngredients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditRecepieIngredients.Designer.cs">
+      <DependentUpon>frmEditRecepieIngredients.cs</DependentUpon>
     </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
@@ -108,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditDiary.resx">
       <DependentUpon>frmEditDiary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditRecepieIngredients.resx">
+      <DependentUpon>frmEditRecepieIngredients.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>

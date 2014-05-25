@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace Helsedagbok
 {
-    public class clsGlobal
+    public class Global
     {
         public static string str_ProductName = "Helsedagbok 2014";
         public static string str_Company = "RuSoft";

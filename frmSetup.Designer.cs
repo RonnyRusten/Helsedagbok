@@ -248,14 +248,14 @@
             this.WeightChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.IsValueShownAsLabel = true;
             series1.Legend = "Legend1";
             series1.Name = "Weight";
+            series1.ToolTip = "#VAL";
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.IsValueShownAsLabel = true;
             series2.Legend = "Legend1";
             series2.Name = "Weight2";
+            series2.ToolTip = "#VAL";
             this.WeightChart.Series.Add(series1);
             this.WeightChart.Series.Add(series2);
             this.WeightChart.Size = new System.Drawing.Size(449, 308);

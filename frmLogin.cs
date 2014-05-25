@@ -22,7 +22,7 @@ namespace Helsedagbok
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-            Boolean Connected = clsFunctions.dbConnect();
+            Boolean Connected = Functions.dbConnect();
             if (Connected)
                 getUsers();
         }
@@ -30,7 +30,7 @@ namespace Helsedagbok
         private void getUsers()
         {
             string sqlQuery = "SELECT idUser, FirstName + ' ' + LastName AS Name FROM tblUsers";
-            SqlDataAdapter a = new SqlDataAdapter(sqlQuery, clsGlobal.conn1);
+            SqlDataAdapter a = new SqlDataAdapter(sqlQuery, Global.conn1);
             tblUsers = new DataTable();
             a.Fill(tblUsers);
             cmbUsers.DataSource = tblUsers;
@@ -44,7 +44,7 @@ namespace Helsedagbok
                 AddUser();
             else
             {
-                clsGlobal.idUser = (int)cmbUsers.SelectedValue;
+                Global.idUser = (int)cmbUsers.SelectedValue;
                 this.Close();
             }
         }
@@ -61,12 +61,12 @@ namespace Helsedagbok
             fName = cmbUsers.Text.Substring(0, pos);
             lName = cmbUsers.Text.Substring(pos + 1);
             sqlQuery = "INSERT INTO tblUsers (FirstName, LastName) VALUES (@fName, @lName); SELECT CAST(idUser AS int) FROM tblUsers";
-            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
+            SqlCommand cmd = new SqlCommand(sqlQuery, Global.conn1);
             cmd.Parameters.AddWithValue("@fName", fName);
             cmd.Parameters.AddWithValue("@lName", lName);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
+            if (Global.conn1.State != ConnectionState.Open)
             {
-                clsGlobal.conn1.Open();
+                Global.conn1.Open();
             }
             cmd.ExecuteNonQuery();
 
@@ -75,8 +75,8 @@ namespace Helsedagbok
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             idUser = reader.GetInt32(0);
-            clsGlobal.conn1.Close();
-            clsGlobal.idUser = idUser;
+            Global.conn1.Close();
+            Global.idUser = idUser;
             this.Close();
         }
     }

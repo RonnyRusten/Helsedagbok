@@ -152,19 +152,19 @@ namespace Helsedagbok
         {
             decimal Weight = 0;
             string selectString = "SELECT TOP 1 Weight FROM tblMeasurement WHERE idUser = 1 ORDER BY Date DESC";
-            SqlCommand cmd = new SqlCommand(selectString, clsGlobal.conn1);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
+            SqlCommand cmd = new SqlCommand(selectString, Global.conn1);
+            if (Global.conn1.State != ConnectionState.Open)
             {
-                clsGlobal.conn1.Open();
+                Global.conn1.Open();
             }
             SqlDataReader myReader = cmd.ExecuteReader();
             if (myReader.HasRows)
             {
                 while (myReader.Read())
-                    Weight = myReader.GetDecimal(0);
+                    Weight = (myReader.IsDBNull(0)) ? 0 : myReader.GetDecimal(0); //myReader.GetDecimal(0);
             }
             myReader.Close();
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
             if (Weight > 0)
             {
                 lblCarbsWeight.Text = (Carbs / Weight).ToString("0.00");
@@ -183,10 +183,10 @@ namespace Helsedagbok
             decimal Fiber = 0;
 
             string selectString = "SELECT TOP 1 * FROM tblNutritionGoals WHERE idUser = 1 ORDER BY idGoal DESC";
-            SqlCommand cmd = new SqlCommand(selectString, clsGlobal.conn1);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
+            SqlCommand cmd = new SqlCommand(selectString, Global.conn1);
+            if (Global.conn1.State != ConnectionState.Open)
             {
-                clsGlobal.conn1.Open();
+                Global.conn1.Open();
             }
             SqlDataReader myReader = cmd.ExecuteReader();
             if (myReader.HasRows)
@@ -201,7 +201,7 @@ namespace Helsedagbok
                 }
             }
             myReader.Close();
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
 
             lblEnergyGoal.Text = Calories.ToString("0.0");
             lblCarbsGoal.Text = Carbs.ToString("0.0");

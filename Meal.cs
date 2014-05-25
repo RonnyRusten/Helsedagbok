@@ -16,10 +16,10 @@ namespace Helsedagbok
         decimal m_persProtein;
         decimal m_persAlcohol;
         int m_MealId;
-        clsGlobal.Food[] m_foods;
+        Global.Food[] m_foods;
 
 #region "Properties"
-        public clsGlobal.Food[] Foods
+        public Global.Food[] Foods
         {
             get { return m_foods; }
             set { m_foods = value; }
@@ -67,12 +67,12 @@ namespace Helsedagbok
                 "LEFT OUTER JOIN tblMealTypes ON tblMealTypes.id = tblMeals.id_mealType " +
                 "WHERE tblMeals.id = @mealId " +
                 "ORDER BY DiaryId";
-            SqlDataAdapter a = new SqlDataAdapter(sqlString, clsGlobal.conn1);
+            SqlDataAdapter a = new SqlDataAdapter(sqlString, Global.conn1);
             a.SelectCommand.Parameters.AddWithValue("@mealId", m_MealId);
             DataTable tblFoods = new DataTable();
             a.Fill(tblFoods);
             int n = 0;
-            Foods = new clsGlobal.Food[tblFoods.Rows.Count];
+            Foods = new Global.Food[tblFoods.Rows.Count];
             foreach (DataRow row in tblFoods.Rows)
 	        {
                 try
@@ -119,7 +119,7 @@ namespace Helsedagbok
             decimal eProteinTotal = 0;
             decimal eAlcoholTotal = 0;
             
-            foreach (clsGlobal.Food Food in Foods)
+            foreach (Global.Food Food in Foods)
             {
                 decimal Mass = Food.Count * Food.unitWeight;
                 decimal eFat = Food.Fat * 9;// / 100 * Mass;

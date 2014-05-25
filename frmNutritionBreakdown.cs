@@ -27,8 +27,14 @@ namespace Helsedagbok
 
         private void frmNutritionBreakdown_Load(object sender, EventArgs e)
         {
+            Functions.GetFormPositionSize(this);
             fill();
             this.Height = 50 + tblMeals.Rows.Count * 160;
+        }
+
+        private void frmNutritionBreakdown_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Functions.SetFormPositionSize(this);
         }
 
         private void fill()
@@ -52,7 +58,7 @@ namespace Helsedagbok
                 if (Meal.Energy > 0)
                 {
                     int n = 0;
-                    foreach (clsGlobal.Food Food in Meal.Foods)
+                    foreach (Global.Food Food in Meal.Foods)
                     {
                         Carbs += Meal.Foods[n].Carbs;
                         Sugar += Meal.Foods[n].Sugar;

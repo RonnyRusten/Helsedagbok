@@ -85,6 +85,7 @@ namespace Helsedagbok
 
         private void frmEditDiary_Load(object sender, EventArgs e)
         {
+            Functions.GetFormPositionSize(this);
             dtpDate.Value = DiaryDate;
             if (IdMealType <= 0)
                 getMealTypes();
@@ -100,6 +101,11 @@ namespace Helsedagbok
                 setUnit();
         }
 
+        private void frmEditDiary_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Functions.SetFormPositionSize(this);
+        }
+
         private void getFood()
         {
             dgvFood.DataSource = null;
@@ -111,7 +117,7 @@ namespace Helsedagbok
                 "FROM tblMatvarer " +
                 "Left Outer Join tblFavorites on tblfavorites.id_food = tblMatvarer.id " +
                 "ORDER BY Display";
-            FoodAdapter = new SqlDataAdapter(sqlString, clsGlobal.conn1);
+            FoodAdapter = new SqlDataAdapter(sqlString, Global.conn1);
             tblFood = new DataTable();
             FoodAdapter.Fill(tblFood);
             if (dgvFood.Columns.Count < 1)
@@ -127,7 +133,7 @@ namespace Helsedagbok
 
         private void getMealTypes()
         {
-            SqlDataAdapter a = new SqlDataAdapter("SELECT id, Name FROM tblMealTypes ORDER BY SortOrder", clsGlobal.conn1);
+            SqlDataAdapter a = new SqlDataAdapter("SELECT id, Name FROM tblMealTypes ORDER BY SortOrder", Global.conn1);
             DataTable tbl = new DataTable();
             a.Fill(tbl);
             lb_mealTypes.DataSource = tbl;
@@ -141,7 +147,7 @@ namespace Helsedagbok
 
         private void getUnits()
         {
-            SqlDataAdapter a = new SqlDataAdapter("SELECT id, Name, Weight FROM tblUnits WHERE idFood = @idFood OR idFood is null", clsGlobal.conn1);
+            SqlDataAdapter a = new SqlDataAdapter("SELECT id, Name, Weight FROM tblUnits WHERE idFood = @idFood OR idFood is null", Global.conn1);
             a.SelectCommand.Parameters.AddWithValue("@idFood", IdFood);
             tblUnits = new DataTable();
             a.Fill(tblUnits);
@@ -152,7 +158,7 @@ namespace Helsedagbok
 
         private void getFoodInfo()
         {
-            SqlDataAdapter a = new SqlDataAdapter("SELECT * FROM tblMatvarer WHERE id =" + IdFood, clsGlobal.conn1);
+            SqlDataAdapter a = new SqlDataAdapter("SELECT * FROM tblMatvarer WHERE id =" + IdFood, Global.conn1);
             tblFoodInfo = new DataTable();
             a.Fill(tblFoodInfo);
             if (tblFoodInfo.Rows.Count > 0)
@@ -243,7 +249,7 @@ namespace Helsedagbok
                 txtAmount.Text = "100";
             }
             decimal unitWeight = (decimal)tblUnits.Rows[cmbUnits.SelectedIndex]["Weight"];
-            if (clsFunctions.IsNumeric(value)) total =  Convert.ToDecimal(value) / 100 * count * unitWeight;
+            if (Functions.IsNumeric(value)) total =  Convert.ToDecimal(value) / 100 * count * unitWeight;
             return total.ToString("0.00");
         }
 
@@ -293,30 +299,30 @@ namespace Helsedagbok
             int DiaryId = getDiaryId(MealId);
             if (DiaryId > 0)
             {
-                cmd = new SqlCommand("Update tblDiary SET amnt = @amnt, id_unit = @idUnit WHERE id = @idDiary", clsGlobal.conn1);
+                cmd = new SqlCommand("Update tblDiary SET amnt = @amnt, id_unit = @idUnit WHERE id = @idDiary", Global.conn1);
                 cmd.Parameters.AddWithValue("@idDiary", DiaryId);
             }
             else
             {
-                cmd = new SqlCommand("INSERT INTO tblDiary (id_Meal, id_Food, amnt, id_Unit) VALUES (@idMeal, @idFood, @amnt, @idUnit)", clsGlobal.conn1);
+                cmd = new SqlCommand("INSERT INTO tblDiary (id_Meal, id_Food, amnt, id_Unit) VALUES (@idMeal, @idFood, @amnt, @idUnit)", Global.conn1);
             }
             
             cmd.Parameters.AddWithValue("@idMeal", MealId);
             cmd.Parameters.AddWithValue("@idFood", IdFood);
             cmd.Parameters.AddWithValue("@amnt", txtAmount.Text);
             cmd.Parameters.AddWithValue("@idUnit", cmbUnits.SelectedValue);
-            if (clsGlobal.conn1.State != ConnectionState.Open) clsGlobal.conn1.Open();
+            if (Global.conn1.State != ConnectionState.Open) Global.conn1.Open();
             cmd.ExecuteNonQuery();
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
         }
 
         private int getMealId()
         {
             int retVal = 0;
-            SqlDataAdapter a = new SqlDataAdapter("SELECT id FROM tblMeals WHERE id_mealType = @idMealType AND date = @date AND idUser = @idUser", clsGlobal.conn1);
+            SqlDataAdapter a = new SqlDataAdapter("SELECT id FROM tblMeals WHERE id_mealType = @idMealType AND date = @date AND idUser = @idUser", Global.conn1);
             a.SelectCommand.Parameters.AddWithValue("@idMealType", lb_mealTypes.SelectedValue);
             a.SelectCommand.Parameters.AddWithValue("@date", dtpDate.Value.Date);
-            a.SelectCommand.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
+            a.SelectCommand.Parameters.AddWithValue("@idUser", Global.idUser);
             DataTable tblMeals = new DataTable();
             a.Fill(tblMeals);
             if (tblMeals.Rows.Count > 0)
@@ -325,18 +331,18 @@ namespace Helsedagbok
             }
             else
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO tblMeals (id_MealType, date, time, sortOrder, idUser) VALUES (@idType, @date, @time, @sortOrder, @idUser)", clsGlobal.conn1);
+                SqlCommand cmd = new SqlCommand("INSERT INTO tblMeals (id_MealType, date, time, sortOrder, idUser) VALUES (@idType, @date, @time, @sortOrder, @idUser)", Global.conn1);
                 cmd.Parameters.AddWithValue("@idType", lb_mealTypes.SelectedValue);
                 cmd.Parameters.AddWithValue("@date", dtpDate.Value.Date);
                 cmd.Parameters.AddWithValue("@time", DateTime.Now);
                 cmd.Parameters.AddWithValue("@sortOrder", 1);
-                cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
-                if (clsGlobal.conn1.State != ConnectionState.Open)
+                cmd.Parameters.AddWithValue("@idUser", Global.idUser);
+                if (Global.conn1.State != ConnectionState.Open)
                 {
-                   clsGlobal.conn1.Open(); 
+                   Global.conn1.Open(); 
                 }
                 cmd.ExecuteNonQuery();
-                clsGlobal.conn1.Close();
+                Global.conn1.Close();
                 a.Fill(tblMeals);
                 retVal = (int)tblMeals.Rows[0]["id"];
             }
@@ -347,18 +353,18 @@ namespace Helsedagbok
         {
             int DiaryId = 0;
             string sqlQuery = "SELECT id FROM tblDiary WHERE id_Meal = @idMeal AND id_Food = @idFood";
-            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
+            SqlCommand cmd = new SqlCommand(sqlQuery, Global.conn1);
             cmd.Parameters.AddWithValue("@idMeal", MealId);
             cmd.Parameters.AddWithValue("@idFood", IdFood);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
-                clsGlobal.conn1.Open();
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
                 reader.Read();
                 DiaryId = reader.GetInt32(0);
             }
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
             return DiaryId;
         }
 
@@ -418,10 +424,10 @@ namespace Helsedagbok
             if (tblUnits == null)
                 getUnits();
             string sqlSelect = "SELECT TOP 1 id FROM tblUnits WHERE idFood = @idFood ORDER BY id";
-            SqlCommand cmd = new SqlCommand(sqlSelect, clsGlobal.conn1);
+            SqlCommand cmd = new SqlCommand(sqlSelect, Global.conn1);
             cmd.Parameters.AddWithValue("@IdFood", IdFood);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
-                clsGlobal.conn1.Open();
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
@@ -451,15 +457,15 @@ namespace Helsedagbok
                     break;
             }
 
-            SqlCommand cmd = new SqlCommand(sqlString, clsGlobal.conn1);
+            SqlCommand cmd = new SqlCommand(sqlString, Global.conn1);
             cmd.Parameters.AddWithValue("@idFood", idFood);
             cmd.Parameters.AddWithValue("@idUser", 1);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
+            if (Global.conn1.State != ConnectionState.Open)
             {
-                clsGlobal.conn1.Open();
+                Global.conn1.Open();
             }
             cmd.ExecuteNonQuery();
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
         }
 
         private void dgvFood_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -483,7 +489,7 @@ namespace Helsedagbok
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (txtAmount.Text == "0" || clsFunctions.IsNumeric(txtAmount.Text) == false)
+            if (txtAmount.Text == "0" || Functions.IsNumeric(txtAmount.Text) == false)
             {
                 MessageBox.Show("Skriv inn mengde");
                 return;
@@ -531,6 +537,7 @@ namespace Helsedagbok
         {
             txtAmount.Focus();
         }
+
 
     }
 }

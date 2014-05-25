@@ -67,17 +67,17 @@ namespace Helsedagbok
             decimal eFat = 0;
             decimal eAlcohol = 0;
             decimal eTotal = 0;
-            if (clsFunctions.IsNumeric(txtCalories.Text) == true)
+            if (Functions.IsNumeric(txtCalories.Text) == true)
                 eTotal = Convert.ToDecimal(txtCalories.Text);
             if (eTotal > 0)
             {
-                if (clsFunctions.IsNumeric(txtCarbohydrates.Text) == true)
+                if (Functions.IsNumeric(txtCarbohydrates.Text) == true)
                     eCarbs = Convert.ToDecimal(txtCarbohydrates.Text) * 4 / eTotal * 100;
-                if (clsFunctions.IsNumeric(txtProtein.Text) == true)
+                if (Functions.IsNumeric(txtProtein.Text) == true)
                     eProtein = Convert.ToDecimal(txtProtein.Text) * 4 / eTotal * 100;
-                if (clsFunctions.IsNumeric(txtFat.Text) == true)
+                if (Functions.IsNumeric(txtFat.Text) == true)
                     eFat = Convert.ToDecimal(txtFat.Text) * 9 / eTotal * 100;
-                if (clsFunctions.IsNumeric(txtAlcohol.Text) == true)
+                if (Functions.IsNumeric(txtAlcohol.Text) == true)
                     eAlcohol = Convert.ToDecimal(txtAlcohol.Text) * 7 / eTotal * 100;
             }
             yValues[0] = eCarbs;
@@ -155,11 +155,11 @@ namespace Helsedagbok
             cmd.Parameters.AddWithValue("@Alcohol", Convert.ToDecimal(txtAlcohol.Text));
             cmd.Parameters.AddWithValue("@Natrium", Convert.ToDecimal(txtNatrium.Text));
             cmd.CommandText = sqlString;
-            cmd.Connection = clsGlobal.conn1;
-            if (clsGlobal.conn1.State == ConnectionState.Closed)
-                clsGlobal.conn1.Open();
+            cmd.Connection = Global.conn1;
+            if (Global.conn1.State == ConnectionState.Closed)
+                Global.conn1.Open();
             numRows = cmd.ExecuteNonQuery();
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
             return numRows;
         }
 
@@ -186,22 +186,22 @@ namespace Helsedagbok
             cmd.Parameters.AddWithValue("@Natrium", Convert.ToDecimal(txtNatrium.Text));
             cmd.Parameters.AddWithValue("@FoodId", FoodId);
             cmd.CommandText = sqlString;
-            cmd.Connection = clsGlobal.conn1;
-            if (clsGlobal.conn1.State == ConnectionState.Closed)
-                clsGlobal.conn1.Open();
+            cmd.Connection = Global.conn1;
+            if (Global.conn1.State == ConnectionState.Closed)
+                Global.conn1.Open();
             numRows = cmd.ExecuteNonQuery();
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
             return numRows;
         }
 
         private void getFood(int FoodID)
         {
             string sqlQuery = "SELECT * FROM tblMatvarer WHERE id = @FoodID";
-            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
+            SqlCommand cmd = new SqlCommand(sqlQuery, Global.conn1);
             cmd.Parameters.AddWithValue("@FoodID", FoodID);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
+            if (Global.conn1.State != ConnectionState.Open)
             {
-                clsGlobal.conn1.Open();
+                Global.conn1.Open();
             }
             SqlDataReader myReader = cmd.ExecuteReader();
             if (myReader.HasRows)
@@ -236,13 +236,13 @@ namespace Helsedagbok
                 }
             }
             myReader.Close();
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
         }
 
         private void getUnits()
         {
             string sqlSelect = "SELECT id, Name + ' = ' + FORMAT(Weight, '0.######') + ' g' AS Unit FROM tblUnits WHERE idFood = @idFood";
-            SqlDataAdapter a = new SqlDataAdapter(sqlSelect, clsGlobal.conn1);
+            SqlDataAdapter a = new SqlDataAdapter(sqlSelect, Global.conn1);
             a.SelectCommand.Parameters.AddWithValue("@idFood", FoodId);
             DataTable tblUnits = new DataTable();
             a.Fill(tblUnits);
@@ -255,6 +255,7 @@ namespace Helsedagbok
 
         private void frmAddFood_Load(object sender, EventArgs e)
         {
+            Functions.GetFormPositionSize(this); 
             if (EditMode == true)
             {
                 this.Text = "Rediger matvare";
@@ -263,27 +264,32 @@ namespace Helsedagbok
             }
         }
 
+        private void frmAddFood_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Functions.SetFormPositionSize(this);
+        }
+
         private int getFoodId()
         {
             int FoodId = 0;
             string sqlSelect = "SELECT id FROM tblMatvarer WHERE Name = @FoodName";
-            SqlCommand cmd = new SqlCommand(sqlSelect, clsGlobal.conn1);
+            SqlCommand cmd = new SqlCommand(sqlSelect, Global.conn1);
             cmd.Parameters.AddWithValue("@FoodName", txtName.Text);
-            if (clsGlobal.conn1.State == ConnectionState.Closed)
-                clsGlobal.conn1.Open();
+            if (Global.conn1.State == ConnectionState.Closed)
+                Global.conn1.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
                 reader.Read();
                 FoodId = reader.GetInt32(0);
             }
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
             return FoodId;
         }
 
         private void btnSaveUnit_Click(object sender, EventArgs e)
         {
-            if (clsFunctions.IsNumeric(txtUnitWeight.Text) & txtUnit.Text.Length > 0)
+            if (Functions.IsNumeric(txtUnitWeight.Text) & txtUnit.Text.Length > 0)
             {
                 int idUnit;
                 if (FoodId == 0)
@@ -295,9 +301,9 @@ namespace Helsedagbok
                 string sqlSelect = "SELECT id FROM tblUnits WHERE idFood = @idFood AND Name = @UnitName";
                 string sqlInsert = "INSERT INTO tblUnits (Name, Weight, idFood) VALUES (@Name, @Weight, @idFood)";
                 string sqlUpdate = "UPDATE tblUnits SET Name = @Name, Weight = @Weight, idFood = @idFood WHERE id = @idUnit";
-                if (clsGlobal.conn1.State != ConnectionState.Open)
-                    clsGlobal.conn1.Open();
-                SqlCommand cmd = new SqlCommand(sqlSelect, clsGlobal.conn1);
+                if (Global.conn1.State != ConnectionState.Open)
+                    Global.conn1.Open();
+                SqlCommand cmd = new SqlCommand(sqlSelect, Global.conn1);
                 cmd.Parameters.AddWithValue("@idFood", FoodId);
                 cmd.Parameters.AddWithValue("@UnitName", txtUnit.Text);
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -306,7 +312,7 @@ namespace Helsedagbok
                     reader.Read();
                     idUnit = reader.GetInt32(0);
                     reader.Close();
-                    SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, clsGlobal.conn1);
+                    SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, Global.conn1);
                     cmdUpdate.Parameters.AddWithValue("@Name", txtUnit.Text);
                     cmdUpdate.Parameters.AddWithValue("@Weight", Convert.ToDecimal(txtUnitWeight.Text.Replace(".", ",")));
                     cmdUpdate.Parameters.AddWithValue("@idFood", FoodId);
@@ -316,7 +322,7 @@ namespace Helsedagbok
                 else
                 {
                     reader.Close();
-                    SqlCommand cmdInsert = new SqlCommand(sqlInsert, clsGlobal.conn1);
+                    SqlCommand cmdInsert = new SqlCommand(sqlInsert, Global.conn1);
                     cmdInsert.Parameters.AddWithValue("@Name", txtUnit.Text);
                     cmdInsert.Parameters.AddWithValue("@Weight", Convert.ToDecimal(txtUnitWeight.Text));
                     cmdInsert.Parameters.AddWithValue("@idFood", FoodId);
@@ -353,13 +359,14 @@ namespace Helsedagbok
         private void tsmiDelete_Click(object sender, EventArgs e)
         {
             string sqlString = "DELETE FROM tblUnits WHERE id = @UnitId";
-            SqlCommand cmdDelete = new SqlCommand(sqlString, clsGlobal.conn1);
+            SqlCommand cmdDelete = new SqlCommand(sqlString, Global.conn1);
             cmdDelete.Parameters.AddWithValue("@UnitId", lbUnits.SelectedValue);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
-                clsGlobal.conn1.Open();
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
             cmdDelete.ExecuteNonQuery();
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
             getUnits();
         }
+
     }
 }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Helsedagbok
 {
@@ -18,6 +19,8 @@ namespace Helsedagbok
         private SqlDataAdapter daMealTypes;
         private DataTable tblMealTypes;
         private bool hasNutritionGoals;
+        private Point? prevPosition = null;
+        private ToolTip ttWeightChart = new ToolTip();
 
         public frmSetup()
         {
@@ -37,8 +40,8 @@ namespace Helsedagbok
         private void getWeightList()
         {
             string sqlQuery = "SELECT * FROM tblMeasurement WHERE idUser = @idUser ORDER BY Date DESC";
-            SqlDataAdapter a = new SqlDataAdapter(sqlQuery, clsGlobal.conn1);
-            a.SelectCommand.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
+            SqlDataAdapter a = new SqlDataAdapter(sqlQuery, Global.conn1);
+            a.SelectCommand.Parameters.AddWithValue("@idUser", Global.idUser);
             DataTable tblWeight = new DataTable();
             a.Fill(tblWeight);
             WeightChart.DataSource = tblWeight;
@@ -52,11 +55,11 @@ namespace Helsedagbok
         private void getLastMeasure()
         {
             string sqlQuery = "SELECT TOP 1 Height, Date FROM tblMeasurement WHERE idUser = @idUser ORDER BY Date DESC";
-            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
-            cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
+            SqlCommand cmd = new SqlCommand(sqlQuery, Global.conn1);
+            cmd.Parameters.AddWithValue("@idUser", Global.idUser);
             cmd.Parameters.AddWithValue("@Date", dtpDate.Value.Date);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
-                clsGlobal.conn1.Open();
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
@@ -70,17 +73,17 @@ namespace Helsedagbok
                 }
             }
             reader.Close();
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
         }
 
         private void getMeasurements()
         {
             string sqlQuery = "SELECT TOP 1 * FROM tblMeasurement WHERE idUser = @idUser AND Date = @Date ORDER BY Date DESC";
-            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
-            cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
+            SqlCommand cmd = new SqlCommand(sqlQuery, Global.conn1);
+            cmd.Parameters.AddWithValue("@idUser", Global.idUser);
             cmd.Parameters.AddWithValue("@Date", dtpDate.Value.Date);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
-                clsGlobal.conn1.Open();
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
@@ -112,16 +115,16 @@ namespace Helsedagbok
                 txtForeArm.Text = "";
             }
             reader.Close();
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
         }
 
         private void getGoals()
         {
             string sqlQuery = "SELECT TOP 1 * FROM tblBodyGoals WHERE idUser = @idUser ORDER BY Date DESC";
-            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
-            cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
-                clsGlobal.conn1.Open();
+            SqlCommand cmd = new SqlCommand(sqlQuery, Global.conn1);
+            cmd.Parameters.AddWithValue("@idUser", Global.idUser);
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
@@ -147,16 +150,16 @@ namespace Helsedagbok
                 if (!reader.IsDBNull(11))
                     txtForeArmGoal.Text = reader.GetDecimal(11).ToString("0.0");
             }
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
         }
 
         private void getNutritionGoals()
         {
             string sqlQuery = "SELECT * FROM tblNutritionGoals WHERE idUser = @idUser";
-            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
-            cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
-                clsGlobal.conn1.Open();
+            SqlCommand cmd = new SqlCommand(sqlQuery, Global.conn1);
+            cmd.Parameters.AddWithValue("@idUser", Global.idUser);
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
@@ -173,7 +176,7 @@ namespace Helsedagbok
                 if (!reader.IsDBNull(6))
                     txtFiberGoal.Text = reader.GetDecimal(6).ToString("0.0");
             }
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
         }
 
         private void saveMeasurements()
@@ -196,19 +199,19 @@ namespace Helsedagbok
                                                          "Arms = @Arms, " +
                                                          "ForeArms = @ForeArms " +
                                                          "WHERE idUser = @idUser AND Date = @Date";
-            SqlCommand cmd = new SqlCommand(sqlSelect, clsGlobal.conn1);
-            cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
+            SqlCommand cmd = new SqlCommand(sqlSelect, Global.conn1);
+            cmd.Parameters.AddWithValue("@idUser", Global.idUser);
             cmd.Parameters.AddWithValue("@Date", dtpDate.Value.Date);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
-                clsGlobal.conn1.Open();
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows) 
                 { sqlQuery = sqlUpdate; }
             else 
                 { sqlQuery = sqlInsert; }
             reader.Close();
-            cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
-            cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
+            cmd = new SqlCommand(sqlQuery, Global.conn1);
+            cmd.Parameters.AddWithValue("@idUser", Global.idUser);
             cmd.Parameters.AddWithValue("@Height", (txtHeight.Text.Length > 0) ? Convert.ToDecimal(txtHeight.Text) : Convert.DBNull);
             cmd.Parameters.AddWithValue("@Weight", (txtWeight.Text.Length > 0) ? Convert.ToDecimal(txtWeight.Text) : Convert.DBNull);
             cmd.Parameters.AddWithValue("@Weight2", (txtWeight2.Text.Length>0) ? Convert.ToDecimal(txtWeight2.Text) : Convert.DBNull);
@@ -222,10 +225,10 @@ namespace Helsedagbok
             cmd.Parameters.AddWithValue("@Arms", (txtArm.Text.Length > 0) ? Convert.ToDecimal(txtArm.Text) : Convert.DBNull);
             cmd.Parameters.AddWithValue("@ForeArms", (txtForeArm.Text.Length > 0) ? Convert.ToDecimal(txtForeArm.Text) : Convert.DBNull);
             cmd.Parameters.AddWithValue("@Date", dtpDate.Value.Date);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
-                clsGlobal.conn1.Open();
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
             cmd.ExecuteNonQuery();
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
         }
 
         private void saveGoals()
@@ -248,8 +251,8 @@ namespace Helsedagbok
                                                          "WHERE idUser = @idUser";
             if (lastMeasurementDate.Date == DateTime.Now.Date) { sqlQuery = sqlUpdate; }
             else { sqlQuery = sqlInsert; }
-            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
-            cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
+            SqlCommand cmd = new SqlCommand(sqlQuery, Global.conn1);
+            cmd.Parameters.AddWithValue("@idUser", Global.idUser);
             cmd.Parameters.AddWithValue("@Weight", Convert.ToDecimal(txtWeightGoal.Text));
             cmd.Parameters.AddWithValue("@Neck", Convert.ToDecimal(txtNeckGoal.Text));
             cmd.Parameters.AddWithValue("@Shoulders", Convert.ToDecimal(txtShouldersGoal.Text));
@@ -261,10 +264,10 @@ namespace Helsedagbok
             cmd.Parameters.AddWithValue("@Arms", Convert.ToDecimal(txtArmGoal.Text));
             cmd.Parameters.AddWithValue("@ForeArms", Convert.ToDecimal(txtForeArmGoal.Text));
             cmd.Parameters.AddWithValue("@Date", DateTime.Now.Date);
-            if (clsGlobal.conn1.State != ConnectionState.Open)
-                clsGlobal.conn1.Open();
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
             cmd.ExecuteNonQuery();
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
         }
 
         private void saveNutritionGoals()
@@ -281,17 +284,17 @@ namespace Helsedagbok
                                                          "WHERE idUser = @idUser";
             if (hasNutritionGoals) { sqlQuery = sqlUpdate; }
             else { sqlQuery = sqlInsert; }
-            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
-            cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
+            SqlCommand cmd = new SqlCommand(sqlQuery, Global.conn1);
+            cmd.Parameters.AddWithValue("@idUser", Global.idUser);
             cmd.Parameters.AddWithValue("@kCals", Convert.ToDecimal(txtEnergyGoal.Text));
             cmd.Parameters.AddWithValue("@Carbs", Convert.ToDecimal(txtCarbsGoal.Text));
             cmd.Parameters.AddWithValue("@Fat", Convert.ToDecimal(txtFatGoal.Text));
             cmd.Parameters.AddWithValue("@Protein", Convert.ToDecimal(txtProteinGoal.Text));
             cmd.Parameters.AddWithValue("@Fiber", Convert.ToDecimal(txtFiberGoal.Text));
-            if (clsGlobal.conn1.State != ConnectionState.Open)
-                clsGlobal.conn1.Open();
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
             cmd.ExecuteNonQuery();
-            clsGlobal.conn1.Close();
+            Global.conn1.Close();
         }
 
         private void getMealTypes()
@@ -309,23 +312,23 @@ namespace Helsedagbok
         {
             SqlDataAdapter a = new SqlDataAdapter();
             string sqlQuery = "SELECT id, Name AS Måltid, SortOrder AS Rekkefølge FROM tblMealTypes WHERE idUser = @idUser ORDER BY SortOrder";
-            SqlCommand cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
-            cmd.Parameters.AddWithValue("idUser", clsGlobal.idUser);
+            SqlCommand cmd = new SqlCommand(sqlQuery, Global.conn1);
+            cmd.Parameters.AddWithValue("idUser", Global.idUser);
             a.SelectCommand = cmd;
 
             sqlQuery = "INSERT INTO tblMealTypes (Name, SortOrder, idUser) VALUES (@Name, @SortOrder, @idUser)";
-            cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
+            cmd = new SqlCommand(sqlQuery, Global.conn1);
             cmd.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Måltid");
             cmd.Parameters.Add("@SortOrder", SqlDbType.Int, 4, "Rekkefølge");
-            cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
+            cmd.Parameters.AddWithValue("@idUser", Global.idUser);
             a.InsertCommand = cmd;
 
             sqlQuery = "UPDATE tblMealTypes SET Name = @Name, SortOrder = @SortOrder WHERE idUser = @idUser AND id = @idMeal";
-            cmd = new SqlCommand(sqlQuery, clsGlobal.conn1);
+            cmd = new SqlCommand(sqlQuery, Global.conn1);
             cmd.Parameters.Add("@idMeal", SqlDbType.Int, 4, "id");
             cmd.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Måltid");
             cmd.Parameters.Add("@SortOrder", SqlDbType.Int, 4, "Rekkefølge");
-            cmd.Parameters.AddWithValue("@idUser", clsGlobal.idUser);
+            cmd.Parameters.AddWithValue("@idUser", Global.idUser);
             a.UpdateCommand = cmd;
 
             return a;
