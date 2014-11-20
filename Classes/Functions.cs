@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace Helsedagbok
 
         public static Boolean dbConnect()
         {
-            string dbServer = "rruw8\\sqlexpress";
+            string dbServer = "rru-w8";
             Global.str_Connetion = "Server=" + dbServer + "; Database=Recepies; User Id=sa; Password=Doelle01;";
             Global.conn1 = new SqlConnection(Global.str_Connetion);
             try
@@ -89,6 +90,14 @@ namespace Helsedagbok
             setRegistryKey(FormName, "yPos", Form.Left);
             setRegistryKey(FormName, "Width", Form.Width);
             setRegistryKey(FormName, "Height", Form.Height);
+        }
+
+        public static DataTable GetTable(string sql)
+        {
+            DataTable tbl = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(sql, Global.conn1);
+            adapter.Fill(tbl);
+            return tbl;
         }
     }
 }

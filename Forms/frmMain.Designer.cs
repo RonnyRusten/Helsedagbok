@@ -53,10 +53,9 @@
             this.btnNutritionDetails = new System.Windows.Forms.Button();
             this.btnAddFood = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tpRecepies = new System.Windows.Forms.TabPage();
             this.btnAddRecepieIngredient = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.gbProperties = new System.Windows.Forms.GroupBox();
             this.lblFat = new System.Windows.Forms.Label();
@@ -78,16 +77,21 @@
             this.dgvRecepies = new System.Windows.Forms.DataGridView();
             this.dgvCategories = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tpWorkout = new System.Windows.Forms.TabPage();
+            this.pnlWorkouts = new System.Windows.Forms.Panel();
+            this.dtpWorkoutDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).BeginInit();
             this.cmFood.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tpFoodDiary.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tpRecepies.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gbProperties.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecepies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tpWorkout.SuspendLayout();
             this.SuspendLayout();
             // 
             // dtpDate
@@ -168,34 +172,34 @@
             this.miCopyMeal,
             this.miMoveMeal});
             this.cmFood.Name = "cmMeals";
-            this.cmFood.Size = new System.Drawing.Size(153, 114);
+            this.cmFood.Size = new System.Drawing.Size(146, 92);
             this.cmFood.Opening += new System.ComponentModel.CancelEventHandler(this.cmFood_Opening);
             // 
             // miEditFood
             // 
             this.miEditFood.Name = "miEditFood";
-            this.miEditFood.Size = new System.Drawing.Size(152, 22);
+            this.miEditFood.Size = new System.Drawing.Size(145, 22);
             this.miEditFood.Text = "Rediger";
             this.miEditFood.Click += new System.EventHandler(this.miEditFood_Click);
             // 
             // miDeleteFood
             // 
             this.miDeleteFood.Name = "miDeleteFood";
-            this.miDeleteFood.Size = new System.Drawing.Size(152, 22);
+            this.miDeleteFood.Size = new System.Drawing.Size(145, 22);
             this.miDeleteFood.Text = "Slett";
             this.miDeleteFood.Click += new System.EventHandler(this.miDeleteFood_Click);
             // 
             // miCopyMeal
             // 
             this.miCopyMeal.Name = "miCopyMeal";
-            this.miCopyMeal.Size = new System.Drawing.Size(152, 22);
+            this.miCopyMeal.Size = new System.Drawing.Size(145, 22);
             this.miCopyMeal.Text = "Kopier måltid";
             this.miCopyMeal.Click += new System.EventHandler(this.miCopyMeal_Click);
             // 
             // miMoveMeal
             // 
             this.miMoveMeal.Name = "miMoveMeal";
-            this.miMoveMeal.Size = new System.Drawing.Size(152, 22);
+            this.miMoveMeal.Size = new System.Drawing.Size(145, 22);
             this.miMoveMeal.Text = "Flytt måltid";
             this.miMoveMeal.Click += new System.EventHandler(this.miMoveMeal_Click);
             // 
@@ -215,7 +219,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tpFoodDiary);
-            this.tabMain.Controls.Add(this.tabPage2);
+            this.tabMain.Controls.Add(this.tpRecepies);
+            this.tabMain.Controls.Add(this.tpWorkout);
             this.tabMain.Location = new System.Drawing.Point(12, 12);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
@@ -271,23 +276,23 @@
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
-            // tabPage2
+            // tpRecepies
             // 
-            this.tabPage2.Controls.Add(this.btnAddRecepieIngredient);
-            this.tabPage2.Controls.Add(this.richTextBox1);
-            this.tabPage2.Controls.Add(this.pictureBox1);
-            this.tabPage2.Controls.Add(this.dataGridView1);
-            this.tabPage2.Controls.Add(this.gbProperties);
-            this.tabPage2.Controls.Add(this.dgvRecepies);
-            this.tabPage2.Controls.Add(this.dgvCategories);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(864, 582);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Oppskrifter";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tpRecepies.Controls.Add(this.btnAddRecepieIngredient);
+            this.tpRecepies.Controls.Add(this.richTextBox1);
+            this.tpRecepies.Controls.Add(this.dataGridView1);
+            this.tpRecepies.Controls.Add(this.gbProperties);
+            this.tpRecepies.Controls.Add(this.dgvRecepies);
+            this.tpRecepies.Controls.Add(this.dgvCategories);
+            this.tpRecepies.Controls.Add(this.textBox1);
+            this.tpRecepies.Controls.Add(this.pictureBox1);
+            this.tpRecepies.Location = new System.Drawing.Point(4, 22);
+            this.tpRecepies.Name = "tpRecepies";
+            this.tpRecepies.Padding = new System.Windows.Forms.Padding(3);
+            this.tpRecepies.Size = new System.Drawing.Size(864, 598);
+            this.tpRecepies.TabIndex = 1;
+            this.tpRecepies.Text = "Oppskrifter";
+            this.tpRecepies.UseVisualStyleBackColor = true;
             // 
             // btnAddRecepieIngredient
             // 
@@ -307,14 +312,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(394, 393);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "Fremgangsmåte:";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(464, 32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(394, 145);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // dataGridView1
             // 
@@ -559,6 +556,43 @@
             this.textBox1.Size = new System.Drawing.Size(216, 20);
             this.textBox1.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(464, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(394, 145);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // tpWorkout
+            // 
+            this.tpWorkout.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.tpWorkout.Controls.Add(this.pnlWorkouts);
+            this.tpWorkout.Controls.Add(this.dtpWorkoutDate);
+            this.tpWorkout.Location = new System.Drawing.Point(4, 22);
+            this.tpWorkout.Name = "tpWorkout";
+            this.tpWorkout.Size = new System.Drawing.Size(864, 598);
+            this.tpWorkout.TabIndex = 2;
+            this.tpWorkout.Text = "Trening";
+            // 
+            // pnlWorkouts
+            // 
+            this.pnlWorkouts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlWorkouts.AutoScroll = true;
+            this.pnlWorkouts.Location = new System.Drawing.Point(3, 29);
+            this.pnlWorkouts.Name = "pnlWorkouts";
+            this.pnlWorkouts.Size = new System.Drawing.Size(425, 566);
+            this.pnlWorkouts.TabIndex = 21;
+            // 
+            // dtpWorkoutDate
+            // 
+            this.dtpWorkoutDate.Location = new System.Drawing.Point(3, 3);
+            this.dtpWorkoutDate.Name = "dtpWorkoutDate";
+            this.dtpWorkoutDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpWorkoutDate.TabIndex = 9;
+            this.dtpWorkoutDate.ValueChanged += new System.EventHandler(this.dtpWorkoutDate_ValueChanged);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -576,14 +610,15 @@
             this.tabMain.ResumeLayout(false);
             this.tpFoodDiary.ResumeLayout(false);
             this.tpFoodDiary.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tpRecepies.ResumeLayout(false);
+            this.tpRecepies.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.gbProperties.ResumeLayout(false);
             this.gbProperties.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecepies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tpWorkout.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -598,7 +633,7 @@
         private System.Windows.Forms.ToolStripMenuItem miDeleteFood;
         private System.Windows.Forms.TabControl tabMain;
         private System.Windows.Forms.TabPage tpFoodDiary;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tpRecepies;
         private System.Windows.Forms.DataGridViewTextBoxColumn DiaryId;
         private System.Windows.Forms.DataGridViewTextBoxColumn MealId;
         private System.Windows.Forms.DataGridViewTextBoxColumn FoodId;
@@ -633,6 +668,9 @@
         private System.Windows.Forms.Button btnNutritionDetails;
         private System.Windows.Forms.Button btnAddFood;
         private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.TabPage tpWorkout;
+        private System.Windows.Forms.DateTimePicker dtpWorkoutDate;
+        private System.Windows.Forms.Panel pnlWorkouts;
     }
 }
 

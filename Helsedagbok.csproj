@@ -50,84 +50,109 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Functions.cs" />
-    <Compile Include="Global.cs" />
-    <Compile Include="frmAddFood.cs">
+    <Compile Include="Classes\Functions.cs" />
+    <Compile Include="Classes\Global.cs" />
+    <Compile Include="Forms\frmAddFood.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAddFood.Designer.cs">
+    <Compile Include="Forms\frmAddFood.Designer.cs">
       <DependentUpon>frmAddFood.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmEditRecepieIngredients.cs">
+    <Compile Include="Forms\frmEditRecepieIngredients.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEditRecepieIngredients.Designer.cs">
+    <Compile Include="Forms\frmEditRecepieIngredients.Designer.cs">
       <DependentUpon>frmEditRecepieIngredients.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmLogin.cs">
+    <Compile Include="Forms\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogin.Designer.cs">
+    <Compile Include="Forms\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmNutritionBreakdown.cs">
+    <Compile Include="Forms\frmNutritionBreakdown.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNutritionBreakdown.Designer.cs">
+    <Compile Include="Forms\frmNutritionBreakdown.Designer.cs">
       <DependentUpon>frmNutritionBreakdown.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSetup.cs">
+    <Compile Include="Forms\frmSetup.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSetup.Designer.cs">
+    <Compile Include="Forms\frmSetup.Designer.cs">
       <DependentUpon>frmSetup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Meal.cs" />
-    <Compile Include="frmEditDiary.cs">
+    <Compile Include="Classes\Meal.cs" />
+    <Compile Include="Forms\frmEditDiary.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEditDiary.Designer.cs">
+    <Compile Include="Forms\frmEditDiary.Designer.cs">
       <DependentUpon>frmEditDiary.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
+    <Compile Include="Forms\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
+    <Compile Include="Forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Classes\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ucDaySummary.cs">
+    <Compile Include="User Controls\ucDaySummary.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucDaySummary.Designer.cs">
+    <Compile Include="User Controls\ucDaySummary.Designer.cs">
       <DependentUpon>ucDaySummary.cs</DependentUpon>
     </Compile>
-    <Compile Include="ucMealSummary.cs">
+    <Compile Include="User Controls\ucExercise.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucMealSummary.Designer.cs">
+    <Compile Include="User Controls\ucExercise.Designer.cs">
+      <DependentUpon>ucExercise.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Controls\ucExerciseTotals.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\ucExerciseTotals.Designer.cs">
+      <DependentUpon>ucExerciseTotals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Controls\ucMealSummary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\ucMealSummary.Designer.cs">
       <DependentUpon>ucMealSummary.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="frmAddFood.resx">
+    <Compile Include="Classes\Workout.cs" />
+    <Compile Include="User Controls\ucSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\ucSet.Designer.cs">
+      <DependentUpon>ucSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Controls\ucWorkout.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\ucWorkout.Designer.cs">
+      <DependentUpon>ucWorkout.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\frmAddFood.resx">
       <DependentUpon>frmAddFood.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEditDiary.resx">
+    <EmbeddedResource Include="Forms\frmEditDiary.resx">
       <DependentUpon>frmEditDiary.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEditRecepieIngredients.resx">
+    <EmbeddedResource Include="Forms\frmEditRecepieIngredients.resx">
       <DependentUpon>frmEditRecepieIngredients.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.resx">
+    <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
+    <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNutritionBreakdown.resx">
+    <EmbeddedResource Include="Forms\frmNutritionBreakdown.resx">
       <DependentUpon>frmNutritionBreakdown.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSetup.resx">
+    <EmbeddedResource Include="Forms\frmSetup.resx">
       <DependentUpon>frmSetup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -140,11 +165,23 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ucDaySummary.resx">
+    <EmbeddedResource Include="User Controls\ucDaySummary.resx">
       <DependentUpon>ucDaySummary.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucMealSummary.resx">
+    <EmbeddedResource Include="User Controls\ucExercise.resx">
+      <DependentUpon>ucExercise.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\ucExerciseTotals.resx">
+      <DependentUpon>ucExerciseTotals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\ucMealSummary.resx">
       <DependentUpon>ucMealSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\ucSet.resx">
+      <DependentUpon>ucSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\ucWorkout.resx">
+      <DependentUpon>ucWorkout.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

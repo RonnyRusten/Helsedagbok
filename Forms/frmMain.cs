@@ -16,8 +16,9 @@ namespace Helsedagbok
 
     public partial class frmMain : Form
     {
-        DataTable tblMeals;
-        ucDaySummary daySummary;
+        private DataTable _tblMeals;
+        private ucDaySummary _daySummary;
+        private Workout _workout;
 
         public frmMain()
         {
@@ -28,6 +29,8 @@ namespace Helsedagbok
         
         private void frmMain_Load(object sender, EventArgs e)
         {
+            pnlWorkouts.Width = 415 + System.Windows.Forms.SystemInformation.VerticalScrollBarWidth;
+            _workout=new Workout();
             Functions.GetFormPositionSize (this);
             tabMain.SelectedIndex = (int)Functions.getRegistry("", "SelectedTab");
 
@@ -100,10 +103,10 @@ namespace Helsedagbok
             SqlDataAdapter a = new SqlDataAdapter(sqlString, Global.conn1);
             a.SelectCommand.Parameters.AddWithValue("@date", dtpDate.Value.Date);
             a.SelectCommand.Parameters.AddWithValue("@idUser", Global.idUser);
-            tblMeals=new DataTable();
-            a.Fill(tblMeals);
+            _tblMeals=new DataTable();
+            a.Fill(_tblMeals);
             
-            foreach (DataRow row in tblMeals.Rows )
+            foreach (DataRow row in _tblMeals.Rows )
             {
                 decimal MealCarbs = 0;
                 decimal MealFat = 0;
@@ -114,7 +117,7 @@ namespace Helsedagbok
                 if (Meal.Foods.Length > 0)
                 {
                     int HeaderRowNo = dgvDiary.Rows.Add();
-                    dgvDiary.Rows[HeaderRowNo].DefaultCellStyle = HeadingStyle();
+                    dgvDiary.Rows[HeaderRowNo].DefaultCellStyle = FoodDiaryHeadingStyle();
                     dgvDiary.Rows[HeaderRowNo].Cells[1].Value = MealId;
                     dgvDiary.Rows[HeaderRowNo].Cells[3].Value = row["Name"].ToString();
                     dgvDiary.Rows[HeaderRowNo].Cells[4].Value = Meal.Energy.ToString("# ###.##") + " kCal";
@@ -152,26 +155,26 @@ namespace Helsedagbok
 
         private void AddDaySummary(int mealNo, decimal Carbs, decimal Sugar, decimal Fat, decimal FatSat, decimal FatMono, decimal FatPoly, decimal FatTrans, decimal Protein, decimal Alcohol, decimal Weight, decimal Energy)
         {
-            if (daySummary == null)
+            if (_daySummary == null)
             {
-                daySummary = new ucDaySummary();
-                daySummary.Top = 81;
-                daySummary.Left = dgvDiary.Left + dgvDiary.Width + 2;
-                daySummary.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                tpFoodDiary.Controls.Add(daySummary);
+                _daySummary = new ucDaySummary();
+                _daySummary.Top = 81;
+                _daySummary.Left = dgvDiary.Left + dgvDiary.Width + 2;
+                _daySummary.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                tpFoodDiary.Controls.Add(_daySummary);
             }
-            daySummary.Energy = Energy;
-            daySummary.Carbs = Carbs;
-            daySummary.Sugar = Sugar;
-            daySummary.Fat = Fat;
-            daySummary.FatMono = FatMono;
-            daySummary.FatPoly = FatPoly;
-            daySummary.FatSat = FatSat;
-            daySummary.FatTrans = FatTrans;
-            daySummary.Protein = Protein;
-            daySummary.Alcohol = Alcohol;
-            daySummary.Weight = Weight;
-            daySummary.setValues();
+            _daySummary.Energy = Energy;
+            _daySummary.Carbs = Carbs;
+            _daySummary.Sugar = Sugar;
+            _daySummary.Fat = Fat;
+            _daySummary.FatMono = FatMono;
+            _daySummary.FatPoly = FatPoly;
+            _daySummary.FatSat = FatSat;
+            _daySummary.FatTrans = FatTrans;
+            _daySummary.Protein = Protein;
+            _daySummary.Alcohol = Alcohol;
+            _daySummary.Weight = Weight;
+            _daySummary.setValues();
         }
 
         private void setDiaryGrid()
@@ -183,7 +186,7 @@ namespace Helsedagbok
             dgvDiary.ClearSelection();
         }
 
-        private DataGridViewCellStyle HeadingStyle()
+        private DataGridViewCellStyle FoodDiaryHeadingStyle()
         {
             DataGridViewCellStyle HeadingStyle = new DataGridViewCellStyle(dgvDiary.DefaultCellStyle);
             Font HeadingFont = new Font(DataGridView.DefaultFont, FontStyle.Bold); ;
@@ -209,7 +212,7 @@ namespace Helsedagbok
         private void btnNutritionDetails_Click(object sender, EventArgs e)
         {
             frmNutritionBreakdown frm = new frmNutritionBreakdown();
-            frm.tblMeals = tblMeals;
+            frm.tblMeals = _tblMeals;
             frm.ShowDialog();
         }
 
@@ -365,6 +368,12 @@ namespace Helsedagbok
 #endregion
 
 #region Oppskrifter
+        private void btnAddRecepieIngredient_Click(object sender, EventArgs e)
+        {
+            frmEditRecepieIngredients frm = new frmEditRecepieIngredients();
+            frm.ShowDialog();
+        }
+
         private void getRecepieCategories()
         {
             DataTable tblCategories = new DataTable();
@@ -407,10 +416,48 @@ namespace Helsedagbok
         }
 #endregion
 
-        private void btnAddRecepieIngredient_Click(object sender, EventArgs e)
+
+        private DataGridViewCellStyle WorkoutHeadingStyle()
         {
-            frmEditRecepieIngredients frm = new frmEditRecepieIngredients();
-            frm.ShowDialog();
+            DataGridViewCellStyle HeadingStyle = new DataGridViewCellStyle(dgvDiary.DefaultCellStyle);
+            Font HeadingFont = new Font(DataGridView.DefaultFont, FontStyle.Bold);
+            HeadingStyle.Font = HeadingFont;
+            HeadingStyle.BackColor = Color.SteelBlue;
+            HeadingStyle.ForeColor = Color.White;
+            HeadingStyle.Alignment = DataGridViewContentAlignment.TopLeft;
+            return HeadingStyle;
+        }
+
+        private DataGridViewCellStyle ExerciseHeadingStyle()
+        {
+            DataGridViewCellStyle HeadingStyle = new DataGridViewCellStyle(dgvDiary.DefaultCellStyle);
+            Font HeadingFont = new Font(DataGridView.DefaultFont, FontStyle.Bold);
+            HeadingStyle.Font = HeadingFont;
+            HeadingStyle.BackColor = Color.CadetBlue;
+            HeadingStyle.ForeColor = Color.White;
+            HeadingStyle.Alignment = DataGridViewContentAlignment.TopLeft;
+            return HeadingStyle;
+        }
+
+        private void dtpWorkoutDate_ValueChanged(object sender, EventArgs e)
+        {
+            pnlWorkouts.Controls.Clear();
+            WorkoutHeader[] workouts = Workout.GetWorkouts(dtpWorkoutDate.Value);
+            if (workouts == null)
+                return;
+            int lineNo = 0;
+            foreach (WorkoutHeader workout in workouts)
+            {
+                ucWorkout wo=new ucWorkout();
+                wo.Title = workout.Name;
+                wo.IdWorkout = workout.IdWorkout;
+                wo.Location = new Point(0, 29 * lineNo);
+                pnlWorkouts.Controls.Add(wo);
+                wo.GetExercises();
+                lineNo += 1;
+
+                //TODO: Add workout summary.
+            }
         }
 
 
