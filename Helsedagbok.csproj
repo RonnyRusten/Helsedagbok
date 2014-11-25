@@ -58,6 +58,12 @@
     <Compile Include="Forms\frmAddFood.Designer.cs">
       <DependentUpon>frmAddFood.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmEditExercise.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmEditExercise.Designer.cs">
+      <DependentUpon>frmEditExercise.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmEditRecepieIngredients.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,12 @@
     </Compile>
     <Compile Include="Forms\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmNewExercise.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmNewExercise.Designer.cs">
+      <DependentUpon>frmNewExercise.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmNutritionBreakdown.cs">
       <SubType>Form</SubType>
@@ -96,6 +108,12 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Program.cs" />
+    <Compile Include="Forms\frmWorkout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmWorkout.Designer.cs">
+      <DependentUpon>frmWorkout.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User Controls\ucDaySummary.cs">
       <SubType>UserControl</SubType>
@@ -140,6 +158,9 @@
     <EmbeddedResource Include="Forms\frmEditDiary.resx">
       <DependentUpon>frmEditDiary.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmEditExercise.resx">
+      <DependentUpon>frmEditExercise.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEditRecepieIngredients.resx">
       <DependentUpon>frmEditRecepieIngredients.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,11 +170,17 @@
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmNewExercise.resx">
+      <DependentUpon>frmNewExercise.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmNutritionBreakdown.resx">
       <DependentUpon>frmNutritionBreakdown.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSetup.resx">
       <DependentUpon>frmSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmWorkout.resx">
+      <DependentUpon>frmWorkout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

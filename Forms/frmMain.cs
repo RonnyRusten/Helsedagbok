@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using Helsedagbok.Forms;
 
 
 namespace Helsedagbok
@@ -23,8 +24,7 @@ namespace Helsedagbok
         public frmMain()
         {
             InitializeComponent();
-            frmEditDiary.eFoodUpdated += MealUpdated;
-            
+            frmEditDiary.eFoodUpdated += MealUpdated;   
         }
         
         private void frmMain_Load(object sender, EventArgs e)
@@ -439,7 +439,7 @@ namespace Helsedagbok
             return HeadingStyle;
         }
 
-        private void dtpWorkoutDate_ValueChanged(object sender, EventArgs e)
+        private void GetWorkouts()
         {
             pnlWorkouts.Controls.Clear();
             WorkoutHeader[] workouts = Workout.GetWorkouts(dtpWorkoutDate.Value);
@@ -448,15 +448,30 @@ namespace Helsedagbok
             int lineNo = 0;
             foreach (WorkoutHeader workout in workouts)
             {
-                ucWorkout wo=new ucWorkout();
+                ucWorkout wo = new ucWorkout();
                 wo.Title = workout.Name;
                 wo.IdWorkout = workout.IdWorkout;
-                wo.Location = new Point(0, 29 * lineNo);
+                wo.Location = new Point(0, 29*lineNo);
                 pnlWorkouts.Controls.Add(wo);
                 wo.GetExercises();
                 lineNo += 1;
 
                 //TODO: Add workout summary.
+            }
+        }
+
+        private void dtpWorkoutDate_ValueChanged(object sender, EventArgs e)
+        {
+            GetWorkouts();
+        }
+
+        private void btnAddWorkout_Click(object sender, EventArgs e)
+        {
+            frmWorkout frm = new frmWorkout();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Workout.AddWorkout(frm.WorkoutName,frm.WorkoutLocation,dtpWorkoutDate.Value,frm.Duration);
+                GetWorkouts();
             }
         }
 

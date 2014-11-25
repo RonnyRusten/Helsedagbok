@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Helsedagbok.Forms;
 
 namespace Helsedagbok
 {
@@ -42,6 +43,11 @@ namespace Helsedagbok
         public void GetExercises()
         {
             DataTable tblExercises = Workout.GetExersises(IdWorkout);
+            foreach (ucExercise ex in _exercises)
+            {
+               Controls.Remove(ex); 
+            }
+            _exercises.Clear();
             foreach (DataRow exerciseRow in tblExercises.Rows)
             {
                 ucExercise ex = new ucExercise();
@@ -68,7 +74,13 @@ namespace Helsedagbok
 
         public void DeleteExercise()
         {
-            
+
+        }
+
+        private void tsmiAddExercise_Click(object sender, EventArgs e)
+        {
+            frmEditExercise frm = new frmEditExercise();
+            frm.ShowDialog();
         }
     }
 }

@@ -50,9 +50,6 @@
             this.lblUserName = new System.Windows.Forms.Label();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tpFoodDiary = new System.Windows.Forms.TabPage();
-            this.btnNutritionDetails = new System.Windows.Forms.Button();
-            this.btnAddFood = new System.Windows.Forms.Button();
-            this.btnSettings = new System.Windows.Forms.Button();
             this.tpRecepies = new System.Windows.Forms.TabPage();
             this.btnAddRecepieIngredient = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -77,10 +74,14 @@
             this.dgvRecepies = new System.Windows.Forms.DataGridView();
             this.dgvCategories = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tpWorkout = new System.Windows.Forms.TabPage();
             this.pnlWorkouts = new System.Windows.Forms.Panel();
             this.dtpWorkoutDate = new System.Windows.Forms.DateTimePicker();
+            this.btnNutritionDetails = new System.Windows.Forms.Button();
+            this.btnAddFood = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnAddWorkout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).BeginInit();
             this.cmFood.SuspendLayout();
             this.tabMain.SuspendLayout();
@@ -90,8 +91,8 @@
             this.gbProperties.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecepies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tpWorkout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dtpDate
@@ -242,39 +243,6 @@
             this.tpFoodDiary.Size = new System.Drawing.Size(864, 598);
             this.tpFoodDiary.TabIndex = 0;
             this.tpFoodDiary.Text = "Matdagbok";
-            // 
-            // btnNutritionDetails
-            // 
-            this.btnNutritionDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNutritionDetails.Image = global::Helsedagbok.Properties.Resources.Stats;
-            this.btnNutritionDetails.Location = new System.Drawing.Point(773, 6);
-            this.btnNutritionDetails.Name = "btnNutritionDetails";
-            this.btnNutritionDetails.Size = new System.Drawing.Size(38, 38);
-            this.btnNutritionDetails.TabIndex = 19;
-            this.btnNutritionDetails.UseVisualStyleBackColor = true;
-            this.btnNutritionDetails.Click += new System.EventHandler(this.btnNutritionDetails_Click);
-            // 
-            // btnAddFood
-            // 
-            this.btnAddFood.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddFood.Image = global::Helsedagbok.Properties.Resources.Plus;
-            this.btnAddFood.Location = new System.Drawing.Point(729, 6);
-            this.btnAddFood.Name = "btnAddFood";
-            this.btnAddFood.Size = new System.Drawing.Size(38, 38);
-            this.btnAddFood.TabIndex = 18;
-            this.btnAddFood.UseVisualStyleBackColor = true;
-            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSettings.Image = global::Helsedagbok.Properties.Resources.Tool;
-            this.btnSettings.Location = new System.Drawing.Point(817, 6);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(38, 38);
-            this.btnSettings.TabIndex = 17;
-            this.btnSettings.UseVisualStyleBackColor = true;
-            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // tpRecepies
             // 
@@ -556,17 +524,10 @@
             this.textBox1.Size = new System.Drawing.Size(216, 20);
             this.textBox1.TabIndex = 0;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(464, 32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(394, 145);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // tpWorkout
             // 
             this.tpWorkout.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.tpWorkout.Controls.Add(this.btnAddWorkout);
             this.tpWorkout.Controls.Add(this.pnlWorkouts);
             this.tpWorkout.Controls.Add(this.dtpWorkoutDate);
             this.tpWorkout.Location = new System.Drawing.Point(4, 22);
@@ -580,18 +541,70 @@
             this.pnlWorkouts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlWorkouts.AutoScroll = true;
-            this.pnlWorkouts.Location = new System.Drawing.Point(3, 29);
+            this.pnlWorkouts.Location = new System.Drawing.Point(3, 36);
             this.pnlWorkouts.Name = "pnlWorkouts";
-            this.pnlWorkouts.Size = new System.Drawing.Size(425, 566);
+            this.pnlWorkouts.Size = new System.Drawing.Size(436, 559);
             this.pnlWorkouts.TabIndex = 21;
             // 
             // dtpWorkoutDate
             // 
-            this.dtpWorkoutDate.Location = new System.Drawing.Point(3, 3);
+            this.dtpWorkoutDate.Location = new System.Drawing.Point(3, 10);
             this.dtpWorkoutDate.Name = "dtpWorkoutDate";
             this.dtpWorkoutDate.Size = new System.Drawing.Size(200, 20);
             this.dtpWorkoutDate.TabIndex = 9;
             this.dtpWorkoutDate.ValueChanged += new System.EventHandler(this.dtpWorkoutDate_ValueChanged);
+            // 
+            // btnNutritionDetails
+            // 
+            this.btnNutritionDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNutritionDetails.Image = global::Helsedagbok.Properties.Resources.Stats;
+            this.btnNutritionDetails.Location = new System.Drawing.Point(773, 6);
+            this.btnNutritionDetails.Name = "btnNutritionDetails";
+            this.btnNutritionDetails.Size = new System.Drawing.Size(38, 38);
+            this.btnNutritionDetails.TabIndex = 19;
+            this.btnNutritionDetails.UseVisualStyleBackColor = true;
+            this.btnNutritionDetails.Click += new System.EventHandler(this.btnNutritionDetails_Click);
+            // 
+            // btnAddFood
+            // 
+            this.btnAddFood.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddFood.Image = global::Helsedagbok.Properties.Resources.Plus;
+            this.btnAddFood.Location = new System.Drawing.Point(729, 6);
+            this.btnAddFood.Name = "btnAddFood";
+            this.btnAddFood.Size = new System.Drawing.Size(38, 38);
+            this.btnAddFood.TabIndex = 18;
+            this.btnAddFood.UseVisualStyleBackColor = true;
+            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSettings.Image = global::Helsedagbok.Properties.Resources.Tool;
+            this.btnSettings.Location = new System.Drawing.Point(817, 6);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(38, 38);
+            this.btnSettings.TabIndex = 17;
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(464, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(394, 145);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnAddWorkout
+            // 
+            this.btnAddWorkout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddWorkout.Image = global::Helsedagbok.Properties.Resources.Plus;
+            this.btnAddWorkout.Location = new System.Drawing.Point(209, 12);
+            this.btnAddWorkout.Name = "btnAddWorkout";
+            this.btnAddWorkout.Size = new System.Drawing.Size(38, 20);
+            this.btnAddWorkout.TabIndex = 22;
+            this.btnAddWorkout.UseVisualStyleBackColor = true;
+            this.btnAddWorkout.Click += new System.EventHandler(this.btnAddWorkout_Click);
             // 
             // frmMain
             // 
@@ -617,8 +630,8 @@
             this.gbProperties.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecepies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tpWorkout.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -671,6 +684,7 @@
         private System.Windows.Forms.TabPage tpWorkout;
         private System.Windows.Forms.DateTimePicker dtpWorkoutDate;
         private System.Windows.Forms.Panel pnlWorkouts;
+        private System.Windows.Forms.Button btnAddWorkout;
     }
 }
 

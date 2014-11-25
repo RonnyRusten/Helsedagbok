@@ -66,7 +66,7 @@ namespace Helsedagbok
         {
             date = date.Date;
             DataTable tbl = new DataTable();
-            string sql = "SELECT idWorkout, Name, Duration, Location FROM tblWoWorkouts WHERE Dato = @Date";
+            string sql = "SELECT idWorkout, Name, Duration, Location FROM tblWoWorkouts WHERE Date = @Date";
             SqlDataAdapter adapter = new SqlDataAdapter(sql, Global.conn1);
             adapter.SelectCommand.Parameters.AddWithValue("@Date", date);
             adapter.Fill(tbl);
@@ -86,6 +86,23 @@ namespace Helsedagbok
                 return null;
         }
 
+        public static void AddWorkout(string name, string location, DateTime date, DateTime duration)
+        {
+            date = new DateTime(date.Year, date.Month, date.Day);
+            string sql = "INSERT INTO tblWoWorkouts (Date, Name, Duration, Location) " +
+                         "VALUES (@date, @name, @duration, @location)";
+            SqlCommand cmd = Global.conn1.CreateCommand();
+            cmd.Parameters.AddWithValue("@date", date);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@duration", duration);
+            cmd.Parameters.AddWithValue("@location", location);
+            cmd.CommandText = sql;
+            if (Global.conn1.State!=ConnectionState.Open)
+                Global.conn1.Open();
+            cmd.ExecuteNonQuery();
+            Global.conn1.Close();
+        }
+
         public static DataTable GetExersises(int idWorkout)
         {
             string sql = "SELECT tblWoWorkoutExercises.idWorkoutExercise, tblWoExerciseTypes.Name " +
@@ -93,6 +110,19 @@ namespace Helsedagbok
                          "JOIN tblWoExerciseTypes ON tblWoWorkoutExercises.idExerciseType=tblWoExerciseTypes.idWorkoutExercise " +
                          "WHERE idWorkout=" + idWorkout + ";";
             return Functions.GetTable(sql);
+        }
+
+        public static void AddExercise(string name, int idBodyPart)
+        {
+            string sql = "INSERT INTO tblWoExerciseTypes (Name, idBodyPart) VALUES (@name, @idBodyPart)";
+            SqlCommand cmd = Global.conn1.CreateCommand();
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@idBodyPart", idBodyPart);
+            cmd.CommandText = sql;
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
+            cmd.ExecuteNonQuery();
+            Global.conn1.Close();
         }
 
         public static DataTable GetWorkoutSets(int idExercise)
