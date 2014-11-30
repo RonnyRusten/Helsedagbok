@@ -31,7 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.lblWorkoutName = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiAddExercise = new System.Windows.Forms.ToolStripMenuItem();
+            this.mAddExercise = new System.Windows.Forms.ToolStripMenuItem();
+            this.mRenameWorkout = new System.Windows.Forms.ToolStripMenuItem();
+            this.mDeleteWorkout = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAction = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -47,20 +49,37 @@
             this.lblWorkoutName.Size = new System.Drawing.Size(413, 26);
             this.lblWorkoutName.TabIndex = 0;
             this.lblWorkoutName.Text = "label1";
+            this.lblWorkoutName.UseMnemonic = false;
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiAddExercise});
+            this.mAddExercise,
+            this.mRenameWorkout,
+            this.mDeleteWorkout});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 92);
             // 
-            // tsmiAddExercise
+            // mAddExercise
             // 
-            this.tsmiAddExercise.Name = "tsmiAddExercise";
-            this.tsmiAddExercise.Size = new System.Drawing.Size(152, 22);
-            this.tsmiAddExercise.Text = "Legg til øvelse";
-            this.tsmiAddExercise.Click += new System.EventHandler(this.tsmiAddExercise_Click);
+            this.mAddExercise.Name = "mAddExercise";
+            this.mAddExercise.Size = new System.Drawing.Size(196, 22);
+            this.mAddExercise.Text = "Legg til øvelse";
+            this.mAddExercise.Click += new System.EventHandler(this.mAddExercise_Click);
+            // 
+            // mRenameWorkout
+            // 
+            this.mRenameWorkout.Name = "mRenameWorkout";
+            this.mRenameWorkout.Size = new System.Drawing.Size(196, 22);
+            this.mRenameWorkout.Text = "Nytt navn på treningen";
+            this.mRenameWorkout.Click += new System.EventHandler(this.mRenameWorkout_Click);
+            // 
+            // mDeleteWorkout
+            // 
+            this.mDeleteWorkout.Name = "mDeleteWorkout";
+            this.mDeleteWorkout.Size = new System.Drawing.Size(196, 22);
+            this.mDeleteWorkout.Text = "Slett treningen";
+            this.mDeleteWorkout.Click += new System.EventHandler(this.mDeleteWorkout_Click);
             // 
             // btnAction
             // 
@@ -90,7 +109,9 @@
 
         private System.Windows.Forms.Label lblWorkoutName;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiAddExercise;
+        private System.Windows.Forms.ToolStripMenuItem mAddExercise;
         private System.Windows.Forms.Button btnAction;
+        private System.Windows.Forms.ToolStripMenuItem mRenameWorkout;
+        private System.Windows.Forms.ToolStripMenuItem mDeleteWorkout;
     }
 }

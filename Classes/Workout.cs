@@ -90,7 +90,7 @@ namespace Helsedagbok
         {
             date = new DateTime(date.Year, date.Month, date.Day);
             string sql = "INSERT INTO tblWoWorkouts (Date, Name, Duration, Location) " +
-                         "VALUES (@date, @name, @duration, @location)";
+                         "VALUES (@date, @name, @duration, @location);";
             SqlCommand cmd = Global.conn1.CreateCommand();
             cmd.Parameters.AddWithValue("@date", date);
             cmd.Parameters.AddWithValue("@name", name);
@@ -103,12 +103,35 @@ namespace Helsedagbok
             Global.conn1.Close();
         }
 
+        public static void EditWorkout(string name, string location, DateTime date, DateTime duration, int idWorkout)
+        {
+            date = new DateTime(date.Year, date.Month, date.Day);
+            string sql = "UPDATE tblWoWorkouts SET Date = @date, Name = @Name, Duration = @Duration, Location = @Location WHERE idWorkout = @idWorkout;";
+            SqlCommand cmd = Global.conn1.CreateCommand();
+            cmd.Parameters.AddWithValue("@date", date);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@duration", duration);
+            cmd.Parameters.AddWithValue("@location", location);
+            cmd.Parameters.AddWithValue("@idWorkout", idWorkout);
+            cmd.CommandText = sql;
+            if (Global.conn1.State!=ConnectionState.Open)
+                Global.conn1.Open();
+            cmd.ExecuteNonQuery();
+            Global.conn1.Close();
+        }
+
+        public static void DeleteWorkout(List<ucExercise> exercises)
+        {
+            
+        }
+
         public static DataTable GetExersises(int idWorkout)
         {
-            string sql = "SELECT tblWoWorkoutExercises.idWorkoutExercise, tblWoExerciseTypes.Name " +
+            string sql = "SELECT tblWoWorkoutExercises.idWorkoutExercise, tblWoExerciseTypes.Name, tblWoWorkoutExercises.idExerciseType,tblWoWorkoutExercises.SortOrder " +
                          "FROM tblWoWorkoutExercises " +
-                         "JOIN tblWoExerciseTypes ON tblWoWorkoutExercises.idExerciseType=tblWoExerciseTypes.idWorkoutExercise " +
-                         "WHERE idWorkout=" + idWorkout + ";";
+                         "JOIN tblWoExerciseTypes ON tblWoWorkoutExercises.idExerciseType = tblWoExerciseTypes.idExerciseType " +
+                         "WHERE idWorkout = " + idWorkout +
+                         "ORDER BY tblWoWorkoutExercises.SortOrder;";
             return Functions.GetTable(sql);
         }
 
@@ -129,14 +152,43 @@ namespace Helsedagbok
         {
             DataTable tbl = new DataTable();
             string sql = "SELECT tblWoSets.idWorkoutSet, tblWoSets.Reps, tblWoSets.Weight " +
-                         "FROM tblWoExerciseSets " +
-                         "INNER JOIN tblWoSets ON tblWoExerciseSets.idSet = tblWoSets.idWorkoutSet " +
-                         "INNER JOIN tblWoWorkoutExercises ON tblWoExerciseSets.idExercise = tblWoWorkoutExercises.idWorkoutExercise " +
+                         "FROM tblWoSets " +
+                         "INNER JOIN tblWoWorkoutExercises ON tblWoWorkoutExercises.idWorkoutExercise = tblWoSets.idWorkoutExercise " +
                          "WHERE tblWoSets.idWorkoutExercise = " + idExercise + " " +
                          "ORDER BY idWorkoutSet";
             SqlDataAdapter adapter = new SqlDataAdapter(sql, Global.conn1);
             adapter.Fill(tbl);
             return tbl;
+        }
+
+        public static void AddSet(int idWorkoutExercise, int idExerciseType, int reps, decimal weight, string notes)
+        {
+            string sql = "INSERT INTO tblWoSets (idWorkoutExercise, idExerciseType, Reps, Weight, Notes) " +
+                         "VALUES(@idWorkoutExercise, @idExerciseType, @reps, @weight, @notes)";
+            SqlCommand cmd = Global.conn1.CreateCommand();
+            cmd.Parameters.AddWithValue("@idWorkoutExercise", idWorkoutExercise);
+            cmd.Parameters.AddWithValue("@idExerciseType", idExerciseType);
+            cmd.Parameters.AddWithValue("@reps", reps);
+            cmd.Parameters.AddWithValue("@weight", weight);
+            cmd.Parameters.AddWithValue("@notes", notes);
+            cmd.CommandText = sql;
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
+            cmd.ExecuteNonQuery();
+            Global.conn1.Close();
+        }
+
+        public static void AddWorkoutExercise(int idWorkout, int idExerciseType)
+        {
+            string sql = "INSERT INTO tblWoWorkoutExercises (idWorkout, idExerciseType) VALUES (@idWorkout, @idExerciseType);";
+            SqlCommand cmd = Global.conn1.CreateCommand();
+            cmd.Parameters.AddWithValue("@idWorkout", idWorkout);
+            cmd.Parameters.AddWithValue("@idExerciseType", idExerciseType);
+            cmd.CommandText = sql;
+            if (Global.conn1.State != ConnectionState.Open)
+                Global.conn1.Open();
+            cmd.ExecuteNonQuery();
+            Global.conn1.Close();
         }
     }
 }

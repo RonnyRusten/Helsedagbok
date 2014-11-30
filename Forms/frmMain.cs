@@ -24,7 +24,8 @@ namespace Helsedagbok
         public frmMain()
         {
             InitializeComponent();
-            frmEditDiary.eFoodUpdated += MealUpdated;   
+            frmEditDiary.eFoodUpdated += MealUpdated;
+            ucWorkout.WorkoutDeletedEvent += GetWorkouts;
         }
         
         private void frmMain_Load(object sender, EventArgs e)
@@ -439,7 +440,7 @@ namespace Helsedagbok
             return HeadingStyle;
         }
 
-        private void GetWorkouts()
+        private void GetWorkouts(object sender, EventArgs e)
         {
             pnlWorkouts.Controls.Clear();
             WorkoutHeader[] workouts = Workout.GetWorkouts(dtpWorkoutDate.Value);
@@ -451,6 +452,7 @@ namespace Helsedagbok
                 ucWorkout wo = new ucWorkout();
                 wo.Title = workout.Name;
                 wo.IdWorkout = workout.IdWorkout;
+                wo.DateTime = dtpWorkoutDate.Value;
                 wo.Location = new Point(0, 29*lineNo);
                 pnlWorkouts.Controls.Add(wo);
                 wo.GetExercises();
@@ -462,7 +464,7 @@ namespace Helsedagbok
 
         private void dtpWorkoutDate_ValueChanged(object sender, EventArgs e)
         {
-            GetWorkouts();
+            GetWorkouts(null, null);
         }
 
         private void btnAddWorkout_Click(object sender, EventArgs e)
@@ -471,7 +473,7 @@ namespace Helsedagbok
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 Workout.AddWorkout(frm.WorkoutName,frm.WorkoutLocation,dtpWorkoutDate.Value,frm.Duration);
-                GetWorkouts();
+                GetWorkouts(null, null);
             }
         }
 

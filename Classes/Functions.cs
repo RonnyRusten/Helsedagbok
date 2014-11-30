@@ -99,5 +99,43 @@ namespace Helsedagbok
             adapter.Fill(tbl);
             return tbl;
         }
+
+        public static bool RunSql(string sql)
+        {
+            ConnectionState tempState = Global.conn1.State;
+            try
+            {
+                SqlCommand cmd = Global.conn1.CreateCommand();
+                cmd.CommandText = sql;
+                if (Global.conn1.State != ConnectionState.Open)
+                    Global.conn1.Open();
+                cmd.ExecuteNonQuery();
+                if (tempState == ConnectionState.Closed)
+                    Global.conn1.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public static bool RunSqlCommand(SqlCommand cmd)
+        {
+            ConnectionState tempState = Global.conn1.State;
+            try
+            {
+                if (Global.conn1.State != ConnectionState.Open)
+                    Global.conn1.Open();
+                cmd.ExecuteNonQuery();
+                if (tempState == ConnectionState.Closed)
+                    Global.conn1.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace Helsedagbok.Forms
         private DataTable _tblExercises;
         private DataTable _tblExercisesFiltered;
         private int _idWorkout;
+        private int _idExerciseType;
 
         public frmEditExercise()
         {
@@ -46,7 +47,7 @@ namespace Helsedagbok.Forms
 
         private void GetExercises()
         {
-            string sql = "SELECT idWorkoutExercise, Name FROM tblWoExerciseTypes ORDER BY Name";
+            string sql = "SELECT idExerciseType, Name FROM tblWoExerciseTypes ORDER BY Name";
             _tblExercises = Functions.GetTable(sql);
             dgvExercises.DataSource = _tblExercises;
             dgvExercises.Columns[0].Visible = false;
@@ -79,6 +80,18 @@ namespace Helsedagbok.Forms
             {
                 GetExercises();
             }
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            Workout.AddWorkoutExercise(IdWorkout, _idExerciseType);
+            DialogResult = DialogResult.OK;
+        }
+
+        private void dgvExercises_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvExercises.SelectedRows.Count > 0)
+                _idExerciseType = (int)dgvExercises.SelectedRows[0].Cells[0].Value;
         }
     }
 }
