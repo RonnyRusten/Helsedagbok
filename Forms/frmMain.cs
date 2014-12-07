@@ -9,36 +9,35 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using Helsedagbok.Classes;
 using Helsedagbok.Forms;
-
+using Helsedagbok.User_Controls;
 
 namespace Helsedagbok
 {
-
     public partial class frmMain : Form
     {
         private DataTable _tblMeals;
         private ucDaySummary _daySummary;
-        private Workout _workout;
+        private int _idRecepie;
 
         public frmMain()
         {
             InitializeComponent();
             frmEditDiary.eFoodUpdated += MealUpdated;
             ucWorkout.WorkoutDeletedEvent += GetWorkouts;
+            FrmRecepieSearch.RecepieSelectedEvent += RecepieSelected;
         }
         
         private void frmMain_Load(object sender, EventArgs e)
         {
+            lblRecepieName.Text = "";
             pnlWorkouts.Width = 415 + System.Windows.Forms.SystemInformation.VerticalScrollBarWidth;
-            _workout=new Workout();
             Functions.GetFormPositionSize (this);
             tabMain.SelectedIndex = (int)Functions.getRegistry("", "SelectedTab");
 
             getMeals();
             lblUserName.Text = getUser(Global.idUser);
-            getRecepieCategories();
-            getRecepies();
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -64,8 +63,6 @@ namespace Helsedagbok
             Global.conn1.Close();
             return UserName;
         }
-
-
 
 #region Næringsinnhold
 
@@ -371,53 +368,77 @@ namespace Helsedagbok
 #region Oppskrifter
         private void btnAddRecepieIngredient_Click(object sender, EventArgs e)
         {
-            frmEditRecepieIngredients frm = new frmEditRecepieIngredients();
-            frm.ShowDialog();
-        }
-
-        private void getRecepieCategories()
-        {
-            DataTable tblCategories = new DataTable();
-            string sqlSelect;
-
-            sqlSelect = "SELECT idCategory,CategoryName AS Kategori FROM tblCategories ORDER BY CategoryName";
-            SqlDataAdapter adapter = new SqlDataAdapter(sqlSelect, Global.conn1);
-            adapter.Fill(tblCategories);
-            dgvCategories.DataSource = tblCategories;
-            dgvCategories.Columns[0].Visible = false;
-            dgvCategories.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //dgvCategories.se
-        }
-
-        private void getRecepies()
-        {
-            DataTable tblRecepies = new DataTable();
-            string sqlSelect;
-
-            sqlSelect = "SELECT idRecepie, Name AS Oppskrift FROM tblRecepies";
-            SqlDataAdapter adapter = new SqlDataAdapter(sqlSelect, Global.conn1);
-            adapter.Fill(tblRecepies);
-            dgvRecepies.DataSource = tblRecepies;
-            dgvRecepies.Columns[0].Visible = false;
-            dgvRecepies.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-        }
-
-        private void getReceiptProperties()
-        {
-            string sqlSelect = "SELECT tblCategories.CategoryName " +
-                                ", tblRecepies.Time " +
-                                ", tblRecepies.Porsjoner " +
-                                ", tblDifficulties.Difficulty " +
-                                "FROM tblRecepies " +
-                                "JOIN tblRecepie_categories ON tblRecepie_categories.id_recepie = tblRecepies.idRecepie " +
-                                "JOIN tblCategories ON tblCategories.idCategory = tblRecepie_categories.id_Category " +
-                                "WHERE tblRecepies.idRecepie = @idRecepie";
             
-
         }
-#endregion
 
+        private void btnRecepieSearch_Click(object sender, EventArgs e)
+        {
+            FrmRecepieSearch frm = new FrmRecepieSearch();
+            frm.TopMost = true;
+            frm.Show();
+        }
+ 
+        private void btnAddRecepie_Click(object sender, EventArgs e)
+        {
+            FrmRecepies frm = new FrmRecepies();
+            frm.Title = "Ny oppskrift.";
+            frm.EditMode = false;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                _idRecepie = frm.IdRecepie;
+                lblRecepieName.Text = frm.RecepieName;
+                GetRecepieProperties(_idRecepie);
+            }
+            
+        }
+       
+        private void RecepieSelected(object sender, RecepieSelectedEventArgs e)
+        {
+            pnlRecepieIngredients.Controls.Clear();
+            _idRecepie = e.RecepieId;
+            lblRecepieName.Text = e.RecepieName;
+            GetRecepieProperties(e.RecepieId);
+            GetRecepieHeadings();
+        }
 
+        private void GetRecepieProperties(int recepieId)
+        {
+            lblRecepieCategories.Text = "";
+            RecepieProperties properties = Recepies.GetRecepieProperties(recepieId);
+            foreach (string cat in properties.Categories)
+            {
+                if (lblRecepieCategories.Text != "")
+                    lblRecepieCategories.Text += ", ";
+                lblRecepieCategories.Text += cat;
+            }
+            lblRecepieTime.Text = properties.Time;
+            lblRecepieDifficulty.Text = properties.Difficulty;
+            lblRecepieServings.Text = properties.Servings.ToString();
+        }
+
+        private void GetRecepieHeadings()
+        {
+            Point recepieHeadingLocation = new Point(0, 0);
+            string sql = "SELECT idRecepieHeading, Name, SortOrder " +
+                         "FROM tblRecepieHeadings " +
+                         "WHERE idRecepie=" + _idRecepie +
+                         " ORDER BY SortOrder";
+            DataTable tbl = Functions.GetTable(sql);
+            foreach (DataRow row in tbl.Rows)
+            {
+                UcRecepiePart heading = new UcRecepiePart();
+                heading.RecepiePartName = row["Name"].ToString();
+                heading.IdRecepieHeading = (int)row["idRecepieHeading"];
+                heading.Location = recepieHeadingLocation;
+                heading.GetRecepieIngredients();
+                pnlRecepieIngredients.Controls.Add(heading);
+                recepieHeadingLocation.Y += heading.Height;
+            }
+        }
+
+        #endregion
+
+        #region Trening
         private DataGridViewCellStyle WorkoutHeadingStyle()
         {
             DataGridViewCellStyle HeadingStyle = new DataGridViewCellStyle(dgvDiary.DefaultCellStyle);
@@ -476,7 +497,7 @@ namespace Helsedagbok
                 GetWorkouts(null, null);
             }
         }
-
+        #endregion
 
     }
 }

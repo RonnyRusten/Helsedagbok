@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.dgvDiary = new System.Windows.Forms.DataGridView();
@@ -50,19 +47,26 @@
             this.lblUserName = new System.Windows.Forms.Label();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tpFoodDiary = new System.Windows.Forms.TabPage();
+            this.btnNutritionDetails = new System.Windows.Forms.Button();
+            this.ilBig = new System.Windows.Forms.ImageList(this.components);
+            this.btnAddFood = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.tpRecepies = new System.Windows.Forms.TabPage();
+            this.pnlRecepieIngredients = new System.Windows.Forms.Panel();
+            this.btnAddRecepie = new System.Windows.Forms.Button();
+            this.lblRecepieName = new System.Windows.Forms.Label();
+            this.btnRecepieSearch = new System.Windows.Forms.Button();
             this.btnAddRecepieIngredient = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.gbProperties = new System.Windows.Forms.GroupBox();
-            this.lblFat = new System.Windows.Forms.Label();
-            this.lblCarbohydrates = new System.Windows.Forms.Label();
-            this.lblProtein = new System.Windows.Forms.Label();
-            this.lblCalories = new System.Windows.Forms.Label();
-            this.lblServings = new System.Windows.Forms.Label();
-            this.lblTime = new System.Windows.Forms.Label();
-            this.lblCategories = new System.Windows.Forms.Label();
-            this.lblDifficulty = new System.Windows.Forms.Label();
+            this.lblReceiptFat = new System.Windows.Forms.Label();
+            this.lblReceiptCarbohydrates = new System.Windows.Forms.Label();
+            this.lblReceiptProtein = new System.Windows.Forms.Label();
+            this.lblReceiptCalories = new System.Windows.Forms.Label();
+            this.lblRecepieServings = new System.Windows.Forms.Label();
+            this.lblRecepieTime = new System.Windows.Forms.Label();
+            this.lblRecepieCategories = new System.Windows.Forms.Label();
+            this.lblRecepieDifficulty = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -71,28 +75,21 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvRecepies = new System.Windows.Forms.DataGridView();
-            this.dgvCategories = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tpWorkout = new System.Windows.Forms.TabPage();
+            this.btnAddWorkout = new System.Windows.Forms.Button();
+            this.il16 = new System.Windows.Forms.ImageList(this.components);
             this.pnlWorkouts = new System.Windows.Forms.Panel();
             this.dtpWorkoutDate = new System.Windows.Forms.DateTimePicker();
-            this.btnNutritionDetails = new System.Windows.Forms.Button();
-            this.btnAddFood = new System.Windows.Forms.Button();
-            this.btnSettings = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnAddWorkout = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).BeginInit();
             this.cmFood.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tpFoodDiary.SuspendLayout();
             this.tpRecepies.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.gbProperties.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRecepies)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).BeginInit();
-            this.tpWorkout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tpWorkout.SuspendLayout();
             this.SuspendLayout();
             // 
             // dtpDate
@@ -244,15 +241,60 @@
             this.tpFoodDiary.TabIndex = 0;
             this.tpFoodDiary.Text = "Matdagbok";
             // 
+            // btnNutritionDetails
+            // 
+            this.btnNutritionDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNutritionDetails.ImageKey = "Stats.ico";
+            this.btnNutritionDetails.ImageList = this.ilBig;
+            this.btnNutritionDetails.Location = new System.Drawing.Point(773, 6);
+            this.btnNutritionDetails.Name = "btnNutritionDetails";
+            this.btnNutritionDetails.Size = new System.Drawing.Size(38, 38);
+            this.btnNutritionDetails.TabIndex = 19;
+            this.btnNutritionDetails.UseVisualStyleBackColor = true;
+            this.btnNutritionDetails.Click += new System.EventHandler(this.btnNutritionDetails_Click);
+            // 
+            // ilBig
+            // 
+            this.ilBig.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilBig.ImageStream")));
+            this.ilBig.TransparentColor = System.Drawing.Color.Transparent;
+            this.ilBig.Images.SetKeyName(0, "Plus.ico");
+            this.ilBig.Images.SetKeyName(1, "Search.ico");
+            this.ilBig.Images.SetKeyName(2, "Stats.ico");
+            this.ilBig.Images.SetKeyName(3, "Tool.ico");
+            // 
+            // btnAddFood
+            // 
+            this.btnAddFood.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddFood.ImageKey = "Plus.ico";
+            this.btnAddFood.ImageList = this.ilBig;
+            this.btnAddFood.Location = new System.Drawing.Point(729, 6);
+            this.btnAddFood.Name = "btnAddFood";
+            this.btnAddFood.Size = new System.Drawing.Size(38, 38);
+            this.btnAddFood.TabIndex = 18;
+            this.btnAddFood.UseVisualStyleBackColor = true;
+            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSettings.ImageKey = "Tool.ico";
+            this.btnSettings.ImageList = this.ilBig;
+            this.btnSettings.Location = new System.Drawing.Point(817, 6);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(38, 38);
+            this.btnSettings.TabIndex = 17;
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
             // tpRecepies
             // 
+            this.tpRecepies.Controls.Add(this.pnlRecepieIngredients);
+            this.tpRecepies.Controls.Add(this.btnAddRecepie);
+            this.tpRecepies.Controls.Add(this.lblRecepieName);
+            this.tpRecepies.Controls.Add(this.btnRecepieSearch);
             this.tpRecepies.Controls.Add(this.btnAddRecepieIngredient);
             this.tpRecepies.Controls.Add(this.richTextBox1);
-            this.tpRecepies.Controls.Add(this.dataGridView1);
             this.tpRecepies.Controls.Add(this.gbProperties);
-            this.tpRecepies.Controls.Add(this.dgvRecepies);
-            this.tpRecepies.Controls.Add(this.dgvCategories);
-            this.tpRecepies.Controls.Add(this.textBox1);
             this.tpRecepies.Controls.Add(this.pictureBox1);
             this.tpRecepies.Location = new System.Drawing.Point(4, 22);
             this.tpRecepies.Name = "tpRecepies";
@@ -262,58 +304,79 @@
             this.tpRecepies.Text = "Oppskrifter";
             this.tpRecepies.UseVisualStyleBackColor = true;
             // 
+            // pnlRecepieIngredients
+            // 
+            this.pnlRecepieIngredients.Location = new System.Drawing.Point(6, 201);
+            this.pnlRecepieIngredients.Name = "pnlRecepieIngredients";
+            this.pnlRecepieIngredients.Size = new System.Drawing.Size(333, 362);
+            this.pnlRecepieIngredients.TabIndex = 22;
+            // 
+            // btnAddRecepie
+            // 
+            this.btnAddRecepie.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddRecepie.ImageKey = "Plus.ico";
+            this.btnAddRecepie.ImageList = this.ilBig;
+            this.btnAddRecepie.Location = new System.Drawing.Point(376, 6);
+            this.btnAddRecepie.Name = "btnAddRecepie";
+            this.btnAddRecepie.Size = new System.Drawing.Size(38, 38);
+            this.btnAddRecepie.TabIndex = 21;
+            this.toolTip1.SetToolTip(this.btnAddRecepie, "Legg til oppskrift");
+            this.btnAddRecepie.UseVisualStyleBackColor = true;
+            this.btnAddRecepie.Click += new System.EventHandler(this.btnAddRecepie_Click);
+            // 
+            // lblRecepieName
+            // 
+            this.lblRecepieName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRecepieName.Location = new System.Drawing.Point(6, 6);
+            this.lblRecepieName.Name = "lblRecepieName";
+            this.lblRecepieName.Size = new System.Drawing.Size(364, 29);
+            this.lblRecepieName.TabIndex = 20;
+            this.lblRecepieName.Text = "lblRecepieName";
+            // 
+            // btnRecepieSearch
+            // 
+            this.btnRecepieSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRecepieSearch.ImageKey = "Search.ico";
+            this.btnRecepieSearch.ImageList = this.ilBig;
+            this.btnRecepieSearch.Location = new System.Drawing.Point(420, 6);
+            this.btnRecepieSearch.Name = "btnRecepieSearch";
+            this.btnRecepieSearch.Size = new System.Drawing.Size(38, 38);
+            this.btnRecepieSearch.TabIndex = 19;
+            this.toolTip1.SetToolTip(this.btnRecepieSearch, "Søk etter oppskrifter");
+            this.btnRecepieSearch.UseVisualStyleBackColor = true;
+            this.btnRecepieSearch.Click += new System.EventHandler(this.btnRecepieSearch_Click);
+            // 
             // btnAddRecepieIngredient
             // 
             this.btnAddRecepieIngredient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddRecepieIngredient.Location = new System.Drawing.Point(383, 553);
+            this.btnAddRecepieIngredient.Location = new System.Drawing.Point(235, 569);
             this.btnAddRecepieIngredient.Name = "btnAddRecepieIngredient";
-            this.btnAddRecepieIngredient.Size = new System.Drawing.Size(75, 23);
+            this.btnAddRecepieIngredient.Size = new System.Drawing.Size(104, 23);
             this.btnAddRecepieIngredient.TabIndex = 7;
-            this.btnAddRecepieIngredient.Text = "Legg til";
+            this.btnAddRecepieIngredient.Text = "Legg til ingrediens";
             this.btnAddRecepieIngredient.UseVisualStyleBackColor = true;
-            this.btnAddRecepieIngredient.Click += new System.EventHandler(this.btnAddRecepieIngredient_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(464, 183);
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.Location = new System.Drawing.Point(345, 201);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(394, 393);
+            this.richTextBox1.Size = new System.Drawing.Size(513, 391);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "Fremgangsmåte:";
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(228, 183);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(230, 364);
-            this.dataGridView1.TabIndex = 4;
-            // 
             // gbProperties
             // 
-            this.gbProperties.Controls.Add(this.lblFat);
-            this.gbProperties.Controls.Add(this.lblCarbohydrates);
-            this.gbProperties.Controls.Add(this.lblProtein);
-            this.gbProperties.Controls.Add(this.lblCalories);
-            this.gbProperties.Controls.Add(this.lblServings);
-            this.gbProperties.Controls.Add(this.lblTime);
-            this.gbProperties.Controls.Add(this.lblCategories);
-            this.gbProperties.Controls.Add(this.lblDifficulty);
+            this.gbProperties.Controls.Add(this.lblReceiptFat);
+            this.gbProperties.Controls.Add(this.lblReceiptCarbohydrates);
+            this.gbProperties.Controls.Add(this.lblReceiptProtein);
+            this.gbProperties.Controls.Add(this.lblReceiptCalories);
+            this.gbProperties.Controls.Add(this.lblRecepieServings);
+            this.gbProperties.Controls.Add(this.lblRecepieTime);
+            this.gbProperties.Controls.Add(this.lblRecepieCategories);
+            this.gbProperties.Controls.Add(this.lblRecepieDifficulty);
             this.gbProperties.Controls.Add(this.label8);
             this.gbProperties.Controls.Add(this.label7);
             this.gbProperties.Controls.Add(this.label6);
@@ -322,84 +385,76 @@
             this.gbProperties.Controls.Add(this.label3);
             this.gbProperties.Controls.Add(this.label2);
             this.gbProperties.Controls.Add(this.label1);
-            this.gbProperties.Location = new System.Drawing.Point(228, 32);
+            this.gbProperties.Location = new System.Drawing.Point(6, 38);
             this.gbProperties.Name = "gbProperties";
-            this.gbProperties.Size = new System.Drawing.Size(230, 145);
+            this.gbProperties.Size = new System.Drawing.Size(452, 157);
             this.gbProperties.TabIndex = 3;
             this.gbProperties.TabStop = false;
             this.gbProperties.Text = "Informasjon";
             // 
-            // lblFat
+            // lblReceiptFat
             // 
-            this.lblFat.AutoSize = true;
-            this.lblFat.Location = new System.Drawing.Point(109, 129);
-            this.lblFat.Name = "lblFat";
-            this.lblFat.Size = new System.Drawing.Size(32, 13);
-            this.lblFat.TabIndex = 34;
-            this.lblFat.Text = "lblFat";
+            this.lblReceiptFat.AutoSize = true;
+            this.lblReceiptFat.Location = new System.Drawing.Point(109, 129);
+            this.lblReceiptFat.Name = "lblReceiptFat";
+            this.lblReceiptFat.Size = new System.Drawing.Size(0, 13);
+            this.lblReceiptFat.TabIndex = 34;
             // 
-            // lblCarbohydrates
+            // lblReceiptCarbohydrates
             // 
-            this.lblCarbohydrates.AutoSize = true;
-            this.lblCarbohydrates.Location = new System.Drawing.Point(109, 115);
-            this.lblCarbohydrates.Name = "lblCarbohydrates";
-            this.lblCarbohydrates.Size = new System.Drawing.Size(85, 13);
-            this.lblCarbohydrates.TabIndex = 33;
-            this.lblCarbohydrates.Text = "lblCarbohydrates";
+            this.lblReceiptCarbohydrates.AutoSize = true;
+            this.lblReceiptCarbohydrates.Location = new System.Drawing.Point(109, 115);
+            this.lblReceiptCarbohydrates.Name = "lblReceiptCarbohydrates";
+            this.lblReceiptCarbohydrates.Size = new System.Drawing.Size(0, 13);
+            this.lblReceiptCarbohydrates.TabIndex = 33;
             // 
-            // lblProtein
+            // lblReceiptProtein
             // 
-            this.lblProtein.AutoSize = true;
-            this.lblProtein.Location = new System.Drawing.Point(109, 102);
-            this.lblProtein.Name = "lblProtein";
-            this.lblProtein.Size = new System.Drawing.Size(50, 13);
-            this.lblProtein.TabIndex = 32;
-            this.lblProtein.Text = "lblProtein";
+            this.lblReceiptProtein.AutoSize = true;
+            this.lblReceiptProtein.Location = new System.Drawing.Point(109, 102);
+            this.lblReceiptProtein.Name = "lblReceiptProtein";
+            this.lblReceiptProtein.Size = new System.Drawing.Size(0, 13);
+            this.lblReceiptProtein.TabIndex = 32;
             // 
-            // lblCalories
+            // lblReceiptCalories
             // 
-            this.lblCalories.AutoSize = true;
-            this.lblCalories.Location = new System.Drawing.Point(109, 89);
-            this.lblCalories.Name = "lblCalories";
-            this.lblCalories.Size = new System.Drawing.Size(54, 13);
-            this.lblCalories.TabIndex = 31;
-            this.lblCalories.Text = "lblCalories";
+            this.lblReceiptCalories.AutoSize = true;
+            this.lblReceiptCalories.Location = new System.Drawing.Point(109, 89);
+            this.lblReceiptCalories.Name = "lblReceiptCalories";
+            this.lblReceiptCalories.Size = new System.Drawing.Size(0, 13);
+            this.lblReceiptCalories.TabIndex = 31;
             // 
-            // lblServings
+            // lblRecepieServings
             // 
-            this.lblServings.AutoSize = true;
-            this.lblServings.Location = new System.Drawing.Point(109, 55);
-            this.lblServings.Name = "lblServings";
-            this.lblServings.Size = new System.Drawing.Size(58, 13);
-            this.lblServings.TabIndex = 30;
-            this.lblServings.Text = "lblServings";
+            this.lblRecepieServings.AutoSize = true;
+            this.lblRecepieServings.Location = new System.Drawing.Point(109, 55);
+            this.lblRecepieServings.Name = "lblRecepieServings";
+            this.lblRecepieServings.Size = new System.Drawing.Size(0, 13);
+            this.lblRecepieServings.TabIndex = 30;
             // 
-            // lblTime
+            // lblRecepieTime
             // 
-            this.lblTime.AutoSize = true;
-            this.lblTime.Location = new System.Drawing.Point(109, 29);
-            this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(40, 13);
-            this.lblTime.TabIndex = 29;
-            this.lblTime.Text = "lblTime";
+            this.lblRecepieTime.AutoSize = true;
+            this.lblRecepieTime.Location = new System.Drawing.Point(109, 29);
+            this.lblRecepieTime.Name = "lblRecepieTime";
+            this.lblRecepieTime.Size = new System.Drawing.Size(0, 13);
+            this.lblRecepieTime.TabIndex = 29;
             // 
-            // lblCategories
+            // lblRecepieCategories
             // 
-            this.lblCategories.AutoSize = true;
-            this.lblCategories.Location = new System.Drawing.Point(109, 16);
-            this.lblCategories.Name = "lblCategories";
-            this.lblCategories.Size = new System.Drawing.Size(67, 13);
-            this.lblCategories.TabIndex = 28;
-            this.lblCategories.Text = "lblCategories";
+            this.lblRecepieCategories.AutoSize = true;
+            this.lblRecepieCategories.Location = new System.Drawing.Point(109, 16);
+            this.lblRecepieCategories.Name = "lblRecepieCategories";
+            this.lblRecepieCategories.Size = new System.Drawing.Size(0, 13);
+            this.lblRecepieCategories.TabIndex = 28;
             // 
-            // lblDifficulty
+            // lblRecepieDifficulty
             // 
-            this.lblDifficulty.AutoSize = true;
-            this.lblDifficulty.Location = new System.Drawing.Point(109, 42);
-            this.lblDifficulty.Name = "lblDifficulty";
-            this.lblDifficulty.Size = new System.Drawing.Size(57, 13);
-            this.lblDifficulty.TabIndex = 27;
-            this.lblDifficulty.Text = "lblDifficulty";
+            this.lblRecepieDifficulty.AutoSize = true;
+            this.lblRecepieDifficulty.Location = new System.Drawing.Point(109, 42);
+            this.lblRecepieDifficulty.Name = "lblRecepieDifficulty";
+            this.lblRecepieDifficulty.Size = new System.Drawing.Size(0, 13);
+            this.lblRecepieDifficulty.TabIndex = 27;
             // 
             // label8
             // 
@@ -473,56 +528,14 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "Kategori(er):";
             // 
-            // dgvRecepies
+            // pictureBox1
             // 
-            this.dgvRecepies.AllowUserToAddRows = false;
-            this.dgvRecepies.AllowUserToDeleteRows = false;
-            this.dgvRecepies.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRecepies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvRecepies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRecepies.Location = new System.Drawing.Point(6, 183);
-            this.dgvRecepies.MultiSelect = false;
-            this.dgvRecepies.Name = "dgvRecepies";
-            this.dgvRecepies.ReadOnly = true;
-            this.dgvRecepies.RowHeadersVisible = false;
-            this.dgvRecepies.Size = new System.Drawing.Size(216, 393);
-            this.dgvRecepies.TabIndex = 2;
-            // 
-            // dgvCategories
-            // 
-            this.dgvCategories.AllowUserToAddRows = false;
-            this.dgvCategories.AllowUserToDeleteRows = false;
-            this.dgvCategories.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCategories.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvCategories.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCategories.Location = new System.Drawing.Point(6, 32);
-            this.dgvCategories.Name = "dgvCategories";
-            this.dgvCategories.ReadOnly = true;
-            this.dgvCategories.RowHeadersVisible = false;
-            this.dgvCategories.Size = new System.Drawing.Size(216, 145);
-            this.dgvCategories.TabIndex = 1;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(6, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(216, 20);
-            this.textBox1.TabIndex = 0;
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Location = new System.Drawing.Point(464, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(394, 186);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // tpWorkout
             // 
@@ -535,6 +548,24 @@
             this.tpWorkout.Size = new System.Drawing.Size(864, 598);
             this.tpWorkout.TabIndex = 2;
             this.tpWorkout.Text = "Trening";
+            // 
+            // btnAddWorkout
+            // 
+            this.btnAddWorkout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddWorkout.ImageKey = "Plus.ico";
+            this.btnAddWorkout.ImageList = this.il16;
+            this.btnAddWorkout.Location = new System.Drawing.Point(209, 7);
+            this.btnAddWorkout.Name = "btnAddWorkout";
+            this.btnAddWorkout.Size = new System.Drawing.Size(24, 24);
+            this.btnAddWorkout.TabIndex = 22;
+            this.btnAddWorkout.UseVisualStyleBackColor = true;
+            this.btnAddWorkout.Click += new System.EventHandler(this.btnAddWorkout_Click);
+            // 
+            // il16
+            // 
+            this.il16.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("il16.ImageStream")));
+            this.il16.TransparentColor = System.Drawing.Color.Transparent;
+            this.il16.Images.SetKeyName(0, "Plus.ico");
             // 
             // pnlWorkouts
             // 
@@ -554,58 +585,6 @@
             this.dtpWorkoutDate.TabIndex = 9;
             this.dtpWorkoutDate.ValueChanged += new System.EventHandler(this.dtpWorkoutDate_ValueChanged);
             // 
-            // btnNutritionDetails
-            // 
-            this.btnNutritionDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNutritionDetails.Image = global::Helsedagbok.Properties.Resources.Stats;
-            this.btnNutritionDetails.Location = new System.Drawing.Point(773, 6);
-            this.btnNutritionDetails.Name = "btnNutritionDetails";
-            this.btnNutritionDetails.Size = new System.Drawing.Size(38, 38);
-            this.btnNutritionDetails.TabIndex = 19;
-            this.btnNutritionDetails.UseVisualStyleBackColor = true;
-            this.btnNutritionDetails.Click += new System.EventHandler(this.btnNutritionDetails_Click);
-            // 
-            // btnAddFood
-            // 
-            this.btnAddFood.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddFood.Image = global::Helsedagbok.Properties.Resources.Plus;
-            this.btnAddFood.Location = new System.Drawing.Point(729, 6);
-            this.btnAddFood.Name = "btnAddFood";
-            this.btnAddFood.Size = new System.Drawing.Size(38, 38);
-            this.btnAddFood.TabIndex = 18;
-            this.btnAddFood.UseVisualStyleBackColor = true;
-            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSettings.Image = global::Helsedagbok.Properties.Resources.Tool;
-            this.btnSettings.Location = new System.Drawing.Point(817, 6);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(38, 38);
-            this.btnSettings.TabIndex = 17;
-            this.btnSettings.UseVisualStyleBackColor = true;
-            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(464, 32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(394, 145);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // btnAddWorkout
-            // 
-            this.btnAddWorkout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddWorkout.Image = global::Helsedagbok.Properties.Resources.Plus;
-            this.btnAddWorkout.Location = new System.Drawing.Point(209, 12);
-            this.btnAddWorkout.Name = "btnAddWorkout";
-            this.btnAddWorkout.Size = new System.Drawing.Size(38, 20);
-            this.btnAddWorkout.TabIndex = 22;
-            this.btnAddWorkout.UseVisualStyleBackColor = true;
-            this.btnAddWorkout.Click += new System.EventHandler(this.btnAddWorkout_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -624,14 +603,10 @@
             this.tpFoodDiary.ResumeLayout(false);
             this.tpFoodDiary.PerformLayout();
             this.tpRecepies.ResumeLayout(false);
-            this.tpRecepies.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.gbProperties.ResumeLayout(false);
             this.gbProperties.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRecepies)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).EndInit();
-            this.tpWorkout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tpWorkout.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -652,12 +627,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FoodId;
         private System.Windows.Forms.DataGridViewTextBoxColumn FoodName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Energy;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DataGridView dgvRecepies;
-        private System.Windows.Forms.DataGridView dgvCategories;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox gbProperties;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -667,14 +638,14 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblFat;
-        private System.Windows.Forms.Label lblCarbohydrates;
-        private System.Windows.Forms.Label lblProtein;
-        private System.Windows.Forms.Label lblCalories;
-        private System.Windows.Forms.Label lblServings;
-        private System.Windows.Forms.Label lblTime;
-        private System.Windows.Forms.Label lblCategories;
-        private System.Windows.Forms.Label lblDifficulty;
+        private System.Windows.Forms.Label lblReceiptFat;
+        private System.Windows.Forms.Label lblReceiptCarbohydrates;
+        private System.Windows.Forms.Label lblReceiptProtein;
+        private System.Windows.Forms.Label lblReceiptCalories;
+        private System.Windows.Forms.Label lblRecepieServings;
+        private System.Windows.Forms.Label lblRecepieTime;
+        private System.Windows.Forms.Label lblRecepieCategories;
+        private System.Windows.Forms.Label lblRecepieDifficulty;
         private System.Windows.Forms.ToolStripMenuItem miCopyMeal;
         private System.Windows.Forms.ToolStripMenuItem miMoveMeal;
         private System.Windows.Forms.Button btnAddRecepieIngredient;
@@ -685,6 +656,13 @@
         private System.Windows.Forms.DateTimePicker dtpWorkoutDate;
         private System.Windows.Forms.Panel pnlWorkouts;
         private System.Windows.Forms.Button btnAddWorkout;
+        private System.Windows.Forms.ImageList il16;
+        private System.Windows.Forms.Button btnRecepieSearch;
+        private System.Windows.Forms.ImageList ilBig;
+        private System.Windows.Forms.Label lblRecepieName;
+        private System.Windows.Forms.Button btnAddRecepie;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Panel pnlRecepieIngredients;
     }
 }
 

@@ -52,23 +52,24 @@
   <ItemGroup>
     <Compile Include="Classes\Functions.cs" />
     <Compile Include="Classes\Global.cs" />
+    <Compile Include="Classes\Recepies.cs" />
     <Compile Include="Forms\frmAddFood.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmAddFood.Designer.cs">
       <DependentUpon>frmAddFood.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmEditExercise.cs">
+    <Compile Include="Forms\FrmEditExercise.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmEditExercise.Designer.cs">
-      <DependentUpon>frmEditExercise.cs</DependentUpon>
+    <Compile Include="Forms\FrmEditExercise.Designer.cs">
+      <DependentUpon>FrmEditExercise.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmEditRecepieIngredients.cs">
+    <Compile Include="Forms\FrmEditRecepieIngredients.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmEditRecepieIngredients.Designer.cs">
-      <DependentUpon>frmEditRecepieIngredients.cs</DependentUpon>
+    <Compile Include="Forms\FrmEditRecepieIngredients.Designer.cs">
+      <DependentUpon>FrmEditRecepieIngredients.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmLogin.cs">
       <SubType>Form</SubType>
@@ -93,6 +94,18 @@
     </Compile>
     <Compile Include="Forms\frmNutritionBreakdown.Designer.cs">
       <DependentUpon>frmNutritionBreakdown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmRecepies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmRecepies.Designer.cs">
+      <DependentUpon>FrmRecepies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmRecepieSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmRecepieSearch.Designer.cs">
+      <DependentUpon>FrmRecepieSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmSetup.cs">
       <SubType>Form</SubType>
@@ -146,6 +159,18 @@
       <DependentUpon>ucMealSummary.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Workout.cs" />
+    <Compile Include="User Controls\UcRecepieIngredient.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\UcRecepieIngredient.Designer.cs">
+      <DependentUpon>UcRecepieIngredient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Controls\UcRecepiePart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\UcRecepiePart.Designer.cs">
+      <DependentUpon>UcRecepiePart.cs</DependentUpon>
+    </Compile>
     <Compile Include="User Controls\ucSet.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -164,11 +189,11 @@
     <EmbeddedResource Include="Forms\frmEditDiary.resx">
       <DependentUpon>frmEditDiary.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmEditExercise.resx">
-      <DependentUpon>frmEditExercise.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmEditExercise.resx">
+      <DependentUpon>FrmEditExercise.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmEditRecepieIngredients.resx">
-      <DependentUpon>frmEditRecepieIngredients.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmEditRecepieIngredients.resx">
+      <DependentUpon>FrmEditRecepieIngredients.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -184,6 +209,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmNutritionBreakdown.resx">
       <DependentUpon>frmNutritionBreakdown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmRecepies.resx">
+      <DependentUpon>FrmRecepies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmRecepieSearch.resx">
+      <DependentUpon>FrmRecepieSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSetup.resx">
       <DependentUpon>frmSetup.cs</DependentUpon>
@@ -212,6 +243,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="User Controls\ucMealSummary.resx">
       <DependentUpon>ucMealSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\UcRecepieIngredient.resx">
+      <DependentUpon>UcRecepieIngredient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\UcRecepiePart.resx">
+      <DependentUpon>UcRecepiePart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User Controls\ucSet.resx">
       <DependentUpon>ucSet.cs</DependentUpon>

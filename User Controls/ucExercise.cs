@@ -22,6 +22,8 @@ namespace Helsedagbok
         private int _sortOrder;
         private List<ucSet> _sets=new List<ucSet>();
         private Point _setLocation = new Point(0, 22);
+        private bool _expanded = true;
+        private int fullHeight;
 
         protected virtual void ExerciseCountChanged(EventArgs e)
         {
@@ -73,6 +75,12 @@ namespace Helsedagbok
             set { _sortOrder = value; }
         }
 
+        public bool Expanded
+        {
+            get { return _expanded; }
+            set { _expanded = value; }
+        }
+
         public void GetSets(object sender, EventArgs e)
         {
             Height = 27;
@@ -105,9 +113,12 @@ namespace Helsedagbok
             ucExerciseTotals totals = new ucExerciseTotals();
             totals.Reps = exerciseTotalReps;
             totals.Weight = exerciseTotalWeight;
-            totals.Location = _setLocation;
-            Controls.Add(totals);
+            //totals.Location = _setLocation;
+            
+            Controls.Add(totals);   
             Height += 27;
+            totals.Top = Height - 30;
+            fullHeight = Height;
             ExerciseUpdated(EventArgs.Empty);
         }
 
@@ -222,10 +233,32 @@ namespace Helsedagbok
             args.NewPosition = SortOrder - 1;
             if (args.NewPosition == 1)
                 btnUp.Enabled = false;
-            //else
-            //    btnUp.Enabled = true;
             btnDown.Enabled = true;
             ExerciseReordered(args);
+        }
+
+        private void btnCollapseExpand_Click(object sender, EventArgs e)
+        {
+            if (Expanded)
+            {
+                Height = 50;
+                Expanded = !Expanded;
+                btnCollapseExpand.ImageKey = "Arrow3 Down.ico";
+            }
+            else
+            {
+                Height = fullHeight;
+                Expanded = !Expanded;
+                btnCollapseExpand.ImageKey = "Arrow3 Up.ico";
+            }
+            Control[] tot = Controls.Find("ucExerciseTotals", true);
+            if (tot.Length > 0)
+            {
+                ucExerciseTotals totals = (ucExerciseTotals)tot[0];
+                totals.Top = Height - 27;
+                totals.BringToFront();
+            }
+            ExerciseUpdated(EventArgs.Empty);
         }
     }
 

@@ -178,17 +178,44 @@ namespace Helsedagbok
             Global.conn1.Close();
         }
 
-        public static void AddWorkoutExercise(int idWorkout, int idExerciseType)
+        public static ucExercise AddWorkoutExercise(int idWorkout, int idExerciseType, string exerciseName, int sortOrder)
         {
-            string sql = "INSERT INTO tblWoWorkoutExercises (idWorkout, idExerciseType) VALUES (@idWorkout, @idExerciseType);";
+            string sql = "INSERT INTO tblWoWorkoutExercises (idWorkout, idExerciseType, SortOrder) VALUES (@idWorkout, @idExerciseType, @SortOrder);";
             SqlCommand cmd = Global.conn1.CreateCommand();
             cmd.Parameters.AddWithValue("@idWorkout", idWorkout);
             cmd.Parameters.AddWithValue("@idExerciseType", idExerciseType);
+            cmd.Parameters.AddWithValue("@SortOrder", sortOrder);
             cmd.CommandText = sql;
             if (Global.conn1.State != ConnectionState.Open)
                 Global.conn1.Open();
             cmd.ExecuteNonQuery();
+            //Get the new idWorkoutExercise
+            int idWorkoutExercise = 0;
+            sql = "SELECT idWorkoutExercise FROM tblWoWorkoutExercises WHERE idWorkout=@idWorkout AND idExerciseType = @idExerciseType AND SortOrder = @SortOrder";
+            cmd = Global.conn1.CreateCommand();
+            cmd.Parameters.AddWithValue("@idWorkout", idWorkout);
+            cmd.Parameters.AddWithValue("@idExerciseType", idExerciseType);
+            cmd.Parameters.AddWithValue("@SortOrder", sortOrder);
+            cmd.CommandText = sql;
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Read();
+                idWorkoutExercise = reader.GetInt32(0);
+            }
+            reader.Close();
+            //Add a new set
+            if (idWorkoutExercise > 0)
+                AddSet(idWorkoutExercise, idExerciseType, 0, 0, "");
+            //Get the ucExercise for the new exercise
+            ucExercise ex = new ucExercise();
+            ex.Title = exerciseName;
+            ex.IdExercise = idWorkoutExercise;
+            ex.IdExerciseType = idExerciseType;
+            ex.SortOrder = sortOrder;
             Global.conn1.Close();
+
+            return ex;
         }
     }
 }

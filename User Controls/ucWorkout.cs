@@ -78,23 +78,35 @@ namespace Helsedagbok
                 ex.ExerciseUpdatedEvent += SetHeight;
                 ex.ExerciseReorderedEvent += SetExerciseOrders;
                 _exercises.Add(ex);
-                ex.Location = _exerciseLocation;
                 Controls.Add(ex);
                 ex.GetSets(null, EventArgs.Empty);
-                Height += ex.Height;
-                _exerciseLocation.Y += ex.Height;
             }
-            Exercises[0].DisableUpButton();
-            Exercises[Exercises.Count - 1].DisableDownButton();
+            if (Exercises.Count > 0)
+            {
+                Exercises[0].DisableUpButton();
+                Exercises[Exercises.Count - 1].DisableDownButton();
+            }
         }
 
         private void mAddExercise_Click(object sender, EventArgs e)
         {
-            frmEditExercise frm = new frmEditExercise();
+            FrmEditExercise frm = new FrmEditExercise();
             frm.IdWorkout = IdWorkout;
+            frm.NewExerciseSortOrder = Exercises.Count + 1;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                GetExercises();
+                //GetExercises();
+                ucExercise ex = frm.NewExercise;
+                ex.ExerciseUpdatedEvent += SetHeight;
+                ex.ExerciseReorderedEvent += SetExerciseOrders;
+                _exerciseLocation.Y =  28;
+                foreach (ucExercise ucExercise in _exercises)
+                {
+                    _exerciseLocation.Y += ucExercise.Height;
+                }
+                _exercises.Add(ex);
+                Controls.Add(ex);
+                SetHeight(null, EventArgs.Empty);
             }
         }
 
@@ -140,9 +152,9 @@ namespace Helsedagbok
             _exerciseLocation.Y = 28;
             foreach (ucExercise ex in _exercises)
             {
-                Height += ex.Height;
+                Height += ex.Height +2;
                 ex.Location = _exerciseLocation;
-                _exerciseLocation.Y += ex.Height;
+                _exerciseLocation.Y += ex.Height + 2;
             }
         }
 
@@ -176,14 +188,19 @@ namespace Helsedagbok
             {
                 foreach (ucExercise ex in Exercises)
                 {
-                    if ((ex.SortOrder - 1) == exSender.SortOrder)
+                    if ((ex.SortOrder) == exSender.SortOrder + 1)
                     {
                         exSender.SortOrder = ex.SortOrder;
                         ex.SortOrder -= 1;
-                        tempList.Add(ex);
+                        tempList.Insert(ex.SortOrder, ex);
+                        ex.SaveSortOrder(ex.SortOrder);
+                        exSender.SaveSortOrder(exSender.SortOrder);
                     }
                     else if (ex == exSender)
-                        tempList.Insert(ex.SortOrder - 1, ex);
+                        if (ex.SortOrder == 0)
+                            tempList.Add(ex);
+                        else
+                            tempList.Add(ex);
                     else
                     {
                         tempList.Add(ex);
@@ -199,21 +216,6 @@ namespace Helsedagbok
             int n = 1;
             int max = _exercises.Count;
             bool noChange = true;
-
-            do
-            {
-                for (int i = 0; i < max - n; i++)
-                {
-                    if (tempList[i].SortOrder > tempList[i + 1].SortOrder)
-                    {
-                        tempExercise = tempList[i];
-                        tempList[i] = tempList[i + 1];
-                        tempList[i + 1] = tempExercise;
-                        noChange = false;
-                    }
-                }
-                n += 1;
-            } while (!noChange);
 
             _exerciseLocation.Y = 28;
             foreach (ucExercise ex in tempList)

@@ -37,6 +37,7 @@
             this.btnUp = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.btnDown = new System.Windows.Forms.Button();
+            this.btnCollapseExpand = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,8 +93,8 @@
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "Arrow1 Down.ico");
             this.imageList1.Images.SetKeyName(1, "Arrow1 Up.ico");
-            this.imageList1.Images.SetKeyName(2, "Arrow2 Down.ico");
-            this.imageList1.Images.SetKeyName(3, "Arrow2 Up.ico");
+            this.imageList1.Images.SetKeyName(2, "Arrow3 Down.ico");
+            this.imageList1.Images.SetKeyName(3, "Arrow3 Up.ico");
             // 
             // btnDown
             // 
@@ -106,12 +107,24 @@
             this.btnDown.UseVisualStyleBackColor = true;
             this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
+            // btnCollapseExpand
+            // 
+            this.btnCollapseExpand.ImageKey = "Arrow3 Up.ico";
+            this.btnCollapseExpand.ImageList = this.imageList1;
+            this.btnCollapseExpand.Location = new System.Drawing.Point(348, -1);
+            this.btnCollapseExpand.Name = "btnCollapseExpand";
+            this.btnCollapseExpand.Size = new System.Drawing.Size(20, 20);
+            this.btnCollapseExpand.TabIndex = 4;
+            this.btnCollapseExpand.UseVisualStyleBackColor = true;
+            this.btnCollapseExpand.Click += new System.EventHandler(this.btnCollapseExpand_Click);
+            // 
             // ucExercise
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.btnCollapseExpand);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.lblExerciseName);
@@ -131,5 +144,6 @@
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button btnDown;
+        private System.Windows.Forms.Button btnCollapseExpand;
     }
 }

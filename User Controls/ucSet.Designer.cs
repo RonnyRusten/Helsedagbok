@@ -97,6 +97,7 @@
             this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(61, 20);
             this.txtTotal.TabIndex = 8;
+            this.txtTotal.TabStop = false;
             this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnDelete
@@ -108,6 +109,7 @@
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(23, 23);
             this.btnDelete.TabIndex = 9;
+            this.btnDelete.TabStop = false;
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -129,6 +131,7 @@
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(23, 23);
             this.btnCopy.TabIndex = 10;
+            this.btnCopy.TabStop = false;
             this.btnCopy.UseVisualStyleBackColor = true;
             this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
@@ -141,6 +144,7 @@
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(23, 23);
             this.btnNew.TabIndex = 11;
+            this.btnNew.TabStop = false;
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -153,6 +157,7 @@
             this.btnNote.Name = "btnNote";
             this.btnNote.Size = new System.Drawing.Size(23, 23);
             this.btnNote.TabIndex = 12;
+            this.btnNote.TabStop = false;
             this.btnNote.UseVisualStyleBackColor = true;
             this.btnNote.Click += new System.EventHandler(this.btnNote_Click);
             // 
